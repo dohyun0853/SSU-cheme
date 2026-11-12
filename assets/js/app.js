@@ -875,8 +875,25 @@
     }
   };
 
+  function initPillarCards() {
+    $$('.pillar-card[data-filter]').forEach((card) => {
+      card.addEventListener('click', (e) => {
+        e.preventDefault();
+        const filter = card.dataset.filter;
+        if (filter) {
+          setLabFilter(filter);
+          const target = $('#labs');
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      });
+    });
+  }
+
   /* ------------------------------------------------------------ init */
   function boot() {
+    initPillarCards();
     renderStats();
     renderTimeline();
     renderCareers();

@@ -195,58 +195,211 @@ input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; appe
 .link-arrow:hover { color: var(--navy); text-decoration: underline; text-underline-offset: 3px; }
 
 /* ---------------------------------------------------------------- hero */
-.hero {
+/* ---------------------------------------------------------------- hero (시안 2: 미니멀 화이트 & 4대 산업 3D 입체 쇼케이스) */
+.hero.hero--v2 {
   position: relative;
+  background: #FFFFFF;
+  background-image: radial-gradient(rgba(0, 44, 108, 0.08) 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+  color: var(--ink);
+  padding-top: 56px;
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+}
+.hero.hero--v2::before {
+  content: "";
+  position: absolute; right: -120px; top: -100px; width: 640px; height: 640px;
+  background: radial-gradient(circle, rgba(0, 180, 216, 0.06) 0%, rgba(0, 44, 108, 0.03) 60%, transparent 80%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hero--v2 .hero-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 56px;
+  align-items: center;
+  padding-bottom: 48px;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  background: #EEF4FC;
+  border: 1px solid #D2E2F7;
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--navy);
+  letter-spacing: .06em;
+  margin-bottom: 18px;
+}
+.hero-badge-dot {
+  width: 6px;
+  height: 6px;
   background: var(--navy);
-  color: #fff;
-  padding-top: 60px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(0, 44, 108, 0.15);
 }
-.hero-inner {
-  display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, .65fr);
-  gap: 64px; align-items: center;
-  padding-bottom: 52px;
+.hero--v2 h1 {
+  font-size: clamp(32px, 3.4vw, 44px);
+  line-height: 1.32;
+  font-weight: 800;
+  letter-spacing: -.035em;
+  color: #0A192F;
 }
-.hero-eyebrow {
-  font-size: 12.5px; letter-spacing: .06em; color: #9DB9DA; margin-bottom: 18px;
+.hero-h1-accent {
+  color: var(--navy);
+  background: linear-gradient(135deg, var(--navy) 0%, #001A42 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-.hero h1 {
-  font-size: 40px; line-height: 1.42; font-weight: 700; letter-spacing: -.035em;
-  color: #fff;
+.hero--v2 .hero-lead {
+  margin-top: 18px;
+  max-width: 520px;
+  font-size: 15px;
+  line-height: 1.8;
+  color: #4A5568;
+  word-break: keep-all;
 }
-.hero-sub {
-  margin-top: 16px; font-size: 17px; font-weight: 500; color: #C9DCF2; letter-spacing: -.01em;
+.hero--v2 .hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
 }
-.hero-lead {
-  margin-top: 18px; max-width: 560px;
-  font-size: 14.5px; line-height: 1.85; color: rgba(255, 255, 255, .78);
+.hero--v2 .hero-cta .btn {
+  height: 46px;
+  padding: 0 22px;
+  font-size: 14.5px;
+  font-weight: 600;
 }
-.hero-cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+.hero-motto {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 32px;
+  padding-top: 22px;
+  border-top: 1px solid #E2E8F0;
+}
+.hero-motto-crest {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  background: #F0F4FA;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #D2DDEB;
+  flex-shrink: 0;
+}
+.hero-motto-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.hero-motto-text strong {
+  font-size: 12.5px;
+  color: #1A202C;
+  font-weight: 700;
+}
+.hero-motto-text span {
+  font-size: 11px;
+  color: #718096;
+  font-family: var(--mono);
+}
 
-.hero-info {
-  border: 1px solid rgba(255, 255, 255, .22);
-  padding: 22px 24px 18px;
-  background: rgba(255, 255, 255, .04);
+/* 4대 산업 3D 입체 글래스 카드 쇼케이스 */
+.hero-showcase {
+  position: relative;
 }
-.hero-info h2 {
-  font-size: 13px; font-weight: 600; color: #C9DCF2; letter-spacing: .02em;
-  padding-bottom: 12px; border-bottom: 1px solid rgba(255, 255, 255, .16);
+.pillar-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  perspective: 1200px;
 }
-.hero-info dl { display: grid; gap: 0; margin-top: 6px; }
-.hero-info dl div {
-  display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 10px;
-  padding: 9px 0; border-bottom: 1px solid rgba(255, 255, 255, .1);
+.pillar-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 44, 108, 0.12);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px -2px rgba(0, 44, 108, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
+  transition: all .35s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+.pillar-card::before {
+  content: "";
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--navy);
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+.pillar-card:hover {
+  transform: translateX(-8px) scale(1.015);
+  background: #FFFFFF;
+  border-color: var(--navy);
+  box-shadow: 0 16px 32px -8px rgba(0, 44, 108, 0.15), 0 0 0 1px rgba(0, 44, 108, 0.18);
+}
+.pillar-card:hover::before {
+  opacity: 1;
+}
+.pillar-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.pillar-num {
+  font-family: var(--mono);
   font-size: 13px;
+  font-weight: 700;
+  color: var(--navy);
+  background: #EEF4FC;
+  padding: 4px 8px;
+  border-radius: 4px;
 }
-.hero-info dl div:last-child { border-bottom: 0; }
-.hero-info dt { color: #8FAECE; }
-.hero-info dd { color: #fff; }
-.hero-info dd a:hover { text-decoration: underline; text-underline-offset: 3px; }
-.hero-info-link {
-  display: inline-flex; align-items: center; gap: 3px; margin-top: 12px;
-  font-size: 12.5px; color: #C9DCF2;
+.pillar-body h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0A192F;
+  letter-spacing: -.02em;
+  margin: 0 0 2px 0;
 }
-.hero-info-link svg, .hero-info-link i { width: 13px; height: 13px; }
-.hero-info-link:hover { color: #fff; }
+.pillar-body p {
+  font-size: 12.5px;
+  color: #64748B;
+  margin: 0;
+}
+.pillar-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: #F1F5F9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--navy);
+  flex-shrink: 0;
+  transition: all .25s ease;
+}
+.pillar-card:hover .pillar-icon {
+  background: var(--navy);
+  color: #FFFFFF;
+  transform: rotate(5deg) scale(1.08);
+}
+.pillar-icon svg {
+  width: 18px;
+  height: 18px;
+}
 
 .stat-strip { background: #fff; border-top: 1px solid #E8ECF2; }
 .stat-bar {
