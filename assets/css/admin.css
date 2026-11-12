@@ -506,7 +506,7 @@ body.is-admin .lab-card .lab-actions { flex-wrap: wrap; gap: 6px; }
 .sa-page:hover:not(:disabled) { background: #F1F4F8; color: var(--ink); }
 .sa-page.is-active { background: var(--navy); color: #fff; }
 .sa-page:disabled { opacity: .35; cursor: default; }
-.sa-page-gap { padding: 0 4px; color: #7C8899; font-size: 11px; }
+.sa-page-gap { padding: 0 4px; color: #6B7280; font-size: 11px; }
 
 /* ============================================================================
    7. 교수진 카드
@@ -582,7 +582,7 @@ body.is-admin .lab-card .lab-actions { flex-wrap: wrap; gap: 6px; }
   padding: 7px 11px; background: #F1F4F8; border-bottom: 1px solid #E0E6EF;
   font-family: var(--sa-mono); font-size: 9.5px; letter-spacing: .06em; color: #5F6771;
 }
-.sa-code-dot { color: #C3CCD9; }
+.sa-code-dot { color: #6B7280; }
 .sa-code pre {
   margin: 0; padding: 12px 14px; max-height: 240px; overflow: auto;
   font-family: var(--sa-mono); font-size: 10.5px; line-height: 1.7; color: #46536A;
@@ -709,7 +709,7 @@ body.is-admin .lab-card .lab-actions { flex-wrap: wrap; gap: 6px; }
 }
 .sa-login-back:hover { color: var(--navy); }
 .sa-login-back svg, .sa-login-back i { width: 13px; height: 13px; }
-.sa-login-foot { font-family: var(--sa-mono); font-size: 9.5px; color: #B3BCC9; letter-spacing: .04em; text-align: center; margin-top: 10px; }
+.sa-login-foot { font-family: var(--sa-mono); font-size: 9.5px; color: #6B7280; letter-spacing: .04em; text-align: center; margin-top: 10px; }
 
 /* ============================================================================
    12. 반응형
