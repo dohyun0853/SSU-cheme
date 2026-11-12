@@ -307,7 +307,15 @@
       ${p.career && p.career.length ? `
       <section class="profile-block">
         <h3>주요 경력</h3>
-        <ul class="profile-list-plain">${p.career.map((c) => `<li>${esc(c)}</li>`).join('')}</ul>
+        <ul class="profile-career-list">
+          ${p.career.map((c) => {
+            const m = c.match(/^(\d{4}\s*~\s*(?:\d{4}|현재))\s*(.*)$/);
+            if (m) {
+              return `<li><span class="career-period">${esc(m[1])}</span><span class="career-desc">${esc(m[2])}</span></li>`;
+            }
+            return `<li><span class="career-desc full-width">${esc(c)}</span></li>`;
+          }).join('')}
+        </ul>
       </section>` : ''}
 
       <div class="profile-actions">

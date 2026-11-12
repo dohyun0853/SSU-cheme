@@ -62,6 +62,9 @@
 <link rel="preconnect" href="https://unpkg.com">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<!-- ⑤ AOS — michalsnik/aos (스크롤 모션그래픽 애니메이션) -->
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+
 <link rel="stylesheet" href="assets/css/style.css?v=20261112d">
 <link rel="stylesheet" href="assets/css/admin.css?v=20261112d">
 </head>
@@ -199,7 +202,17 @@
       </aside>
     </div>
 
-    <div class="career-block">
+    <figure class="quote-band" data-aos="fade-up">
+      <blockquote>
+        <p>“분자를 다루는 일은 결국,<br>세상이 쓰는 물건을 바꾸는 일입니다.”</p>
+      </blockquote>
+      <figcaption>
+        <span class="side-label">Soongsil Chemical Engineering</span>
+        <span class="from">숭실대학교 화학공학과</span>
+      </figcaption>
+    </figure>
+
+    <div class="career-block" data-aos="fade-up">
       <div class="career-head">
         <h3 class="sub-title">졸업 후 진로</h3>
         <p>화학공학 졸업생은 반도체·전자, 정유·석유화학, 소재, 제약·바이오, 식품, 에너지, 엔지니어링까지 산업 전반으로 진출합니다.</p>
@@ -212,7 +225,7 @@
 <!-- ============================================================ RESEARCH -->
 <section class="section section-research" id="research" aria-labelledby="researchTitle">
   <div class="wrap">
-    <div class="section-head section-head--split">
+    <div class="section-head section-head--split" data-aos="fade-up">
       <div>
         <h2 class="section-title" id="researchTitle">연구 분야</h2>
       </div>
@@ -222,24 +235,24 @@
       </p>
     </div>
 
-    <div class="research-list" id="researchList"></div>
+    <div class="research-list" id="researchList" data-aos="fade-up" data-aos-delay="80"></div>
   </div>
 </section>
 
 <!-- ============================================================ LABS / FACULTY -->
 <section class="section section-labs" id="labs" aria-labelledby="labsTitle">
   <div class="wrap">
-    <div class="section-head section-head--split">
+    <div class="section-head section-head--split" data-aos="fade-up">
       <div>
         <h2 class="section-title" id="labsTitle">교수진 및 연구실</h2>
       </div>
       <p class="section-desc">
-        전임교원 14명, 12개 연구실입니다. 연구 분야를 선택하면 해당 교수진만 표시되며,
-        카드를 누르면 연구실 홈페이지가 새 탭으로 열립니다. ‘프로필 보기’에서 학력·연구 내용·경력을 확인할 수 있습니다.
+        전임교원 14명, 10개 연구실입니다. 연구 분야를 선택하면 해당 교수진만 표시되며,
+        자체 랩 웹사이트가 있는 경우 카드를 누르면 새 탭으로 연결됩니다. ‘프로필 보기’에서 학력·연구 내용·경력을 확인할 수 있습니다.
       </p>
     </div>
 
-    <div class="lab-toolbar">
+    <div class="lab-toolbar" data-aos="fade-up" data-aos-delay="60">
       <div class="chips" id="labFilters" role="tablist" aria-label="연구 분야 필터"></div>
       <div class="lab-search">
         <i data-lucide="search" aria-hidden="true"></i>
@@ -350,7 +363,7 @@
 <!-- ============================================================ ADMISSION -->
 <section class="section section-admission" id="admission" aria-labelledby="admissionTitle">
   <div class="wrap">
-    <div class="section-head section-head--split">
+    <div class="section-head section-head--split" data-aos="fade-up">
       <div>
         <h2 class="section-title" id="admissionTitle">입학 및 진로</h2>
       </div>
@@ -359,9 +372,9 @@
       </p>
     </div>
 
-    <div class="guide-grid" id="guideGrid"></div>
+    <div class="guide-grid" id="guideGrid" data-aos="fade-up" data-aos-delay="80"></div>
 
-    <div class="contact-cta">
+    <div class="contact-cta" data-aos="fade-up" data-aos-delay="120">
       <div>
         <h3>학과 사무실</h3>
         <p class="contact-line"><a href="tel:028200610">02-820-0610</a><span>형남공학관 912호 · 학사조교 이찬미, 이지숙</span></p>
@@ -484,6 +497,7 @@
 <script src="https://unpkg.com/lucide@0.451.0/dist/umd/lucide.min.js"></script>
 <script src="data.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.7/dist/purify.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script src="assets/js/admin-core.js?v=20261112d"></script>
 <script src="assets/js/app.js?v=20261112d"></script>
 <script src="assets/js/admin.js?v=20261112d"></script>
@@ -495,6 +509,11 @@ if ('serviceWorker' in navigator) {
       .then(function (reg) { console.log('[PWA] Service Worker 등록 완료:', reg.scope); })
       .catch(function (err) { console.warn('[PWA] Service Worker 등록 실패:', err); });
   });
+}
+
+// AOS 초기화 (스크롤 시 자연스러운 모션그래픽 효과)
+if (window.AOS) {
+  AOS.init({ duration: 650, easing: 'ease-out-cubic', once: true, offset: 40 });
 }
 
 // PWA 설치 안내 인터랙션
