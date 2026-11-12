@@ -699,7 +699,7 @@ body.is-admin .lab-card .lab-actions { flex-wrap: wrap; gap: 6px; }
 .sa-login-points li { display: flex; align-items: center; gap: 12px; font-size: 12.5px; color: #B7C9E1; }
 .sa-login-points span { font-family: var(--sa-mono); font-size: 9.5px; color: #4C6B92; letter-spacing: .08em; }
 
-.sa-login-form-wrap { display: flex; align-items: center; justify-content: center; padding: 40px 32px; }
+.sa-login-form-wrap { display: flex; align-items: center; justify-content: center; padding: 40px 32px; background: #fff; }
 .sa-login-form { width: 100%; max-width: 340px; display: grid; gap: 14px; }
 .sa-login-form h1 { font-size: 25px; font-weight: 700; color: var(--sa-ink); letter-spacing: -.03em; margin-top: -6px; }
 .sa-login-sub { font-size: 12.5px; color: #5F6771; line-height: 1.6; margin-bottom: 6px; }
@@ -709,7 +709,7 @@ body.is-admin .lab-card .lab-actions { flex-wrap: wrap; gap: 6px; }
 }
 .sa-login-back:hover { color: var(--navy); }
 .sa-login-back svg, .sa-login-back i { width: 13px; height: 13px; }
-.sa-login-foot { font-family: var(--sa-mono); font-size: 9.5px; color: #6B7280; letter-spacing: .04em; text-align: center; margin-top: 10px; }
+.sa-login-foot { font-family: var(--sa-mono); font-size: 9.5px; color: #5F6771; letter-spacing: .04em; text-align: center; margin-top: 10px; }
 
 /* ============================================================================
    12. 반응형
