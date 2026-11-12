@@ -815,18 +815,63 @@
   function initNav() {
     const header = $('#siteHeader');
     const toggle = $('#menuToggle');
+    const drawer = $('#mobileDrawer');
+    const backdrop = $('#drawerBackdrop');
+    const closeBtn = $('#drawerClose');
 
-    if (toggle && header) {
-      toggle.addEventListener('click', () => {
-        const open = header.classList.toggle('nav-open');
-        toggle.setAttribute('aria-expanded', String(open));
-        toggle.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
-      });
-      $$('#primaryNav a').forEach((a) => a.addEventListener('click', () => {
-        header.classList.remove('nav-open');
-        toggle.setAttribute('aria-expanded', 'false');
-      }));
+    function openDrawer() {
+      if (!drawer || !backdrop) return;
+      drawer.classList.add('is-open');
+      backdrop.classList.add('is-open');
+      backdrop.hidden = false;
+      drawer.setAttribute('aria-hidden', 'false');
+      if (toggle) toggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+      if (window.lucide) window.lucide.createIcons();
     }
+
+    function closeDrawer() {
+      if (!drawer || !backdrop) return;
+      drawer.classList.remove('is-open');
+      backdrop.classList.remove('is-open');
+      drawer.setAttribute('aria-hidden', 'true');
+      if (toggle) toggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      setTimeout(() => { if (!drawer.classList.contains('is-open')) backdrop.hidden = true; }, 320);
+    }
+
+    if (toggle) {
+      toggle.addEventListener('click', () => {
+        if (drawer && drawer.classList.contains('is-open')) closeDrawer();
+        else openDrawer();
+      });
+    }
+
+    if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+    if (backdrop) backdrop.addEventListener('click', closeDrawer);
+
+    if (drawer) {
+      $$('.mobile-nav-link', drawer).forEach((link) => {
+        link.addEventListener('click', (e) => {
+          closeDrawer();
+          const targetId = link.getAttribute('href');
+          if (targetId && targetId.startsWith('#')) {
+            e.preventDefault();
+            const target = $(targetId);
+            if (target) {
+              setTimeout(() => {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }, 180);
+            }
+          }
+        });
+      });
+    }
+
+    $$('#primaryNav a').forEach((a) => a.addEventListener('click', () => {
+      if (header) header.classList.remove('nav-open');
+      if (toggle) toggle.setAttribute('aria-expanded', 'false');
+    }));
 
     const sections = $$('main section[id]');
     const links = $$('#primaryNav a');

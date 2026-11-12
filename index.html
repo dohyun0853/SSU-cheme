@@ -65,7 +65,7 @@
 <!-- ⑤ AOS — michalsnik/aos (스크롤 모션그래픽 애니메이션) -->
 <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
 
-<link rel="stylesheet" href="assets/css/style.css?v=20261112_v3">
+<link rel="stylesheet" href="assets/css/style.css?v=20261112_drawer">
 <link rel="stylesheet" href="assets/css/admin.css?v=20261112_v3">
 </head>
 <body id="top">
@@ -114,12 +114,73 @@
         <i data-lucide="search" aria-hidden="true"></i>
         <span>검색</span>
       </button>
-      <button class="menu-toggle" id="menuToggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="primaryNav">
-        <span></span><span></span>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobileDrawer">
+        <span></span><span></span><span></span>
       </button>
     </div>
   </div>
 </header>
+
+<!-- 모바일 전용 슬라이드 사이드 드로어 메뉴 -->
+<div class="mobile-drawer-backdrop" id="drawerBackdrop" hidden></div>
+<nav class="mobile-drawer" id="mobileDrawer" aria-label="모바일 메뉴" aria-hidden="true">
+  <div class="mobile-drawer-head">
+    <div class="mobile-drawer-brand">
+      <img src="assets/ssu-logo.png" alt="숭실대학교" width="130" height="18">
+      <strong>화학공학과</strong>
+    </div>
+    <button type="button" class="mobile-drawer-close" id="drawerClose" aria-label="메뉴 닫기">
+      <i data-lucide="x" aria-hidden="true"></i>
+    </button>
+  </div>
+  <div class="mobile-drawer-body">
+    <div class="mobile-nav-links">
+      <a href="#about" class="mobile-nav-link">
+        <i data-lucide="info" aria-hidden="true"></i>
+        <span>학과 소개</span>
+      </a>
+      <a href="#research" class="mobile-nav-link">
+        <i data-lucide="flask-conical" aria-hidden="true"></i>
+        <span>연구 분야</span>
+      </a>
+      <a href="#labs" class="mobile-nav-link">
+        <i data-lucide="users" aria-hidden="true"></i>
+        <span>교수진 및 연구실</span>
+      </a>
+      <a href="#curriculum" class="mobile-nav-link">
+        <i data-lucide="book-open" aria-hidden="true"></i>
+        <span>학부 교과과정</span>
+      </a>
+      <a href="#notices" class="mobile-nav-link">
+        <i data-lucide="bell" aria-hidden="true"></i>
+        <span>학과 공지사항</span>
+      </a>
+      <a href="#admission" class="mobile-nav-link">
+        <i data-lucide="graduation-cap" aria-hidden="true"></i>
+        <span>입학 및 진로</span>
+      </a>
+      <a href="#contact" class="mobile-nav-link">
+        <i data-lucide="map-pin" aria-hidden="true"></i>
+        <span>오시는 길</span>
+      </a>
+    </div>
+
+    <div class="mobile-drawer-divider"></div>
+
+    <div class="mobile-drawer-quick">
+      <p class="mobile-quick-title">숭실대 주요 서비스</p>
+      <div class="mobile-quick-grid">
+        <a href="https://saint.ssu.ac.kr" target="_blank" rel="noopener">u-SAINT ↗</a>
+        <a href="https://lms.ssu.ac.kr" target="_blank" rel="noopener">스마트LMS ↗</a>
+        <a href="https://path.ssu.ac.kr" target="_blank" rel="noopener">슈패스 ↗</a>
+        <a href="https://oasis.ssu.ac.kr/" target="_blank" rel="noopener">중앙도서관 ↗</a>
+      </div>
+    </div>
+  </div>
+  <div class="mobile-drawer-foot">
+    <p>형남공학관 912호 · 02-820-0610</p>
+  </div>
+</nav>
 
 <main id="main">
 
@@ -188,7 +249,7 @@
         </a>
 
         <!-- 04 Advanced Polymers -->
-        <a href="#labs" class="pillar-card" data-filter="나노" aria-label="04 Advanced Polymers 첨단 고분자 연구실 둘러보기">
+        <a href="#labs" class="pillar-card" data-filter="고분자" aria-label="04 Advanced Polymers 첨단 고분자 연구실 둘러보기">
           <picture>
             <source srcset="assets/hero/card_polymer.webp" type="image/webp">
             <img src="assets/hero/card_polymer.png" alt="04 Advanced Polymers 다공성 나노소재 및 고기능성 고분자 복합체" width="760" height="180" loading="eager">
@@ -551,7 +612,7 @@
 <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.7/dist/purify.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script src="assets/js/admin-core.js?v=20261112_v3"></script>
-<script src="assets/js/app.js?v=20261112_v3"></script>
+<script src="assets/js/app.js?v=20261112_drawer"></script>
 <script src="assets/js/admin.js?v=20261112_v3"></script>
 <!-- PWA Service Worker & 앱 설치 스크립트 -->
 <script>
