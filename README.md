@@ -6,9 +6,14 @@
 
 ```
 index.html                 메인 페이지 (시맨틱 HTML5 + 접근성 마크업)
+admin.html                 ★ 관리자 포털 (공지·교수진 편집 · data.js 백업 · GitHub 커밋)
 data.js                    학과 데이터 (교수진 14명 · 연구실 · 교과목 48개 · 공지 221건 · 연혁)
 assets/css/style.css       디자인 시스템 (색·타이포그래피·레이아웃·반응형·인쇄)
+assets/css/admin.css       관리자 UI (모드 바 · 로그인 모달 · 포털 레이아웃)
 assets/js/app.js           렌더링과 인터랙션 (검색 · 필터 · 탭 · 정렬 · 드로어)
+assets/js/admin-core.js    관리자 공통 (로그인 · 저장소 · data.js 생성 · GitHub API)
+assets/js/admin.js         메인 페이지 관리자 모드 (로그인 · 상단 바 · 퀵 버튼)
+assets/js/admin-portal.js  관리자 포털 네 개 탭
 assets/faculty/*.jpg       전임교원 사진 14장 (학과 공식 홈페이지 제공 이미지)
 assets/ssu-logo.png        숭실대학교 로고
 AI_유지보수_가이드.md      교수님·조교 인계용 유지보수 매뉴얼
@@ -29,6 +34,16 @@ AI_유지보수_가이드.md      교수님·조교 인계용 유지보수 매�
 
 Pretendard(웹폰트) · Tailwind CSS(유틸리티) · Lucide(아이콘) · Fuse.js(검색) · AOS(스크롤 애니메이션)
 — 모두 CDN으로 불러오며, 로드에 실패해도 핵심 디자인과 데이터는 그대로 표시됩니다.
+
+## 관리자 포털
+
+`admin.html` — 공지 221건과 교수진 14명을 브라우저에서 직접 고치고, `data.js`로 내려받거나
+GitHub 저장소(`dohyun0853/SSU-cheme`)에 바로 커밋해 홈페이지를 갱신하는 관리자 화면입니다.
+
+- 최초 계정: `admin` / `ssu1967!` (보안 탭에서 변경)
+- 수정 내용은 먼저 브라우저 localStorage에 저장 → `data.js` 내려받기 → GitHub 커밋 순서로 영구 반영
+- 홈페이지 푸터의 「관리자 로그인」으로도 들어갈 수 있고, 로그인하면 목록에 [수정] [삭제] 퀵 버튼이 나타납니다
+- 자세한 사용법·토큰 발급 절차는 `AI_유지보수_가이드.md` 1장
 
 ## 배포
 

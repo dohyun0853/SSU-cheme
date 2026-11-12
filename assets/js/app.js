@@ -22,6 +22,24 @@
 
   const TAG_ORDER = ['반도체', '배터리', '바이오', '고분자', '환경'];
 
+  /* 관리자 모드 — admin-core.js / admin.js 가 없으면 항상 false */
+  function adminActive() {
+    return !!(window.SSUAdmin && window.SSUAdmin.Auth && window.SSUAdmin.Auth.isAuthed());
+  }
+  function adminBtns(kind, item, extra) {
+    if (!adminActive()) return '';
+    const id = esc(item._id || item.id || '');
+    const board = extra && extra.board ? ` data-board="${esc(extra.board)}"` : '';
+    const pin = kind === 'notice'
+      ? `<button type="button" class="row-admin-btn${item.pinned ? ' is-on' : ''}" data-admin-act="notice-pin" data-id="${id}"${board} title="중요 공지 고정 토글" aria-label="중요 공지 고정 토글">${ic('pin')}</button>`
+      : '';
+    return `<span class="row-admin">
+      ${pin}
+      <button type="button" class="row-admin-btn" data-admin-act="${kind}-edit" data-id="${id}"${board}>${ic('pencil')}<span>수정</span></button>
+      <button type="button" class="row-admin-btn is-danger" data-admin-act="${kind}-del" data-id="${id}"${board}>${ic('trash-2')}<span>삭제</span></button>
+    </span>`;
+  }
+
   /* 라이브러리 로드 실패 대비 */
   if (!window.AOS) document.documentElement.classList.add('no-aos');
   if (!window.Fuse) document.documentElement.classList.add('no-fuse');
@@ -174,6 +192,7 @@
           <div class="lab-actions">
             <button class="lab-more" type="button" data-profile="${esc(p.id)}">프로필 보기 ${ic('arrow-right')}</button>
             ${p.labUrl ? `<span class="lab-home">랩 홈페이지 ${ic('external-link')}</span>` : ''}
+            ${adminBtns('prof', p)}
           </div>
         </div>
       </article>`).join('') + (labFilter === '전체' && !labQuery ? `
@@ -205,22 +224,26 @@
     icon();
   }
 
+  function buildLabFuse() {
+    labFuse = null;
+    if (!window.Fuse || typeof PROFESSORS === 'undefined') return;
+    labFuse = new Fuse(PROFESSORS, {
+      keys: [
+        { name: 'name', weight: .4 },
+        { name: 'field', weight: .25 },
+        { name: 'labName', weight: .15 },
+        { name: 'research', weight: .2 }
+      ],
+      threshold: .38,
+      ignoreLocation: true
+    });
+  }
+
   function initLabSearch() {
     const input = $('#labSearch');
     const clear = $('#labSearchClear');
     if (!input) return;
-    if (window.Fuse) {
-      labFuse = new Fuse(PROFESSORS, {
-        keys: [
-          { name: 'name', weight: .4 },
-          { name: 'field', weight: .25 },
-          { name: 'labName', weight: .15 },
-          { name: 'research', weight: .2 }
-        ],
-        threshold: .38,
-        ignoreLocation: true
-      });
-    }
+    buildLabFuse();
     let t;
     input.addEventListener('input', () => {
       clearTimeout(t);
@@ -402,8 +425,13 @@
     }
     if (noticeQuery) {
       const fuse = getNoticeFuse();
-      const ids = new Set(fuse.search(noticeQuery).map((r) => r.item));
-      list = list.filter((n) => ids.has(n));
+      if (fuse) {
+        const ids = new Set(fuse.search(noticeQuery).map((r) => r.item));
+        list = list.filter((n) => ids.has(n));
+      } else {
+        const q = noticeQuery.toLowerCase();
+        list = list.filter((n) => String(n.title).toLowerCase().includes(q) || String(n.author).toLowerCase().includes(q));
+      }
     }
     return list;
   }
@@ -427,13 +455,14 @@
     const shown = all.slice(0, noticeVisible);
 
     listEl.innerHTML = shown.map((n) => `
-      <li class="notice-row">
+      <li class="notice-row${adminActive() ? ' has-admin' : ''}">
         <span class="notice-date">${esc(n.date)}</span>
         <span class="notice-title">
           ${n.pinned ? '<span class="pin">중요</span>' : ''}
-          <a href="${esc(n.url)}" target="_blank" rel="noopener">${esc(n.title)}</a>
+          <a href="${esc(n.url || BOARD_META[board].source)}" target="_blank" rel="noopener">${esc(n.title)}</a>
         </span>
         <span class="notice-views">${fmtViews(n.views)}</span>
+        ${adminBtns('notice', n, { board: board })}
       </li>`).join('');
 
     const count = $('#noticeCount');
@@ -533,6 +562,7 @@
   let paletteResults = [];
 
   function buildPaletteIndex() {
+    paletteIndex.length = 0;
     if (typeof PROFESSORS !== 'undefined') {
       PROFESSORS.forEach((p) => paletteIndex.push({
         type: '교수진', icon: 'user-round', title: `${p.name} ${p.title}`,
@@ -744,6 +774,64 @@
 
     sections.forEach((s) => obs.observe(s));
   }
+
+  /* ------------------------------------------------------------ 12. 관리자 갱신 */
+  function resetNoticeFuse() {
+    Object.keys(noticeFuse).forEach((k) => { delete noticeFuse[k]; });
+  }
+
+  function refreshNotices() {
+    resetNoticeFuse();
+    renderNotices();
+    icon();
+  }
+
+  function refreshLabs() {
+    buildLabFuse();
+    renderResearch();
+    renderLabFilters();
+    renderLabs();
+  }
+
+  function refreshAll() {
+    resetNoticeFuse();
+    renderStats();
+    renderTimeline();
+    renderCareers();
+    buildLabFuse();
+    renderResearch();
+    renderLabFilters();
+    renderLabs();
+    renderNotices();
+    renderGuides();
+    buildPaletteIndex();
+    icon();
+  }
+
+  /* 관리자 화면(admin.js / admin-portal.js)이 쓰는 최소한의 공개 API */
+  window.SSUApp = {
+    refreshAll: refreshAll,
+    refreshNotices: refreshNotices,
+    refreshLabs: refreshLabs,
+    openProfile: openProfile,
+    closeProfile: closeProfile,
+    currentBoard: () => board,
+    setBoard: (b) => {
+      if (!BOARD_META[b]) return;
+      board = b;
+      noticeVisible = 12;
+      $$('#noticeTabs .notice-tab').forEach((t) => {
+        const on = t.dataset.board === b;
+        t.classList.toggle('is-active', on);
+        t.setAttribute('aria-selected', String(on));
+      });
+      refreshNotices();
+    },
+    scrollTo: (sel) => {
+      const t = $(sel);
+      if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   /* ------------------------------------------------------------ init */
   function boot() {

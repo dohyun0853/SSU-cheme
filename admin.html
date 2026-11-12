@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>관리자 포털 | 숭실대학교 화학공학과</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#00173A">
+<link rel="icon" href="assets/ssu-logo.png">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
+
+<!-- ① Pretendard -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<!-- ② Tailwind CSS (보조 유틸리티) -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  if (window.tailwind) {
+    tailwind.config = { corePlugins: { preflight: false } };
+  }
+</script>
+
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body class="sa-body">
+
+<!-- ============================================================ LOGIN -->
+<div class="sa-login" id="loginScreen" hidden>
+  <div class="sa-login-visual" aria-hidden="true">
+    <div class="sa-login-grid"></div>
+    <div class="sa-login-copy">
+      <p class="sa-eyebrow sa-eyebrow--light">Soongsil University · Since 1967</p>
+      <p class="sa-login-wordmark">화학공학과<br><strong>관리자 포털</strong></p>
+      <p class="sa-login-line">공지사항 221건과 교수진 14명의 정보를<br>브라우저에서 바로 고치고, GitHub로 배포합니다.</p>
+      <ul class="sa-login-points">
+        <li><span>01</span>공지·교수진 실시간 편집</li>
+        <li><span>02</span>data.js 원클릭 백업</li>
+        <li><span>03</span>GitHub 커밋으로 영구 반영</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sa-login-form-wrap">
+    <form class="sa-login-form" id="loginForm" novalidate>
+      <a class="sa-login-back" href="index.html">
+        <i data-lucide="arrow-left"></i><span>홈페이지로</span>
+      </a>
+      <p class="sa-eyebrow">Administrator</p>
+      <h1>관리자 로그인</h1>
+      <p class="sa-login-sub">학과 홈페이지의 공지와 교수진 정보를 관리합니다.</p>
+
+      <label class="sa-field">
+        <span class="sa-label">아이디</span>
+        <input name="id" type="text" class="sa-input" autocomplete="username" autofocus required>
+      </label>
+      <label class="sa-field">
+        <span class="sa-label">비밀번호</span>
+        <input name="pw" type="password" class="sa-input" autocomplete="current-password" placeholder="••••••••" required>
+      </label>
+      <p class="sa-form-error" id="loginError" hidden></p>
+      <button type="submit" class="sa-btn sa-btn-primary sa-btn--block">로그인</button>
+      <p class="sa-login-note">
+        최초 계정 <code>admin</code> / <code>ssu1967!</code> · 로그인 후 <strong>보안 설정</strong>에서 변경하세요.
+      </p>
+      <p class="sa-login-foot">© Chemical Engineering, Soongsil University</p>
+    </form>
+  </div>
+</div>
+
+<!-- ============================================================ APP -->
+<div class="sa-app" id="adminApp" hidden>
+  <aside class="sa-side">
+    <div class="sa-side-brand">
+      <img src="assets/ssu-logo.png" alt="">
+      <p>화학공학과<strong>관리자 포털</strong></p>
+    </div>
+
+    <nav class="sa-side-nav" aria-label="관리자 메뉴">
+      <p class="sa-side-label">관리</p>
+      <a href="#notices" data-tab="notices" class="is-active">
+        <i data-lucide="megaphone"></i><span>공지사항</span><em id="navNoticeCount">221</em>
+      </a>
+      <a href="#faculty" data-tab="faculty">
+        <i data-lucide="users"></i><span>교수진·연구실</span><em id="navProfCount">14</em>
+      </a>
+      <p class="sa-side-label">배포</p>
+      <a href="#sync" data-tab="sync">
+        <i data-lucide="cloud-upload"></i><span>보존·GitHub 동기화</span>
+      </a>
+      <a href="#security" data-tab="security">
+        <i data-lucide="shield-check"></i><span>보안 설정</span>
+      </a>
+    </nav>
+
+    <div class="sa-side-foot">
+      <div class="sa-side-user">
+        <span class="sa-avatar" id="sideAvatar">관</span>
+        <div>
+          <strong id="sideUserId">admin</strong>
+          <span id="sideSession">세션 12시간</span>
+        </div>
+      </div>
+      <a class="sa-side-link" href="index.html"><i data-lucide="external-link"></i>홈페이지 열기</a>
+      <button class="sa-side-link" type="button" data-logout><i data-lucide="log-out"></i>로그아웃</button>
+    </div>
+  </aside>
+
+  <div class="sa-main">
+    <header class="sa-topbar">
+      <div class="sa-topbar-title">
+        <p class="sa-eyebrow">Administrator Console</p>
+        <h1 id="pageTitle">공지사항 관리</h1>
+      </div>
+      <div class="sa-topbar-actions">
+        <span class="sa-badge" id="localBadge">원본 data.js 그대로</span>
+        <a class="sa-btn sa-btn--sm" href="index.html" target="_blank" rel="noopener">
+          <i data-lucide="arrow-up-right"></i>홈페이지 보기
+        </a>
+      </div>
+    </header>
+
+    <main class="sa-content">
+
+      <!-- ======================================================= TAB 1 -->
+      <section class="sa-tab" id="tab-notices">
+        <div class="sa-stats">
+          <article class="sa-stat">
+            <p>전체 공지</p>
+            <strong id="statNotices">0</strong>
+            <em id="statNoticesSub">학부 0 · 대학원 0 · 취업 0</em>
+          </article>
+          <article class="sa-stat">
+            <p>중요 공지</p>
+            <strong id="statPinned">0</strong>
+            <em>목록 상단 고정</em>
+          </article>
+          <article class="sa-stat">
+            <p>이번 달 등록</p>
+            <strong id="statRecent">0</strong>
+            <em id="statRecentSub">최근 30일</em>
+          </article>
+          <article class="sa-stat sa-stat--wide">
+            <p>마지막 로컬 저장</p>
+            <strong class="sa-stat-time" id="statSaved">—</strong>
+            <em>브라우저 localStorage</em>
+          </article>
+        </div>
+
+        <div class="sa-panel">
+          <div class="sa-panel-head">
+            <div class="sa-seg" id="boardTabs" role="tablist" aria-label="게시판">
+              <button type="button" class="is-active" data-board="all" role="tab">전체<em id="cntAll">0</em></button>
+              <button type="button" data-board="undergrad" role="tab">학부공지<em id="cntUndergrad">0</em></button>
+              <button type="button" data-board="grad" role="tab">대학원공지<em id="cntGrad">0</em></button>
+              <button type="button" data-board="job" role="tab">취업·인턴십<em id="cntJob">0</em></button>
+            </div>
+            <div class="sa-panel-tools">
+              <div class="sa-search">
+                <i data-lucide="search"></i>
+                <input type="search" id="noticeSearch" placeholder="제목·작성자 검색" aria-label="공지 검색" autocomplete="off">
+                <button type="button" class="sa-search-clear" id="noticeSearchClear" hidden aria-label="검색어 지우기">
+                  <i data-lucide="x"></i>
+                </button>
+              </div>
+              <select class="sa-select" id="noticeSort" aria-label="정렬">
+                <option value="latest">최신 등록순</option>
+                <option value="oldest">오래된 순</option>
+                <option value="pinned">중요공지 우선</option>
+                <option value="views">조회수 높은 순</option>
+              </select>
+              <button type="button" class="sa-btn sa-btn-primary sa-btn--sm" data-act="notice-new">
+                <i data-lucide="plus"></i>새 공지
+              </button>
+            </div>
+          </div>
+
+          <div class="sa-table-wrap">
+            <table class="sa-table">
+              <thead>
+                <tr>
+                  <th class="c-pin">중요</th>
+                  <th class="c-board">게시판</th>
+                  <th class="c-date">등록일</th>
+                  <th>제목</th>
+                  <th class="c-author">작성자</th>
+                  <th class="c-num">조회</th>
+                  <th class="c-manage">관리</th>
+                </tr>
+              </thead>
+              <tbody id="noticeRows"></tbody>
+            </table>
+          </div>
+          <p class="sa-empty" id="noticeEmpty" hidden>조건에 맞는 공지가 없습니다.</p>
+          <div class="sa-pager" id="noticePager"></div>
+        </div>
+      </section>
+
+      <!-- ======================================================= TAB 2 -->
+      <section class="sa-tab" id="tab-faculty" hidden>
+        <div class="sa-panel-head sa-panel-head--plain">
+          <div class="sa-search">
+            <i data-lucide="search"></i>
+            <input type="search" id="facultySearch" placeholder="이름·연구실·분야 검색" aria-label="교수진 검색" autocomplete="off">
+          </div>
+          <div class="sa-panel-tools">
+            <select class="sa-select" id="facultyTag" aria-label="연구 분야 필터">
+              <option value="all">전체 분야</option>
+              <option value="반도체">반도체</option>
+              <option value="배터리">배터리</option>
+              <option value="바이오">바이오</option>
+              <option value="고분자">고분자</option>
+              <option value="환경">환경</option>
+            </select>
+            <button type="button" class="sa-btn sa-btn-primary sa-btn--sm" data-act="prof-new">
+              <i data-lucide="user-plus"></i>새 교수진
+            </button>
+          </div>
+        </div>
+
+        <div class="sa-faculty" id="facultyGrid"></div>
+        <p class="sa-empty" id="facultyEmpty" hidden>조건에 맞는 교수진이 없습니다.</p>
+      </section>
+
+      <!-- ======================================================= TAB 3 -->
+      <section class="sa-tab" id="tab-sync" hidden>
+        <div class="sa-grid-2">
+          <article class="sa-panel sa-panel--pad">
+            <header class="sa-card-head">
+              <div>
+                <p class="sa-eyebrow">Backup</p>
+                <h2>영구 보존</h2>
+              </div>
+              <span class="sa-chip" id="dataFingerprint">—</span>
+            </header>
+            <p class="sa-copy">
+              지금 화면의 공지 <strong id="syncNoticeCount">0</strong>건, 교수진 <strong id="syncProfCount">0</strong>명이
+              담긴 <code>data.js</code>를 그대로 내려받습니다. 파일을 받아 두면 어떤 경우에도 내용을 되살릴 수 있습니다.
+            </p>
+            <div class="sa-actions">
+              <button type="button" class="sa-btn sa-btn-primary" data-act="download-datajs">
+                <i data-lucide="download"></i>data.js 내려받기
+              </button>
+              <button type="button" class="sa-btn" data-act="copy-datajs">
+                <i data-lucide="clipboard-copy"></i>코드 복사
+              </button>
+              <button type="button" class="sa-btn" data-act="download-json">
+                <i data-lucide="file-json"></i>백업 JSON
+              </button>
+            </div>
+            <dl class="sa-meta">
+              <div><dt>파일 크기</dt><dd id="dataSize">—</dd></div>
+              <div><dt>SHA-256</dt><dd id="dataSha">—</dd></div>
+              <div><dt>생성 시각</dt><dd id="dataBuiltAt">—</dd></div>
+            </dl>
+            <div class="sa-code">
+              <div class="sa-code-head"><span>data.js — 미리보기</span><span class="sa-code-dot">●</span></div>
+              <pre id="dataPreview">—</pre>
+            </div>
+          </article>
+
+          <article class="sa-panel sa-panel--pad">
+            <header class="sa-card-head">
+              <div>
+                <p class="sa-eyebrow">GitHub</p>
+                <h2>실시간 동기화</h2>
+              </div>
+              <span class="sa-chip sa-chip--live" id="ghState">대기</span>
+            </header>
+            <p class="sa-copy">
+              저장소의 <code>data.js</code>에 직접 커밋합니다. GitHub Pages는 커밋 후 1~2분 안에 자동으로 다시 배포됩니다.
+            </p>
+
+            <div class="sa-field-row">
+              <label class="sa-field"><span class="sa-label">소유자</span>
+                <input class="sa-input" id="ghOwner" type="text" value="dohyun0853" spellcheck="false"></label>
+              <label class="sa-field"><span class="sa-label">저장소</span>
+                <input class="sa-input" id="ghRepo" type="text" value="SSU-cheme" spellcheck="false"></label>
+            </div>
+            <div class="sa-field-row">
+              <label class="sa-field"><span class="sa-label">파일 경로</span>
+                <input class="sa-input" id="ghPath" type="text" value="data.js" spellcheck="false"></label>
+              <label class="sa-field"><span class="sa-label">브랜치</span>
+                <input class="sa-input" id="ghBranch" type="text" value="main" spellcheck="false"></label>
+            </div>
+            <label class="sa-field">
+              <span class="sa-label">Personal access token <em>Contents: Read and write</em></span>
+              <input class="sa-input sa-input--mono" id="ghToken" type="password" placeholder="github_pat_…" autocomplete="off" spellcheck="false">
+              <span class="sa-hint">토큰은 이 브라우저 탭에만 보관하고, 서버로 보내지 않습니다. 탭을 닫으면 사라집니다.</span>
+            </label>
+            <label class="sa-field">
+              <span class="sa-label">커밋 메시지</span>
+              <input class="sa-input" id="ghMessage" type="text" value="chore(data): 관리자 포털에서 학과 데이터 갱신">
+            </label>
+
+            <div class="sa-actions">
+              <button type="button" class="sa-btn" data-act="gh-check">
+                <i data-lucide="refresh-cw"></i>원격 상태 확인
+              </button>
+              <button type="button" class="sa-btn sa-btn-primary" data-act="gh-push">
+                <i data-lucide="git-commit-horizontal"></i>GitHub에 커밋
+              </button>
+            </div>
+
+            <div class="sa-log" id="ghLog" aria-live="polite">
+              <p class="sa-log-line is-muted">아직 실행한 작업이 없습니다.</p>
+            </div>
+          </article>
+        </div>
+
+        <article class="sa-panel sa-panel--pad sa-panel--mt">
+          <header class="sa-card-head">
+            <div>
+              <p class="sa-eyebrow">Notes</p>
+              <h2>이렇게 동작합니다</h2>
+            </div>
+          </header>
+          <ol class="sa-steps">
+            <li><span>01</span><div><strong>브라우저에 먼저 저장</strong><p>공지·교수진을 고치면 이 브라우저의 홈페이지에 즉시 반영되고, 새로고침해도 유지됩니다. 방문자에게는 아직 보이지 않습니다.</p></div></li>
+            <li><span>02</span><div><strong>data.js 내려받기</strong><p>수정 내용 전체가 담긴 파일을 받아 둡니다. 백업이자, GitHub 없이도 배포할 수 있는 수단입니다.</p></div></li>
+            <li><span>03</span><div><strong>GitHub 커밋</strong><p>저장소의 data.js를 같은 내용으로 바꿔 커밋합니다. 커밋이 끝나면 모든 방문자가 보는 홈페이지가 갱신됩니다.</p></div></li>
+          </ol>
+          <div class="sa-note">
+            <i data-lucide="key-round"></i>
+            <div>
+              <strong>토큰 발급 (1회만)</strong>
+              <p>GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens →
+                <em>Only select repositories</em>에서 <code>SSU-cheme</code> 선택 →
+                Repository permissions의 <em>Contents</em>를 <strong>Read and write</strong>로 지정 → 생성 후 한 번만 복사.</p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- ======================================================= TAB 4 -->
+      <section class="sa-tab" id="tab-security" hidden>
+        <div class="sa-grid-2">
+          <article class="sa-panel sa-panel--pad">
+            <header class="sa-card-head">
+              <div>
+                <p class="sa-eyebrow">Account</p>
+                <h2>계정 정보 변경</h2>
+              </div>
+              <span class="sa-chip" id="credChip">기본 계정</span>
+            </header>
+            <dl class="sa-meta sa-meta--tight">
+              <div><dt>현재 아이디</dt><dd id="credId">admin</dd></div>
+              <div><dt>마지막 변경</dt><dd id="credUpdated">변경 이력 없음</dd></div>
+            </dl>
+            <form class="sa-form sa-form--flat" id="credForm" novalidate>
+              <label class="sa-field">
+                <span class="sa-label">현재 비밀번호 <em>필수</em></span>
+                <input class="sa-input" name="currentPw" type="password" autocomplete="current-password" required>
+              </label>
+              <div class="sa-field-row">
+                <label class="sa-field">
+                  <span class="sa-label">새 아이디</span>
+                  <input class="sa-input" name="id" type="text" autocomplete="username" spellcheck="false" placeholder="영문·숫자 3~20자">
+                </label>
+                <label class="sa-field">
+                  <span class="sa-label">새 비밀번호</span>
+                  <input class="sa-input" name="pw" type="password" autocomplete="new-password" placeholder="8자 이상, 영문+숫자">
+                </label>
+              </div>
+              <label class="sa-field">
+                <span class="sa-label">새 비밀번호 확인</span>
+                <input class="sa-input" name="confirmPw" type="password" autocomplete="new-password">
+              </label>
+              <p class="sa-form-error" data-sa-error hidden></p>
+              <div class="sa-actions">
+                <button type="submit" class="sa-btn sa-btn-primary">변경 저장</button>
+              </div>
+            </form>
+          </article>
+
+          <article class="sa-panel sa-panel--pad">
+            <header class="sa-card-head">
+              <div>
+                <p class="sa-eyebrow">Scope</p>
+                <h2>이 관리자 모드의 범위</h2>
+              </div>
+            </header>
+            <ul class="sa-scope">
+              <li><i data-lucide="check"></i><div><strong>할 수 있는 일</strong><p>이 브라우저에서 보이는 공지·교수진을 고치고, data.js로 내려받고, GitHub 저장소에 커밋하는 일.</p></div></li>
+              <li><i data-lucide="minus"></i><div><strong>할 수 없는 일</strong><p>서버가 없는 정적 사이트라, 로그인은 화면을 여는 잠금장치입니다. 방문자의 화면을 직접 바꾸지 못하며, 실제 반영은 GitHub 커밋으로만 이뤄집니다.</p></div></li>
+              <li><i data-lucide="alert-triangle"></i><div><strong>그래서 비밀번호는</strong><p>기본값을 그대로 두면 누구나 이 화면을 열어 볼 수 있습니다. 처음 로그인한 뒤 위에서 바로 바꿔 주세요.</p></div></li>
+            </ul>
+
+            <div class="sa-danger">
+              <h3>되돌리기</h3>
+              <div class="sa-danger-row">
+                <div><strong>로컬 수정본 비우기</strong><p>이 브라우저에 저장한 편집 내용을 모두 버리고, 저장소의 원본 data.js 상태로 돌아갑니다.</p></div>
+                <button type="button" class="sa-btn sa-btn--sm" data-act="reset-local">원본으로</button>
+              </div>
+              <div class="sa-danger-row">
+                <div><strong>기본 계정으로 초기화</strong><p>아이디·비밀번호를 <code>admin</code> / <code>ssu1967!</code> 로 되돌립니다. 비밀번호를 잊었을 때 쓰는 마지막 수단입니다.</p></div>
+                <button type="button" class="sa-btn sa-btn--sm sa-btn-danger" data-act="reset-cred">초기화</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="sa-foot">
+      <p>숭실대학교 화학공학과 관리자 포털 · 데이터는 <code>data.js</code> 한 파일에 모입니다.</p>
+      <p class="sa-foot-meta" id="footMeta">—</p>
+    </footer>
+  </div>
+</div>
+
+<script src="https://unpkg.com/lucide@0.451.0/dist/umd/lucide.min.js"></script>
+<script src="data.js"></script>
+<script src="assets/js/admin-core.js"></script>
+<script src="assets/js/admin-portal.js"></script>
+</body>
+</html>
