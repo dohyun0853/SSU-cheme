@@ -894,6 +894,7 @@
         host.className = 'sa-modal-host';
         document.body.appendChild(host);
       }
+      host.hidden = false;
       return host;
     },
 
@@ -906,11 +907,13 @@
         const opener = panel._opener;
         setTimeout(() => {
           host.innerHTML = '';
+          host.hidden = true;
           document.body.classList.remove('sa-locked');
           if (opener && opener.focus) opener.focus();
         }, 160);
       } else {
         host.innerHTML = '';
+        host.hidden = true;
       }
     },
 

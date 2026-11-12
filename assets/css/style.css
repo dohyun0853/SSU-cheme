@@ -93,7 +93,7 @@ input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; appe
   display: flex; align-items: center; justify-content: space-between;
   gap: 16px; height: 36px;
 }
-.util-dept { font-size: 12px; color: #6A727D; white-space: nowrap; }
+.util-dept { font-size: 12px; color: #5F6771; white-space: nowrap; }
 .util-links { display: flex; align-items: center; gap: 0; }
 .util-links a {
   position: relative; padding: 0 11px; color: #4A525D; white-space: nowrap;
