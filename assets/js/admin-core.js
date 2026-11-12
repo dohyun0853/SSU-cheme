@@ -120,6 +120,54 @@
   const hash = (v) => sha256Hex(SALT + String(v));
 
   /* ==========================================================================
+     1.5 입력 살균 — DOMPurify (cure53)
+     --------------------------------------------------------------------------
+     관리자 입력(공지 제목·작성자, 교수 프로필)과 브라우저에 저장된 수정본을
+     화면에 넣기 전에 태그를 모두 걷어냅니다. 화면 출력은 app.js가 한 번 더
+     HTML 이스케이프하므로 이중 방어입니다. CDN이 막히면 같은 규칙의
+     화이트리스트 살균으로 대체합니다.
+     ========================================================================== */
+  const Sanitizer = {
+    lib: null,
+    init() {
+      this.lib = (window.DOMPurify && typeof window.DOMPurify.sanitize === 'function') ? window.DOMPurify : null;
+      return !!this.lib;
+    },
+    /* 텍스트 필드: 실제 HTML 태그가 들어 있을 때만 살균합니다.
+       (게시판 제목의 <취준동고동락> 처럼 괄호를 쓴 한글은 그대로 보존) */
+    text(value, max) {
+      let s = String(value == null ? '' : value);
+      if (/<\/?[a-zA-Z][^>]*>/.test(s)) {
+        if (!this.lib) this.init();
+        if (this.lib) {
+          s = this.lib.sanitize(s, { ALLOWED_TAGS: [], ALLOWED_ATTR: [], KEEP_CONTENT: true });
+        } else {
+          /* DOM 미로드·CDN 차단 시 같은 효과의 폴백: script/style 본문 차단 후 태그 제거 */
+          s = s.replace(/<(script|style|iframe|object)\b[^>]*>[\s\S]*?<\/\1>/gi, ' ');
+          s = s.replace(/<\/?[a-zA-Z][^>]*>/g, '');
+        }
+      }
+      s = s.replace(/[\u0000-\u001F\u007F]/g, ' ').replace(/\s+/g, ' ').trim();
+      if (max && s.length > max) s = s.slice(0, max);
+      return s;
+    },
+    /* 링크: http(s)만 허용 (javascript:, data:, vbscript: 차단) */
+    url(value) {
+      const s = String(value == null ? '' : value).trim();
+      if (!s) return '';
+      if (!/^https?:\/\//i.test(s)) return '';
+      if (/[\s"'<>`]/.test(s)) return '';
+      return s;
+    },
+    /* 여러 줄(학력·연구·경력): 줄 단위로 살균 */
+    lines(list) {
+      if (!Array.isArray(list)) return [];
+      return list.map((v) => this.text(v, 300)).filter(Boolean);
+    }
+  };
+  Sanitizer.init();
+
+  /* ==========================================================================
      2. 원본 데이터 접근 — data.js 는 const 선언이라 window 에 붙지 않습니다.
         같은 전역 스코프에서 직접 이름으로 읽습니다.
      ========================================================================== */
@@ -172,11 +220,11 @@
   function normalizeNotice(n) {
     const o = {
       date: String(n.date || '').slice(0, 10),
-      title: String(n.title || ''),
-      author: String(n.author || '관리자'),
-      views: Number(n.views) || 0,
+      title: Sanitizer.text(n.title, 200),
+      author: Sanitizer.text(n.author, 40) || '관리자',
+      views: Math.max(0, Number(n.views) || 0),
       pinned: !!n.pinned,
-      url: String(n.url || '')
+      url: Sanitizer.url(n.url)
     };
     o._id = n._id || noticeKey(o);
     return o;
@@ -184,20 +232,20 @@
   function normalizeProfessor(p) {
     return {
       id: p.id || uid('p-'),
-      name: String(p.name || ''),
-      title: String(p.title || '교수'),
-      field: String(p.field || ''),
+      name: Sanitizer.text(p.name, 20),
+      title: Sanitizer.text(p.title, 20) || '교수',
+      field: Sanitizer.text(p.field, 80),
       tags: Array.isArray(p.tags) ? p.tags.filter((t) => TAGS.indexOf(t) >= 0) : [],
-      office: String(p.office || ''),
-      labName: String(p.labName || ''),
-      labRoom: String(p.labRoom || ''),
-      tel: String(p.tel || ''),
-      email: String(p.email || ''),
-      labUrl: String(p.labUrl || ''),
-      photo: String(p.photo || ''),
-      edu: Array.isArray(p.edu) ? p.edu.map(String) : [],
-      research: Array.isArray(p.research) ? p.research.map(String) : [],
-      career: Array.isArray(p.career) ? p.career.map(String) : []
+      office: Sanitizer.text(p.office, 40),
+      labName: Sanitizer.text(p.labName, 60),
+      labRoom: Sanitizer.text(p.labRoom, 40),
+      tel: Sanitizer.text(p.tel, 24),
+      email: Sanitizer.text(p.email, 60),
+      labUrl: Sanitizer.url(p.labUrl),
+      photo: Sanitizer.url(p.photo) || Sanitizer.text(p.photo, 120),
+      edu: Sanitizer.lines(p.edu),
+      research: Sanitizer.lines(p.research),
+      career: Sanitizer.lines(p.career)
     };
   }
 
@@ -647,28 +695,113 @@
         return `https://api.github.com/repos/${encodeURIComponent(opts.owner)}/${encodeURIComponent(opts.repo)}/contents/${path}`;
       },
 
+      /* ---- Octokit (octokit/octokit.js) — 가능하면 공식 클라이언트로 커밋 ---- */
+      _octokit: null,
+      _octokitToken: null,
+      _octokitTried: false,
+
+      async client(token) {
+        if (this._octokit && this._octokitToken === token) return this._octokit;
+        if (this._octokitTried && this._octokitToken === token) return this._octokit;
+        this._octokitTried = true;
+        this._octokitToken = token;
+        try {
+          const mod = await import('https://cdn.jsdelivr.net/npm/octokit@4/+esm');
+          const Ctor = mod && (mod.Octokit || (mod.default && mod.default.Octokit));
+          this._octokit = Ctor ? new Ctor({ auth: token, request: { retries: 2 } }) : null;
+        } catch (e) {
+          this._octokit = null;
+        }
+        return this._octokit;
+      },
+
+      async readOctokit(client, opts) {
+        try {
+          const res = await client.rest.repos.getContent({
+            owner: opts.owner, repo: opts.repo, path: String(opts.path).replace(/^\/+/, ''), ref: opts.branch || 'main'
+          });
+          const d = res.data;
+          if (Array.isArray(d)) return { ok: false, status: 0, message: '경로가 폴더입니다. 파일 경로를 지정하세요.', via: 'octokit' };
+          return { ok: true, status: 200, sha: d.sha, size: d.size, content: b64ToUtf8(d.content || ''), via: 'octokit' };
+        } catch (err) {
+          if (err && err.status === 404) return { ok: true, missing: true, status: 404, via: 'octokit' };
+          return { ok: false, status: (err && err.status) || 0, message: (err && err.message) || '원격 파일을 읽지 못했습니다.', via: 'octokit' };
+        }
+      },
+
+      async pushOctokit(client, opts, content, message) {
+        const remote = await this.readOctokit(client, opts);
+        if (!remote.ok) return remote;
+        if (!remote.missing && remote.content === content) {
+          return { ok: true, unchanged: true, sha: remote.sha, via: 'octokit' };
+        }
+        try {
+          const params = {
+            owner: opts.owner,
+            repo: opts.repo,
+            path: String(opts.path).replace(/^\/+/, ''),
+            message: message || 'chore(data): 관리자 포털에서 학과 데이터 갱신',
+            content: utf8ToB64(content),
+            branch: opts.branch || 'main'
+          };
+          if (remote.sha) params.sha = remote.sha;
+          const res = await client.rest.repos.createOrUpdateFileContents(params);
+          const d = res.data || {};
+          return {
+            ok: true,
+            status: res.status,
+            sha: d.content && d.content.sha,
+            commitSha: d.commit && d.commit.sha,
+            commitUrl: d.commit && d.commit.html_url,
+            via: 'octokit'
+          };
+        } catch (err) {
+          return {
+            ok: false,
+            status: (err && err.status) || 0,
+            message: (err && err.message) || '커밋에 실패했습니다.',
+            conflict: !!(err && err.status === 409),
+            via: 'octokit'
+          };
+        }
+      },
+
+      /* ---- 기본 경로: REST Contents API (Octokit CDN이 막힌 경우) ---- */
       async read(opts, token) {
+        const client = await this.client(token);
+        if (client) return this.readOctokit(client, opts);
+        return this.readRest(opts, token);
+      },
+
+      async readRest(opts, token) {
         const res = await fetch(this.url(opts) + '?ref=' + encodeURIComponent(opts.branch || 'main'), {
           headers: this.headers(token),
           cache: 'no-store'
         });
-        if (res.status === 404) return { ok: true, missing: true, status: 404 };
+        if (res.status === 404) return { ok: true, missing: true, status: 404, via: 'rest' };
         const body = await res.json().catch(() => ({}));
-        if (!res.ok) return { ok: false, status: res.status, message: (body && body.message) || '원격 파일을 읽지 못했습니다.' };
+        if (!res.ok) return { ok: false, status: res.status, message: (body && body.message) || '원격 파일을 읽지 못했습니다.', via: 'rest' };
         return {
           ok: true,
           status: res.status,
           sha: body.sha,
           size: body.size,
-          content: body.content ? b64ToUtf8(body.content) : ''
+          content: body.content ? b64ToUtf8(body.content) : '',
+          via: 'rest'
         };
       },
 
       async push(opts, token, content, message) {
-        const remote = await this.read(opts, token);
+        const client = await this.client(token);
+        if (client) return this.pushOctokit(client, opts, content, message);
+        return this.pushRest(opts, token, content, message);
+      },
+
+      async pushRest(opts, token, content, message) {
+        const remote = await this.readRest(opts, token);
         if (!remote.ok) return remote;
         if (!remote.missing && remote.content === content) {
-          return { ok: true, unchanged: true, sha: remote.sha };
+          return { ok: true, unchanged: true, sha: remote.sha, via: 'rest' };
         }
         const payload = {
           message: message || 'chore(data): 관리자 포털에서 학과 데이터 갱신',
@@ -687,7 +820,8 @@
             ok: false,
             status: res.status,
             message: (body && body.message) || '커밋에 실패했습니다.',
-            conflict: res.status === 409
+            conflict: res.status === 409,
+            via: 'rest'
           };
         }
         return {
@@ -695,7 +829,8 @@
           status: res.status,
           sha: body.content && body.content.sha,
           commitSha: body.commit && body.commit.sha,
-          commitUrl: body.commit && body.commit.html_url
+          commitUrl: body.commit && body.commit.html_url,
+          via: 'rest'
         };
       }
     }
@@ -1048,6 +1183,7 @@
     Auth: Auth,
     Store: Store,
     UI: UI,
+    Sanitizer: Sanitizer,
     sha256: sha256Hex,
     hash: hash,
     base: base,

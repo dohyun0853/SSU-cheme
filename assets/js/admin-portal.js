@@ -367,7 +367,7 @@
       }
       const same = r.content === built().content;
       setGhState(same ? '동기화됨' : '변경 있음', same ? 'on' : 'warn');
-      logLine(`원격 <code>${esc(o.path)}</code> · ${fmtBytes(r.size)} · ${esc(String(r.sha).slice(0, 8))}`, 'muted');
+      logLine(`원격 <code>${esc(o.path)}</code> · ${fmtBytes(r.size)} · ${esc(String(r.sha).slice(0, 8))} · ${r.via === 'octokit' ? 'Octokit' : 'REST'}`, 'muted');
       logLine(same
         ? '원격과 지금 화면의 내용이 같습니다. 커밋할 변경 사항이 없습니다.'
         : '원격과 내용이 다릅니다. 아래 <strong>GitHub에 커밋</strong>으로 반영할 수 있습니다.', same ? 'ok' : 'warn');
@@ -424,7 +424,7 @@
         return;
       }
       setGhState('커밋 완료', 'on');
-      logLine(`커밋 완료 · <code>${esc(String(r.commitSha || '').slice(0, 10))}</code>`, 'ok');
+      logLine(`커밋 완료 · <code>${esc(String(r.commitSha || '').slice(0, 10))}</code> · ${r.via === 'octokit' ? 'Octokit' : 'REST'}`, 'ok');
       if (r.commitUrl) {
         logLine(`<a href="${esc(r.commitUrl)}" target="_blank" rel="noopener">GitHub에서 커밋 열기 ↗</a>`, 'muted');
       }

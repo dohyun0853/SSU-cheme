@@ -499,21 +499,69 @@
     }
   }
 
+  function setNoticeBoard(key, opts) {
+    if (!BOARD_META[key]) return;
+    const changed = key !== board;
+    board = key;
+    noticeVisible = 12;
+    $$('#noticeTabs .notice-tab').forEach((t) => {
+      const on = t.dataset.board === key;
+      t.classList.toggle('is-active', on);
+      t.setAttribute('aria-selected', String(on));
+    });
+    renderNotices();
+    const listEl = $('#noticeList');
+    if (changed && listEl && opts && opts.slide) {
+      listEl.classList.remove('is-sliding');
+      void listEl.offsetWidth;
+      listEl.classList.add('is-sliding');
+    }
+  }
+
+  /* 하드웨어 가속 터치 스와이프 — 모바일에서 게시판 탭을 좌우로 넘깁니다.
+     (passive 리스너 + Layout Thrash 없는 단일 측정으로 스크롤을 막지 않습니다) */
+  function initNoticeSwipe() {
+    const panel = $('#notices .notice-panel');
+    if (!panel || !('ontouchstart' in window)) return;
+    const order = ['undergrad', 'grad', 'job'];
+    let sx = 0, sy = 0, active = false, horizontal = false;
+
+    panel.addEventListener('touchstart', (e) => {
+      if (e.touches.length !== 1) return;
+      sx = e.touches[0].clientX;
+      sy = e.touches[0].clientY;
+      active = true;
+      horizontal = false;
+    }, { passive: true });
+
+    panel.addEventListener('touchmove', (e) => {
+      if (!active || e.touches.length !== 1) return;
+      const dx = Math.abs(e.touches[0].clientX - sx);
+      const dy = Math.abs(e.touches[0].clientY - sy);
+      if (dx > 14 && dx > dy) horizontal = true;
+    }, { passive: true });
+
+    panel.addEventListener('touchend', (e) => {
+      if (!active) { return; }
+      active = false;
+      if (!horizontal) return;
+      const t = e.changedTouches[0];
+      const dx = t.clientX - sx;
+      const dy = t.clientY - sy;
+      if (Math.abs(dx) < 56 || Math.abs(dx) < Math.abs(dy) * 1.4) return;
+      const i = order.indexOf(board);
+      const next = dx < 0 ? order[Math.min(i + 1, order.length - 1)] : order[Math.max(i - 1, 0)];
+      if (next !== board) setNoticeBoard(next, { slide: true });
+    }, { passive: true });
+  }
+
   function initNotices() {
     if (typeof NOTICES === 'undefined') return;
 
     $$('#noticeTabs .notice-tab').forEach((tab) => {
-      tab.addEventListener('click', () => {
-        board = tab.dataset.board;
-        noticeVisible = 12;
-        $$('#noticeTabs .notice-tab').forEach((t) => {
-          const on = t === tab;
-          t.classList.toggle('is-active', on);
-          t.setAttribute('aria-selected', String(on));
-        });
-        renderNotices();
-      });
+      tab.addEventListener('click', () => setNoticeBoard(tab.dataset.board));
     });
+    initNoticeSwipe();
 
     $$('.sort-toggle button').forEach((btn) => {
       btn.addEventListener('click', () => {
@@ -812,17 +860,7 @@
     openProfile: openProfile,
     closeProfile: closeProfile,
     currentBoard: () => board,
-    setBoard: (b) => {
-      if (!BOARD_META[b]) return;
-      board = b;
-      noticeVisible = 12;
-      $$('#noticeTabs .notice-tab').forEach((t) => {
-        const on = t.dataset.board === b;
-        t.classList.toggle('is-active', on);
-        t.setAttribute('aria-selected', String(on));
-      });
-      refreshNotices();
-    },
+    setBoard: (b) => setNoticeBoard(b),
     scrollTo: (sel) => {
       const t = $(sel);
       if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });

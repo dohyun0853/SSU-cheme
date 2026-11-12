@@ -10,6 +10,46 @@
 <meta property="og:description" content="AI 융합 시대를 선도하는 화학공학의 새로운 도약 — 반도체·배터리·바이오·첨단소재 공학">
 <meta property="og:type" content="website">
 <link rel="icon" href="assets/ssu-logo.png">
+<link rel="canonical" href="https://dohyun0853.github.io/SSU-cheme/">
+<meta name="robots" content="index,follow">
+<meta name="author" content="숭실대학교 화학공학과">
+<meta name="keywords" content="숭실대학교, 화학공학과, 반도체, 배터리, 바이오, 고분자, 화학공학, 대학원">
+<meta property="og:site_name" content="숭실대학교 화학공학과">
+<meta property="og:url" content="https://dohyun0853.github.io/SSU-cheme/">
+<meta property="og:image" content="https://dohyun0853.github.io/SSU-cheme/assets/ssu-logo.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="숭실대학교 화학공학과">
+<meta name="twitter:description" content="AI 융합 시대를 선도하는 화학공학의 새로운 도약 — 반도체·배터리·바이오·첨단소재 공학">
+
+<!-- 구조화 데이터 (schema.org) — 검색엔진이 학과 정보를 이해하도록 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollegeOrUniversity",
+  "name": "숭실대학교 화학공학과",
+  "alternateName": "Soongsil University, Department of Chemical Engineering",
+  "url": "https://dohyun0853.github.io/SSU-cheme/",
+  "logo": "https://dohyun0853.github.io/SSU-cheme/assets/ssu-logo.png",
+  "foundingDate": "1967",
+  "telephone": "+82-2-820-0610",
+  "faxNumber": "+82-2-812-5378",
+  "email": "chemical@ssu.ac.kr",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "상도로 369",
+    "addressLocality": "서울특별시 동작구",
+    "postalCode": "06978",
+    "addressCountry": "KR"
+  },
+  "parentOrganization": { "@type": "CollegeOrUniversity", "name": "숭실대학교" },
+  "department": {
+    "@type": "Organization",
+    "name": "화학공학과",
+    "numberOfEmployees": { "@type": "QuantitativeValue", "value": 14 }
+  },
+  "knowsAbout": ["반도체 공정", "이차전지", "바이오의약", "고분자 소재", "환경 공정"]
+}
+</script>
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://unpkg.com">
@@ -41,7 +81,7 @@
 <header class="site-header" id="siteHeader">
   <div class="wrap header-inner">
     <a class="brand" href="#top" aria-label="숭실대학교 화학공학과 홈으로">
-      <img class="brand-logo" src="assets/ssu-logo.png" alt="숭실대학교" width="200" height="28">
+      <img class="brand-logo" src="assets/ssu-logo.png" alt="숭실대학교" width="200" height="28" decoding="async">
       <span class="brand-text">
         <strong>화학공학과</strong>
         <em>Department of Chemical Engineering</em>
@@ -434,8 +474,29 @@
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
 <script src="https://unpkg.com/lucide@0.451.0/dist/umd/lucide.min.js"></script>
 <script src="data.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.7/dist/purify.min.js"></script>
 <script src="assets/js/admin-core.js"></script>
 <script src="assets/js/app.js"></script>
 <script src="assets/js/admin.js"></script>
+<!-- 접근성 자체 점검 (axe-core) — 주소 뒤에 ?a11y=1 을 붙이면 콘솔에 결과를 남깁니다 -->
+<script>
+(function () {
+  try {
+    if (new URLSearchParams(location.search).get('a11y') !== '1') return;
+    var s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/axe-core@4.10.2/axe.min.js';
+    s.onload = function () {
+      window.axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'] } })
+        .then(function (r) {
+          console.log('[a11y] 위반 ' + r.violations.length + '건 · 통과 ' + r.passes.length + '규칙');
+          r.violations.forEach(function (v) {
+            console.log('· [' + v.impact + '] ' + v.id + ' — ' + v.help + ' (' + v.nodes.length + '곳)');
+          });
+        });
+    };
+    document.head.appendChild(s);
+  } catch (e) { /* 점검 모드가 아니면 아무 것도 하지 않습니다 */ }
+})();
+</script>
 </body>
 </html>

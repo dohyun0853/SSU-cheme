@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+
+Sitemap: https://dohyun0853.github.io/SSU-cheme/sitemap.xml
