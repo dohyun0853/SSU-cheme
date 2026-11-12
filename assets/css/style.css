@@ -496,21 +496,30 @@ input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; appe
 .research-body p { margin-top: 7px; font-size: 14px; line-height: 1.8; color: #4A525D; }
 .research-side { display: flex; flex-direction: column; gap: 8px; }
 .research-count { font-size: 12px; color: #667080; }
-.research-profs { display: flex; flex-wrap: wrap; gap: 5px; }
+.research-profs { display: flex; flex-wrap: wrap; gap: 6px; position: relative; z-index: 3; }
 .prof-chip {
-  padding: 4px 10px; border: 1px solid #D5DEEA; background: #fff;
-  border-radius: 3px; font-size: 12.5px; color: var(--navy);
+  position: relative;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  border: 1px solid #D5DEEA;
+  background: #fff;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--navy);
   transition: all .2s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
+  user-select: none;
 }
 .prof-chip:hover {
-  background: var(--navy); color: #fff; border-color: var(--navy);
-  transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0, 44, 108, 0.2);
+  background: var(--navy);
+  color: #fff;
+  border-color: var(--navy);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 44, 108, 0.2);
 }
-  font-size: 12.5px; color: #3A4553;
-  transition: border-color .15s var(--ease), color .15s var(--ease);
-}
-.prof-chip:hover { border-color: var(--navy); color: var(--navy); }
 
 /* ---------------------------------------------------------------- labs */
 .lab-toolbar {
