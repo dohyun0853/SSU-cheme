@@ -65,8 +65,8 @@
 <!-- ⑤ AOS — michalsnik/aos (스크롤 모션그래픽 애니메이션) -->
 <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
 
-<link rel="stylesheet" href="assets/css/style.css?v=20261112d">
-<link rel="stylesheet" href="assets/css/admin.css?v=20261112d">
+<link rel="stylesheet" href="assets/css/style.css?v=20261112_v3">
+<link rel="stylesheet" href="assets/css/admin.css?v=20261112_v3">
 </head>
 <body id="top">
 <a class="skip-link" href="#main">본문으로 건너뛰기</a>
@@ -160,64 +160,47 @@
       </div>
     </div>
 
-    <!-- 4대 산업 입체 쇼케이스 스택 (3D 글래스 카드) -->
+    <!-- 4대 산업 입체 쇼케이스 스택 (데스크톱: 3D 글래스 스택 / 모바일: 가로 터치 스와이프 캐러셀) -->
     <div class="hero-showcase" data-aos="fade-left" data-aos-delay="100">
-      <div class="pillar-stack">
+      <div class="pillar-stack" id="pillarStack">
         <!-- 01 Semiconductor -->
         <a href="#labs" class="pillar-card" data-filter="반도체" aria-label="01 Semiconductor 반도체 연구실 둘러보기">
-          <div class="pillar-left">
-            <span class="pillar-num">01</span>
-            <div class="pillar-body">
-              <h3>Semiconductor</h3>
-              <p>반도체 공정 및 차세대 패키징 소재</p>
-            </div>
-          </div>
-          <div class="pillar-icon pillar-icon--semi">
-            <i data-lucide="cpu" aria-hidden="true"></i>
-          </div>
+          <picture>
+            <source srcset="assets/hero/card_semiconductor.webp" type="image/webp">
+            <img src="assets/hero/card_semiconductor.png" alt="01 Semiconductor 반도체 공정 및 차세대 패키징 소재" width="680" height="200" loading="eager">
+          </picture>
         </a>
 
         <!-- 02 Secondary Battery -->
         <a href="#labs" class="pillar-card" data-filter="배터리" aria-label="02 Secondary Battery 이차전지 연구실 둘러보기">
-          <div class="pillar-left">
-            <span class="pillar-num">02</span>
-            <div class="pillar-body">
-              <h3>Secondary Battery</h3>
-              <p>고용량 이차전지 및 에너지 저장·변환</p>
-            </div>
-          </div>
-          <div class="pillar-icon pillar-icon--battery">
-            <i data-lucide="zap" aria-hidden="true"></i>
-          </div>
+          <picture>
+            <source srcset="assets/hero/card_battery.webp" type="image/webp">
+            <img src="assets/hero/card_battery.png" alt="02 Secondary Battery 고용량 이차전지 및 에너지 저장·변환" width="698" height="185" loading="eager">
+          </picture>
         </a>
 
         <!-- 03 Bio-Health -->
         <a href="#labs" class="pillar-card" data-filter="바이오" aria-label="03 Bio-Health 바이오 헬스 연구실 둘러보기">
-          <div class="pillar-left">
-            <span class="pillar-num">03</span>
-            <div class="pillar-body">
-              <h3>Bio-Health</h3>
-              <p>생체분자 공학 및 의약·뷰티 기능성 소재</p>
-            </div>
-          </div>
-          <div class="pillar-icon pillar-icon--bio">
-            <i data-lucide="dna" aria-hidden="true"></i>
-          </div>
+          <picture>
+            <source srcset="assets/hero/card_bio.webp" type="image/webp">
+            <img src="assets/hero/card_bio.png" alt="03 Bio-Health 생체분자 공학 및 의약·뷰티 기능성 소재" width="720" height="182" loading="eager">
+          </picture>
         </a>
 
         <!-- 04 Advanced Polymers -->
         <a href="#labs" class="pillar-card" data-filter="나노" aria-label="04 Advanced Polymers 첨단 고분자 연구실 둘러보기">
-          <div class="pillar-left">
-            <span class="pillar-num">04</span>
-            <div class="pillar-body">
-              <h3>Advanced Polymers</h3>
-              <p>다공성 나노소재 및 고기능성 고분자 복합체</p>
-            </div>
-          </div>
-          <div class="pillar-icon pillar-icon--poly">
-            <i data-lucide="atom" aria-hidden="true"></i>
-          </div>
+          <picture>
+            <source srcset="assets/hero/card_polymer.webp" type="image/webp">
+            <img src="assets/hero/card_polymer.png" alt="04 Advanced Polymers 다공성 나노소재 및 고기능성 고분자 복합체" width="760" height="180" loading="eager">
+          </picture>
         </a>
+      </div>
+      <!-- 모바일 전용 스와이프 인디케이터 점 -->
+      <div class="pillar-dots" id="pillarDots" aria-hidden="true">
+        <span class="dot is-active" data-index="0"></span>
+        <span class="dot" data-index="1"></span>
+        <span class="dot" data-index="2"></span>
+        <span class="dot" data-index="3"></span>
       </div>
     </div>
   </div>
@@ -567,15 +550,18 @@
 <script src="data.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.7/dist/purify.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-<script src="assets/js/admin-core.js?v=20261112d"></script>
-<script src="assets/js/app.js?v=20261112d"></script>
-<script src="assets/js/admin.js?v=20261112d"></script>
+<script src="assets/js/admin-core.js?v=20261112_v3"></script>
+<script src="assets/js/app.js?v=20261112_v3"></script>
+<script src="assets/js/admin.js?v=20261112_v3"></script>
 <!-- PWA Service Worker & 앱 설치 스크립트 -->
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function () {
     navigator.serviceWorker.register('./service-worker.js')
-      .then(function (reg) { console.log('[PWA] Service Worker 등록 완료:', reg.scope); })
+      .then(function (reg) {
+        console.log('[PWA] Service Worker 등록 완료:', reg.scope);
+        reg.update();
+      })
       .catch(function (err) { console.warn('[PWA] Service Worker 등록 실패:', err); });
   });
 }

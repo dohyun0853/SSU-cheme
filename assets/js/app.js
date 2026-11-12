@@ -103,10 +103,26 @@
 
     $$('.prof-chip', el).forEach((chip) => {
       chip.addEventListener('click', () => {
-        setLabFilter(chip.dataset.area);
-        const target = $('#labs');
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        setTimeout(() => openProfile(chip.dataset.prof), 420);
+        const profId = chip.dataset.prof;
+        const areaKey = chip.dataset.area;
+
+        // 해당 교수 연구실 카드가 화면에 보이도록 필터 조정
+        if (labFilter !== '전체' && labFilter !== areaKey) {
+          setLabFilter('전체');
+        }
+
+        // 해당 연구실 카드로 부드럽게 스크롤 이동 및 포커스 하이라이트
+        setTimeout(() => {
+          const card = document.querySelector(`.lab-card[data-id="${profId}"]`);
+          if (card) {
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            card.classList.add('is-highlighted');
+            setTimeout(() => card.classList.remove('is-highlighted'), 2200);
+          } else {
+            const labs = $('#labs');
+            if (labs) labs.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 60);
       });
     });
   }
@@ -891,9 +907,74 @@
     });
   }
 
+  /* ------------------------------------------------------------ 모바일 4대 산업 캐러셀 & 인디케이터 */
+  function initPillarCarousel() {
+    const stack = $('#pillarStack');
+    const dotsWrap = $('#pillarDots');
+    if (!stack || !dotsWrap) return;
+
+    const dots = dotsWrap.querySelectorAll('.dot');
+    const cards = stack.querySelectorAll('.pillar-card');
+    if (!dots.length || !cards.length) return;
+
+    // 스크롤 시 현재 활성화된 카드 점 표시
+    stack.addEventListener('scroll', () => {
+      const scrollLeft = stack.scrollLeft;
+      const cardWidth = cards[0].offsetWidth + 12;
+      const activeIdx = Math.min(Math.max(Math.round(scrollLeft / cardWidth), 0), cards.length - 1);
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('is-active', idx === activeIdx);
+      });
+    }, { passive: true });
+
+    // 점 클릭 시 해당 카드로 스크롤 이동
+    dots.forEach((dot, idx) => {
+      dot.addEventListener('click', () => {
+        const cardWidth = cards[0].offsetWidth + 12;
+        stack.scrollTo({ left: cardWidth * idx, behavior: 'smooth' });
+      });
+    });
+
+    // 자동 가로 스와이프 (모바일 화면에서 3.5초마다 부드럽게 순환)
+    let autoTimer = null;
+    let isInteracting = false;
+
+    function startAutoSwipe() {
+      if (window.innerWidth > 900) return;
+      stopAutoSwipe();
+      autoTimer = setInterval(() => {
+        if (isInteracting) return;
+        const scrollLeft = stack.scrollLeft;
+        const cardWidth = cards[0].offsetWidth + 12;
+        const nextIdx = (Math.round(scrollLeft / cardWidth) + 1) % cards.length;
+        stack.scrollTo({ left: cardWidth * nextIdx, behavior: 'smooth' });
+      }, 3500);
+    }
+
+    function stopAutoSwipe() {
+      if (autoTimer) {
+        clearInterval(autoTimer);
+        autoTimer = null;
+      }
+    }
+
+    stack.addEventListener('touchstart', () => { isInteracting = true; }, { passive: true });
+    stack.addEventListener('touchend', () => {
+      isInteracting = false;
+      setTimeout(() => { isInteracting = false; }, 1000);
+    }, { passive: true });
+
+    startAutoSwipe();
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900) stopAutoSwipe();
+      else if (!autoTimer) startAutoSwipe();
+    });
+  }
+
   /* ------------------------------------------------------------ init */
   function boot() {
     initPillarCards();
+    initPillarCarousel();
     renderStats();
     renderTimeline();
     renderCareers();

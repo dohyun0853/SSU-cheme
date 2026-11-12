@@ -1,5 +1,5 @@
-// 숭실대학교 화학공학과 공식 PWA Service Worker
-const CACHE_NAME = 'ssu-cheme-v1.1';
+// 숭실대학교 화학공학과 공식 PWA Service Worker (v3.0 Network-First)
+const CACHE_NAME = 'ssu-cheme-v3.0';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -11,30 +11,34 @@ const ASSETS_TO_CACHE = [
   './assets/js/app.js',
   './assets/js/admin-core.js',
   './assets/js/admin.js',
+  './assets/hero/card_semiconductor.webp',
+  './assets/hero/card_battery.webp',
+  './assets/hero/card_bio.webp',
+  './assets/hero/card_polymer.webp',
   './assets/icons/icon-192.png',
   './assets/icons/icon-512.png',
   './assets/icons/apple-touch-icon.png',
   './assets/ssu-logo.png'
 ];
 
-// Install: Cache core assets
+// Install: Cache core assets and activate immediately
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('[ServiceWorker] Caching App Shell');
+      console.log('[ServiceWorker v3.0] Caching App Shell');
       return cache.addAll(ASSETS_TO_CACHE).catch(err => console.warn('Cache addAll error:', err));
     }).then(() => self.skipWaiting())
   );
 });
 
-// Activate: Clean up old caches
+// Activate: Delete all older cache versions and claim clients immediately
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keyList) => {
       return Promise.all(
         keyList.map((key) => {
           if (key !== CACHE_NAME) {
-            console.log('[ServiceWorker] Removing old cache', key);
+            console.log('[ServiceWorker v3.0] Deleting stale cache:', key);
             return caches.delete(key);
           }
         })
@@ -43,37 +47,56 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Fetch: Stale-While-Revalidate strategy for internal assets, Network-First for external
+// Fetch: NETWORK-FIRST for HTML, CSS, JS, and data.js to prevent stale UI bugs on mobile!
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
   
   const url = new URL(event.request.url);
   
-  // Skip cross-origin non-CDN requests or API requests
+  // Skip cross-origin non-CDN requests
   if (url.origin !== self.location.origin && !url.hostname.includes('cdn') && !url.hostname.includes('unpkg')) {
     return;
   }
 
+  // Network-First for core web files (CSS, JS, HTML, Data)
+  const isCoreWeb = event.request.mode === 'navigate' ||
+                    url.pathname.endsWith('.html') ||
+                    url.pathname.endsWith('.css') ||
+                    url.pathname.endsWith('.js') ||
+                    url.pathname.includes('data.js');
+
+  if (isCoreWeb) {
+    event.respondWith(
+      fetch(event.request).then((networkResponse) => {
+        if (networkResponse && networkResponse.status === 200) {
+          const responseToCache = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseToCache));
+        }
+        return networkResponse;
+      }).catch(() => {
+        return caches.match(event.request);
+      })
+    );
+    return;
+  }
+
+  // Stale-while-revalidate for static assets (images, icons, fonts)
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       const fetchPromise = fetch(event.request).then((networkResponse) => {
         if (networkResponse && networkResponse.status === 200) {
           const responseToCache = networkResponse.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseToCache);
-          });
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseToCache));
         }
         return networkResponse;
-      }).catch(() => {
-        return cachedResponse;
-      });
+      }).catch(() => cachedResponse);
 
       return cachedResponse || fetchPromise;
     })
   );
 });
 
-// Push notification listener (ready for Firebase FCM / Web Push)
+// Push notification listener
 self.addEventListener('push', (event) => {
   let title = '숭실대학교 화학공학과';
   let options = {

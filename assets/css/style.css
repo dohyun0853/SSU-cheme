@@ -310,95 +310,37 @@ input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; appe
   font-family: var(--mono);
 }
 
-/* 4대 산업 3D 입체 글래스 카드 쇼케이스 */
+/* 4대 산업 3D 입체 글래스 카드 쇼케이스 (시안 2번 실물 그래픽 탑재) */
 .hero-showcase {
   position: relative;
 }
 .pillar-stack {
   display: flex;
   flex-direction: column;
-  gap: 11px;
-  perspective: 1200px;
+  gap: 13px;
 }
 .pillar-card {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 20px;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(0, 44, 108, 0.12);
-  border-radius: 8px;
-  box-shadow: 0 4px 16px -2px rgba(0, 44, 108, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
-  transition: all .35s cubic-bezier(0.16, 1, 0.3, 1);
-  text-decoration: none;
+  display: block;
+  border-radius: 10px;
   overflow: hidden;
-  cursor: pointer;
+  text-decoration: none;
+  transition: transform .35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 6px 20px -3px rgba(0, 44, 108, 0.08), 0 1px 3px rgba(0, 0, 0, 0.03);
 }
-.pillar-card::before {
-  content: "";
-  position: absolute; left: 0; top: 0; bottom: 0;
-  width: 3px;
-  background: var(--navy);
-  opacity: 0;
-  transition: opacity .25s ease;
+.pillar-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  transition: transform .35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .pillar-card:hover {
   transform: translateX(-8px) scale(1.015);
-  background: #FFFFFF;
-  border-color: var(--navy);
-  box-shadow: 0 16px 32px -8px rgba(0, 44, 108, 0.15), 0 0 0 1px rgba(0, 44, 108, 0.18);
+  box-shadow: 0 18px 36px -8px rgba(0, 44, 108, 0.22), 0 0 0 1px rgba(0, 44, 108, 0.20);
 }
-.pillar-card:hover::before {
-  opacity: 1;
-}
-.pillar-left {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-.pillar-num {
-  font-family: var(--mono);
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--navy);
-  background: #EEF4FC;
-  padding: 4px 8px;
-  border-radius: 4px;
-}
-.pillar-body h3 {
-  font-size: 16px;
-  font-weight: 700;
-  color: #0A192F;
-  letter-spacing: -.02em;
-  margin: 0 0 2px 0;
-}
-.pillar-body p {
-  font-size: 12.5px;
-  color: #64748B;
-  margin: 0;
-}
-.pillar-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  background: #F1F5F9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--navy);
-  flex-shrink: 0;
-  transition: all .25s ease;
-}
-.pillar-card:hover .pillar-icon {
-  background: var(--navy);
-  color: #FFFFFF;
-  transform: rotate(5deg) scale(1.08);
-}
-.pillar-icon svg {
-  width: 18px;
-  height: 18px;
+.pillar-dots {
+  display: none;
 }
 
 .stat-strip { background: #fff; border-top: 1px solid #E8ECF2; }
@@ -514,11 +456,11 @@ input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; appe
 .career-head { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 40px; align-items: start; }
 .career-head p { font-size: 14.5px; color: var(--muted); line-height: 1.8; padding-top: 2px; }
 .career-grid {
-  display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
-  margin-top: 22px;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px;
+  margin-top: 24px;
 }
 .career-item {
-  padding: 18px 16px 20px; border: 1px solid var(--line); border-radius: 4px;
+  padding: 20px 22px; border: 1px solid var(--line); border-radius: 6px;
   background: #fff;
   transition: transform .3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .3s cubic-bezier(0.16, 1, 0.3, 1), border-color .2s ease;
 }
@@ -527,8 +469,8 @@ input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; appe
   border-color: var(--navy);
   box-shadow: 0 10px 24px -8px rgba(0, 44, 108, 0.12);
 }
-.career-item h4 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 8px; letter-spacing: -.02em; }
-.career-item p { font-size: 12.5px; color: #5A6069; line-height: 1.7; word-break: keep-all; }
+.career-item h4 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 8px; letter-spacing: -.02em; }
+.career-item p { font-size: 13px; color: #4A5568; line-height: 1.7; word-break: keep-all; }
 
 /* ---------------------------------------------------------------- research (3D 모션 지원) */
 .research-list { border-top: 1px solid var(--line); }
@@ -625,6 +567,13 @@ input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; appe
   border-color: rgba(0, 44, 108, 0.3);
   box-shadow: 0 16px 36px -10px rgba(0, 44, 108, 0.14), 0 0 0 1px rgba(0, 44, 108, 0.18);
   z-index: 2;
+}
+.lab-card.is-highlighted {
+  border-color: var(--navy) !important;
+  outline: 2px solid var(--navy) !important;
+  box-shadow: 0 0 0 6px rgba(0, 44, 108, 0.22), 0 16px 36px -4px rgba(0, 44, 108, 0.25) !important;
+  transform: translateY(-6px) scale(1.02) !important;
+  z-index: 10;
 }
 .lab-stretch {
   position: absolute; inset: 0; z-index: 1;
@@ -1082,7 +1031,7 @@ body.is-admin .notice-head .m { display: block; text-align: right; }
 @media (max-width: 1180px) {
   .lab-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .nav a { padding: 0 11px; font-size: 14.5px; }
-  .career-grid { grid-template-columns: repeat(3, 1fr); }
+  .career-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 1024px) {
@@ -1118,12 +1067,60 @@ body.is-admin .notice-head .m { display: block; text-align: right; }
   .nav a::after { display: none; }
   .header-actions { margin-left: auto; }
   .lab-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .career-grid { grid-template-columns: repeat(2, 1fr); }
+  .career-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .term-grid { grid-template-columns: 1fr; }
   .stat-bar { grid-template-columns: 1fr 1fr; }
   .stat-bar > div { padding: 16px 4px; }
   .stat-bar > div:nth-child(2n) { border-right: 0; }
   .stat-bar > div:nth-child(n+3) { border-top: 1px solid var(--line-soft); }
+
+  /* Hero v2 모바일 가로 터치 스와이프 캐러셀 */
+  .hero.hero--v2 { padding-top: 28px; overflow: hidden; }
+  .hero.hero--v2::before { display: none !important; }
+  .quote-band::after { display: none !important; }
+  .hero--v2 .hero-inner { grid-template-columns: 1fr !important; gap: 24px; padding-bottom: 24px; }
+  .hero-showcase { width: 100%; max-width: 100%; overflow: hidden; margin-top: 6px; }
+  .pillar-stack {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 6px 4px 12px 4px;
+    margin: 0;
+    scrollbar-width: none;
+  }
+  .pillar-stack::-webkit-scrollbar { display: none; }
+  .pillar-card {
+    flex: 0 0 84vw;
+    max-width: 320px;
+    scroll-snap-align: center;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px -4px rgba(0, 44, 108, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04);
+  }
+  .pillar-card:hover { transform: none; }
+  .pillar-card img { width: 100%; height: auto; display: block; border-radius: 10px; }
+  .pillar-dots {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    margin-top: 4px;
+    padding: 4px 0;
+  }
+  .pillar-dots .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: #D1D5DB;
+    transition: all .25s ease;
+    cursor: pointer;
+  }
+  .pillar-dots .dot.is-active {
+    width: 22px;
+    background: var(--navy);
+  }
 }
 
 @media (max-width: 640px) {
@@ -1200,7 +1197,10 @@ body.is-admin .notice-head .m { display: block; text-align: right; }
   .section-title { font-size: 23px; }
   .stat-bar dt { font-size: 20px; }
   .lab-grid { grid-template-columns: 1fr; }
-  .career-grid { grid-template-columns: 1fr; }
+  .career-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .career-item { padding: 14px 12px; }
+  .career-item h4 { font-size: 13.5px; margin-bottom: 4px; }
+  .career-item p { font-size: 11.5px; line-height: 1.55; }
   .chips { width: 100%; }
   .chip { padding: 6px 10px; font-size: 12.5px; }
   .lab-search { width: 100%; }
