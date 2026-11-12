@@ -73,7 +73,7 @@ const PROFESSORS = [
     id: "ryu", name: "류희욱", title: "교수", field: "화학공학, 환경공학",
     tags: ["바이오", "환경"],
     office: "형남공학관 904호", labName: "환경생물공학 연구실", labRoom: "형남공학관 915호",
-    tel: "02-820-0611", email: "hwryu@ssu.ac.kr", labUrl: "https://www.ssueblab.com/",
+    tel: "02-820-0611", email: "hwryu@ssu.ac.kr", labUrl: "",
     photo: "assets/faculty/류희욱.jpg",
     edu: ["학사 · 숭실대학교 화학공학전공 (1987)", "석사 · 한국과학기술원 화학공학전공 (1989)", "박사 · 한국과학기술원 화학공학전공 (1993)"],
     research: ["바이오공정과 바이오에너지·바이오고분자 생산", "폐가스·폐수·지하수의 생물학적 처리", "석유·석탄의 생물학적 탈황과 금속 회수", "온실가스 저감을 위한 미생물 공정", "뷰티공학: 천연 화장품 소재와 생물공학 응용"],
