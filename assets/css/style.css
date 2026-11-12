@@ -1087,8 +1087,8 @@ body.is-admin .notice-head .m { display: block; text-align: right; }
 
 @media (max-width: 1024px) {
   :root { --header-h: 74px; }
-  .hero-inner { grid-template-columns: 1fr; gap: 34px; padding-bottom: 40px; }
-  .hero h1 { font-size: 32px; }
+  .hero-inner, .hero--v2 .hero-inner { grid-template-columns: 1fr; gap: 36px; padding-bottom: 40px; }
+  .hero h1, .hero--v2 h1 { font-size: 32px; }
   .hero-info { max-width: 520px; }
   .section-head--split { grid-template-columns: 1fr; gap: 16px; }
   .section-head--split .section-desc { padding-top: 0; }
@@ -1128,6 +1128,8 @@ body.is-admin .notice-head .m { display: block; text-align: right; }
 
 @media (max-width: 640px) {
   :root { --gutter: 18px; --header-h: 66px; }
+  html, body { overflow-x: hidden; }
+
   /* 터치 목표 크기 44px 이상 확보 */
   .notice-tab { min-height: 46px; }
   .sort-toggle button { height: 36px; padding: 0 12px; }
@@ -1142,6 +1144,55 @@ body.is-admin .notice-head .m { display: block; text-align: right; }
   .brand-text strong { font-size: 17px; }
   .search-trigger span { display: none; }
   .search-trigger { width: 38px; padding: 0; justify-content: center; }
+
+  /* Hero v2 모바일 반응형 정밀 교정 (1열 스택 & 터치 최적화) */
+  .hero.hero--v2 { padding-top: 32px; }
+  .hero--v2 .hero-inner { grid-template-columns: 1fr; gap: 28px; padding-bottom: 28px; }
+  .hero-badge { font-size: 10.5px; padding: 4px 10px; margin-bottom: 12px; }
+  .hero--v2 h1 { font-size: 26px; line-height: 1.34; letter-spacing: -.03em; }
+  .hero--v2 .hero-lead { font-size: 14px; line-height: 1.75; margin-top: 14px; }
+  .hero--v2 .hero-cta { flex-direction: column; gap: 8px; margin-top: 20px; }
+  .hero--v2 .hero-cta .btn { width: 100%; justify-content: center; height: 44px; font-size: 14px; }
+  .hero-motto { margin-top: 22px; padding-top: 16px; gap: 10px; }
+  .hero-motto-crest { width: 32px; height: 32px; }
+  .hero-motto-text strong { font-size: 12px; }
+  .hero-motto-text span { font-size: 10px; }
+
+  /* 4대 산업 글래스 카드 모바일 맞춤 */
+  .pillar-stack { gap: 10px; }
+  .pillar-card { padding: 13px 14px; }
+  .pillar-card:hover { transform: none; }
+  .pillar-left { gap: 12px; min-width: 0; }
+  .pillar-num { font-size: 11.5px; padding: 3px 6px; }
+  .pillar-body { min-width: 0; }
+  .pillar-body h3 { font-size: 14.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pillar-body p { font-size: 11.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pillar-icon { width: 34px; height: 34px; }
+  .pillar-icon svg { width: 16px; height: 16px; }
+
+  /* 인용구 밴드 모바일 */
+  .quote-band { flex-direction: column; align-items: flex-start; gap: 18px; padding: 26px 20px; margin-top: 32px; }
+  .quote-band blockquote p { font-size: 18px; line-height: 1.5; }
+  .quote-band figcaption { text-align: left; }
+
+  /* 연구분야 모바일 */
+  .research-row { grid-template-columns: 1fr; gap: 10px; padding: 16px 12px; }
+  .research-row:hover { transform: none; }
+  .research-num { font-size: 15px; }
+  .research-body h3 { font-size: 16px; }
+  .research-body p { font-size: 13px; line-height: 1.65; margin-top: 4px; }
+  .research-side { margin-top: 4px; }
+
+  /* 입학 및 진로 모바일 */
+  .guide-grid { grid-template-columns: 1fr; gap: 12px; }
+  .guide-card { padding: 22px 18px; }
+  .guide-card h3 { font-size: 17px; }
+  .guide-card p { font-size: 13px; }
+
+  /* 프로필 경력 모바일 줄바꿈 방지 */
+  .profile-career-list li { grid-template-columns: 1fr; gap: 2px; padding: 6px 0; }
+  .profile-career-list .career-period { font-size: 11.5px; }
+  .profile-career-list .career-desc { font-size: 12.5px; }
   .hero { padding-top: 40px; }
   .hero h1 { font-size: 26px; }
   .hero-sub { font-size: 15px; }
