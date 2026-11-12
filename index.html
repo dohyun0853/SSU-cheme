@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>숭실대학교 화학공학과 | Department of Chemical Engineering, Soongsil University</title>
+<meta name="description" content="숭실대학교 화학공학과 공식 홈페이지. 반도체·이차전지·바이오·고분자·환경 분야 14명 전임교원과 12개 연구실, 2024학년도 교과과정, 학부·대학원·취업 공지사항을 안내합니다.">
+<meta name="theme-color" content="#002C6C">
+<meta property="og:title" content="숭실대학교 화학공학과">
+<meta property="og:description" content="분자를 설계하고, 산업의 다음을 만든다. 1967년 설립, 반도체·에너지·바이오·고분자·환경을 잇는 화학공학.">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/ssu-logo.png">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
+
+<!-- ① Pretendard — orioncactus/pretendard -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+
+<!-- ② Tailwind CSS — tailwindlabs/tailwindcss (유틸리티 보조 레이어) -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  if (window.tailwind) {
+    tailwind.config = {
+      corePlugins: { preflight: false },
+      theme: { extend: { colors: { ssu: { 900: '#002C6C', 700: '#004098', 500: '#1A56B0', 50: '#EEF3FA' }, accent: '#00A0B8' } } }
+    };
+  }
+</script>
+
+<!-- ⑤ AOS — michalsnik/aos (스크롤 애니메이션) -->
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body id="top">
+<a class="skip-link" href="#main">본문으로 건너뛰기</a>
+<div class="scroll-progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+<!-- ============================================================ HEADER -->
+<header class="site-header" id="siteHeader">
+  <div class="wrap header-inner">
+    <a class="brand" href="#top" aria-label="숭실대학교 화학공학과 홈으로">
+      <img class="brand-logo" src="assets/ssu-logo.png" alt="숭실대학교 화학공학과" width="200" height="28">
+      <span class="brand-rule" aria-hidden="true"></span>
+      <span class="brand-text"><em>Chemical Engineering</em></span>
+    </a>
+
+    <nav class="nav" id="primaryNav" aria-label="주요 메뉴">
+      <a href="#about">학과소개</a>
+      <a href="#research">연구분야</a>
+      <a href="#labs">교수진·연구실</a>
+      <a href="#curriculum">교과과정</a>
+      <a href="#notices">공지사항</a>
+      <a href="#admission">입학·진로</a>
+      <a href="#contact">오시는 길</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="search-trigger" id="openSearch" type="button" aria-label="통합 검색 열기">
+        <i data-lucide="search" aria-hidden="true"></i>
+        <span>검색</span>
+        <kbd>Ctrl K</kbd>
+      </button>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="primaryNav">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============================================================ HERO -->
+<section class="hero" aria-labelledby="heroTitle">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+  </div>
+
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <p class="eyebrow" data-aos="fade-up">
+        <span class="dot" aria-hidden="true"></span>
+        Soongsil University · Since 1967
+      </p>
+      <h1 id="heroTitle" data-aos="fade-up" data-aos-delay="60">
+        분자를 설계하고,<br>
+        <span class="hero-h1-accent">산업의 다음</span>을 만든다
+      </h1>
+      <p class="hero-lead" data-aos="fade-up" data-aos-delay="120">
+        반도체와 이차전지, 바이오의약, 고분자, 탄소중립 공정.
+        숭실대학교 화학공학과는 기초 과학과 공정 설계를 함께 다루며,
+        실험실의 발견을 산업의 문제 해결로 옮기는 엔지니어를 기릅니다.
+      </p>
+      <div class="hero-cta" data-aos="fade-up" data-aos-delay="180">
+        <a class="btn btn-primary" href="#labs">
+          연구실 둘러보기
+          <i data-lucide="arrow-up-right" aria-hidden="true"></i>
+        </a>
+        <a class="btn btn-ghost" href="#curriculum">
+          교과과정 보기
+          <i data-lucide="arrow-right" aria-hidden="true"></i>
+        </a>
+      </div>
+      <dl class="hero-meta" data-aos="fade-up" data-aos-delay="240">
+        <div><dt>위치</dt><dd>형남공학관 912호</dd></div>
+        <div><dt>대표전화</dt><dd><a href="tel:02-820-0610">02-820-0610</a></dd></div>
+        <div><dt>대학원</dt><dd>석사·박사 과정 운영</dd></div>
+      </dl>
+    </div>
+
+    <figure class="hero-visual" data-aos="fade-left" data-aos-delay="120" aria-label="화학공학 연구 개념도">
+      <div class="plate" id="heroPlate">
+        <div class="plate-head">
+          <span>FIG. 01 — RESEARCH MATRIX</span>
+          <span class="plate-live"><i></i>LIVE</span>
+        </div>
+
+        <svg class="plate-svg" viewBox="0 0 520 460" role="img" aria-label="반도체, 이차전지, 바이오, 고분자, 환경 공정 다섯 축이 분자 설계를 중심으로 연결된 개념도">
+          <defs>
+            <pattern id="dotGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+              <circle cx="1" cy="1" r="1" fill="#002C6C" opacity="0.14"/>
+            </pattern>
+            <radialGradient id="plateFade" cx="50%" cy="46%" r="62%">
+              <stop offset="55%" stop-color="#ffffff" stop-opacity="0"/>
+              <stop offset="100%" stop-color="#ffffff" stop-opacity="0.92"/>
+            </radialGradient>
+          </defs>
+
+          <rect x="0" y="0" width="520" height="460" fill="url(#dotGrid)"/>
+          <rect x="0" y="0" width="520" height="460" fill="url(#plateFade)"/>
+
+          <!-- 측정 눈금 -->
+          <g stroke="#002C6C" stroke-opacity="0.28" stroke-width="1">
+            <path d="M40 40 H 120"/><path d="M40 40 V 90"/>
+            <path d="M480 40 H 400"/><path d="M480 40 V 90"/>
+            <path d="M40 420 H 120"/><path d="M480 420 H 400"/>
+          </g>
+          <g fill="#5B6675" font-size="8" letter-spacing="1.4" font-family="ui-monospace,monospace">
+            <text x="40" y="32">A1</text>
+            <text x="462" y="32">A2</text>
+            <text x="40" y="436">B1</text>
+            <text x="462" y="436">B2</text>
+          </g>
+
+          <!-- 연결선 -->
+          <g stroke="#004098" stroke-width="1" stroke-opacity="0.42" fill="none">
+            <path d="M260 232 L120 120"/>
+            <path d="M260 232 L410 118"/>
+            <path d="M260 232 L104 300"/>
+            <path d="M260 232 L416 306"/>
+            <path d="M260 232 L260 372"/>
+            <!-- 보조 궤도 -->
+            <circle cx="260" cy="232" r="118" stroke-dasharray="2 6" stroke-opacity="0.3"/>
+            <circle cx="260" cy="232" r="176" stroke-dasharray="2 9" stroke-opacity="0.18"/>
+          </g>
+
+          <!-- 중앙 분자 구조 (벤젠 고리) -->
+          <g transform="translate(260 232)">
+            <g class="spin" stroke="#002C6C" stroke-width="1.6" fill="none">
+              <path d="M0 -34 L29.4 -17 L29.4 17 L0 34 L-29.4 17 L-29.4 -17 Z"/>
+              <circle cx="0" cy="0" r="20" stroke-width="1" stroke-opacity="0.5"/>
+              <path d="M0 -18 L15.6 -9 L15.6 9 L0 18 L-15.6 9 L-15.6 -9 Z" stroke-width="0.9" stroke-opacity="0.55"/>
+            </g>
+            <circle cx="0" cy="0" r="3.2" fill="#002C6C"/>
+            <g fill="#002C6C" font-family="ui-monospace,monospace" font-size="9" letter-spacing="0.6">
+              <text x="-11" y="-48">C₆H₆</text>
+            </g>
+          </g>
+
+          <!-- 5개 축 노드 -->
+          <g class="nodes" font-family="Pretendard Variable,Pretendard,sans-serif">
+            <!-- 반도체 -->
+            <g transform="translate(120 120)">
+              <circle r="9" fill="#fff" stroke="#002C6C" stroke-width="1.4"/>
+              <circle r="3" fill="#00A0B8"/>
+              <text x="0" y="-24" text-anchor="middle" font-size="13" font-weight="600" fill="#0B1220">반도체</text>
+              <text x="0" y="-11" text-anchor="middle" font-size="8" fill="#5B6675" letter-spacing="1">SEMICONDUCTOR</text>
+            </g>
+            <!-- 배터리 -->
+            <g transform="translate(410 118)">
+              <circle r="9" fill="#fff" stroke="#002C6C" stroke-width="1.4"/>
+              <circle r="3" fill="#00A0B8"/>
+              <text x="0" y="-24" text-anchor="middle" font-size="13" font-weight="600" fill="#0B1220">이차전지</text>
+              <text x="0" y="-11" text-anchor="middle" font-size="8" fill="#5B6675" letter-spacing="1">ENERGY</text>
+            </g>
+            <!-- 바이오 -->
+            <g transform="translate(104 300)">
+              <circle r="9" fill="#fff" stroke="#002C6C" stroke-width="1.4"/>
+              <circle r="3" fill="#00A0B8"/>
+              <text x="0" y="34" text-anchor="middle" font-size="13" font-weight="600" fill="#0B1220">바이오</text>
+              <text x="0" y="47" text-anchor="middle" font-size="8" fill="#5B6675" letter-spacing="1">BIO</text>
+            </g>
+            <!-- 고분자 -->
+            <g transform="translate(416 306)">
+              <circle r="9" fill="#fff" stroke="#002C6C" stroke-width="1.4"/>
+              <circle r="3" fill="#00A0B8"/>
+              <text x="0" y="34" text-anchor="middle" font-size="13" font-weight="600" fill="#0B1220">고분자</text>
+              <text x="0" y="47" text-anchor="middle" font-size="8" fill="#5B6675" letter-spacing="1">POLYMER</text>
+            </g>
+            <!-- 환경 -->
+            <g transform="translate(260 372)">
+              <circle r="9" fill="#fff" stroke="#002C6C" stroke-width="1.4"/>
+              <circle r="3" fill="#00A0B8"/>
+              <text x="0" y="30" text-anchor="middle" font-size="13" font-weight="600" fill="#0B1220">환경·공정</text>
+              <text x="0" y="43" text-anchor="middle" font-size="8" fill="#5B6675" letter-spacing="1">PROCESS</text>
+            </g>
+          </g>
+        </svg>
+
+        <div class="plate-foot">
+          <span>14 FACULTY</span><span>12 LABS</span><span>48 COURSES</span>
+        </div>
+      </div>
+    </figure>
+  </div>
+
+  <div class="wrap">
+    <dl class="stat-bar" data-aos="fade-up" data-aos-delay="120" id="statBar"></dl>
+  </div>
+</section>
+
+<!-- ============================================================ ABOUT -->
+<section class="section section-about" id="about" aria-labelledby="aboutTitle">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="section-index" data-aos="fade-up"><span>01</span> About the Department</p>
+      <h2 class="section-title" id="aboutTitle" data-aos="fade-up" data-aos-delay="60">
+        물질을 이해하는 기초과학과<br>산업을 움직이는 공정 설계
+      </h2>
+      <p class="section-desc" data-aos="fade-up" data-aos-delay="120">
+        숭실대학교 화학공학과는 1967년 설립되었습니다. 화학공학은 분자 수준의 이해에서 출발해
+        대규모 공정의 설계까지 이어지는 학문으로, 반도체·에너지·바이오·소재·환경 산업의
+        공통 기반입니다. 학과는 IT·NT·ET·BT와 화학공학을 결합한 교육으로
+        산업과 사회가 필요로 하는 공학 인재를 양성합니다.
+      </p>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-main" data-aos="fade-up">
+        <h3 class="sub-title">교육 목적</h3>
+        <p class="prose">
+          폭넓은 소양을 갖춘 인성교육을 바탕으로 이론과 실제를 겸비하여, 문제 분석에서
+          해법 제시에 이르기까지 전 과정을 실행할 수 있는 종합적인 공학 능력을 갖춘 인재를 배양합니다.
+          특히 21세기의 중요 분야인 IT·NT·ET·BT와 화학공학을 결합하여 시대의 흐름에 맞는
+          공학 및 기술 전문가를 양성합니다.
+        </p>
+        <p class="prose">
+          지구촌 시대에 맞춰 공학교육을 내실화하고 국제교류를 통해 국제 사회에서 활약할 뿐 아니라,
+          국가와 사회에 봉사하는 인재를 기르는 것을 지향합니다.
+        </p>
+
+        <h3 class="sub-title">교육 목표</h3>
+        <ol class="goal-list">
+          <li><span class="num">01</span><p>수학·물리·화학 등 기초과학 지식을 바탕으로 창의적 연구와 응용 능력을 기른다.</p></li>
+          <li><span class="num">02</span><p>효율성과 환경을 함께 고려하는 화학공정 해석 및 설계 능력을 갖춘다.</p></li>
+          <li><span class="num">03</span><p>국제 경쟁력 확보를 위한 의사전달 능력과 정보화 대응력을 갖춘다.</p></li>
+          <li><span class="num">04</span><p>기독교적 가치관과 봉사정신을 갖춘 공학 인재로 성장한다.</p></li>
+        </ol>
+      </div>
+
+      <aside class="about-side" data-aos="fade-up" data-aos-delay="100">
+        <div class="side-card">
+          <p class="side-label">학과 연혁</p>
+          <ol class="timeline" id="timeline"></ol>
+        </div>
+      </aside>
+    </div>
+
+    <figure class="quote-band" data-aos="fade-up">
+      <blockquote>
+        <p>“분자를 다루는 일은 결국,<br>세상이 쓰는 물건을 바꾸는 일입니다.”</p>
+      </blockquote>
+      <figcaption>
+        <span class="side-label">Soongsil Chemical Engineering</span>
+        <span class="from">숭실대학교 화학공학과</span>
+      </figcaption>
+    </figure>
+
+    <div class="career-block" data-aos="fade-up">
+      <div class="career-head">
+        <h3 class="sub-title">졸업 후 진로</h3>
+        <p>화학공학 졸업생은 반도체·전자, 정유·석유화학, 소재, 제약·바이오, 식품, 에너지, 엔지니어링까지 산업 전반으로 진출합니다.</p>
+      </div>
+      <div class="career-grid" id="careerGrid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ RESEARCH -->
+<section class="section section-research" id="research" aria-labelledby="researchTitle">
+  <div class="wrap">
+    <div class="section-head section-head--split">
+      <div>
+        <p class="section-index" data-aos="fade-up"><span>02</span> Research Fields</p>
+        <h2 class="section-title" id="researchTitle" data-aos="fade-up" data-aos-delay="60">다섯 개의 축,<br>하나의 방법론</h2>
+      </div>
+      <p class="section-desc" data-aos="fade-up" data-aos-delay="120">
+        학과 연구는 소재 합성, 계면 현상, 공정 설계라는 공통된 방법론 위에서
+        다섯 개의 산업 축으로 확장됩니다. 각 분야의 교수진과 연구실로 바로 이어집니다.
+      </p>
+    </div>
+
+    <div class="research-list" id="researchList"></div>
+  </div>
+</section>
+
+<!-- ============================================================ LABS / FACULTY -->
+<section class="section section-labs" id="labs" aria-labelledby="labsTitle">
+  <div class="wrap">
+    <div class="section-head section-head--split">
+      <div>
+        <p class="section-index" data-aos="fade-up"><span>03</span> Faculty &amp; Laboratories</p>
+        <h2 class="section-title" id="labsTitle" data-aos="fade-up" data-aos-delay="60">전임교원 14명,<br>연구실 12곳</h2>
+      </div>
+      <p class="section-desc" data-aos="fade-up" data-aos-delay="120">
+        연구 분야를 선택하면 해당 교수진과 연구실만 표시됩니다.
+        카드를 누르면 연구실 홈페이지가 새 탭으로 열리고, ‘프로필 보기’에서 학력·연구 내용·경력을 볼 수 있습니다.
+      </p>
+    </div>
+
+    <div class="lab-toolbar" data-aos="fade-up">
+      <div class="chips" id="labFilters" role="tablist" aria-label="연구 분야 필터"></div>
+      <div class="lab-search">
+        <i data-lucide="search" aria-hidden="true"></i>
+        <input type="search" id="labSearch" placeholder="교수명·연구 키워드 검색" aria-label="교수진 검색" autocomplete="off">
+        <button type="button" class="clear-input" id="labSearchClear" aria-label="검색어 지우기" hidden>
+          <i data-lucide="x" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+
+    <p class="result-line"><span id="labCount">14</span>명의 교수진 <span class="sep">·</span> <span id="labStatus">전체 연구 분야</span></p>
+
+    <div class="lab-grid" id="labGrid" aria-live="polite"></div>
+
+    <p class="empty-state" id="labEmpty" hidden>조건에 맞는 교수진이 없습니다. 다른 연구 분야를 선택해 보세요.</p>
+  </div>
+</section>
+
+<!-- ============================================================ CURRICULUM -->
+<section class="section section-curriculum" id="curriculum" aria-labelledby="curriculumTitle">
+  <div class="wrap">
+    <div class="section-head section-head--split">
+      <div>
+        <p class="section-index" data-aos="fade-up"><span>04</span> Curriculum</p>
+        <h2 class="section-title" id="curriculumTitle" data-aos="fade-up" data-aos-delay="60">1학년 기초에서<br>4학년 종합설계까지</h2>
+      </div>
+      <p class="section-desc" data-aos="fade-up" data-aos-delay="120">
+        2024학년도 화학공학과 편성표 기준, 학년별 전공 교과목 48개를 정리했습니다.
+        과목을 누르면 강의 내용을 확인할 수 있습니다.
+      </p>
+    </div>
+
+    <div class="curriculum-layout">
+      <div class="curriculum-main" data-aos="fade-up">
+        <div class="year-tabs" id="yearTabs" role="tablist" aria-label="학년 선택"></div>
+        <div class="term-grid" id="curriculumPanel" role="tabpanel" aria-live="polite"></div>
+        <p class="curriculum-note">
+          이수구분 — 전기: 전공기초 · 전필: 전공필수 · 전선: 전공선택. 2024학년도 화학공학과 편성표를 기준으로 정리했으며,
+          입학 학년도에 따라 적용 교과과정이 다를 수 있습니다. 과목ID는 학과 교과과정표 기준입니다.
+        </p>
+      </div>
+
+      <aside class="grad-card" data-aos="fade-up" data-aos-delay="100">
+        <p class="side-label">졸업요건 · 단일전공</p>
+        <p class="grad-total"><strong>133</strong><span>학점</span></p>
+        <ul class="grad-rows" id="gradRows"></ul>
+        <p class="grad-note" id="gradNote"></p>
+        <a class="link-arrow" href="http://chemeng.ssu.ac.kr/sub/sub02_04_01.php" target="_blank" rel="noopener">
+          학과 졸업요건 안내 <i data-lucide="arrow-up-right" aria-hidden="true"></i>
+        </a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ NOTICES -->
+<section class="section section-notices" id="notices" aria-labelledby="noticesTitle">
+  <div class="wrap">
+    <div class="section-head section-head--split">
+      <div>
+        <p class="section-index" data-aos="fade-up"><span>05</span> Notices</p>
+        <h2 class="section-title" id="noticesTitle" data-aos="fade-up" data-aos-delay="60">학과 소식</h2>
+      </div>
+      <p class="section-desc" data-aos="fade-up" data-aos-delay="120">
+        학부·대학원·취업 게시판의 최신 글입니다. 제목이나 내용으로 바로 검색할 수 있으며,
+        각 글은 학과 홈페이지 원문으로 연결됩니다.
+      </p>
+    </div>
+
+    <div class="notice-panel" data-aos="fade-up">
+      <div class="notice-top">
+        <div class="notice-tabs" id="noticeTabs" role="tablist" aria-label="공지 게시판 선택">
+          <button class="notice-tab is-active" type="button" role="tab" aria-selected="true" data-board="undergrad">학부공지</button>
+          <button class="notice-tab" type="button" role="tab" aria-selected="false" data-board="grad">대학원공지</button>
+          <button class="notice-tab" type="button" role="tab" aria-selected="false" data-board="job">취업·인턴십</button>
+        </div>
+
+        <div class="notice-controls">
+          <div class="notice-search">
+            <i data-lucide="search" aria-hidden="true"></i>
+            <input type="search" id="noticeSearch" placeholder="공지 검색" aria-label="공지사항 검색" autocomplete="off">
+          </div>
+          <div class="sort-toggle" role="group" aria-label="정렬 기준">
+            <button type="button" class="is-active" data-sort="latest" aria-pressed="true">최신순</button>
+            <button type="button" data-sort="important" aria-pressed="false">중요공지순</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="notice-summary">
+        <span id="noticeCount">0건</span>
+        <span class="notice-sort-note" id="noticeSortNote">등록일 최신순</span>
+      </div>
+
+      <ol class="notice-list" id="noticeList" aria-live="polite"></ol>
+      <p class="empty-state" id="noticeEmpty" hidden>검색 결과가 없습니다. 다른 검색어를 입력해 보세요.</p>
+
+      <div class="notice-foot">
+        <a class="link-arrow" id="noticeSource" href="http://chemeng.ssu.ac.kr/sub/sub03_01.php" target="_blank" rel="noopener">
+          학과 홈페이지에서 전체 보기 <i data-lucide="arrow-up-right" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ ADMISSION -->
+<section class="section section-admission" id="admission" aria-labelledby="admissionTitle">
+  <div class="wrap">
+    <div class="section-head section-head--split">
+      <div>
+        <p class="section-index" data-aos="fade-up"><span>06</span> Admission &amp; Career</p>
+        <h2 class="section-title" id="admissionTitle" data-aos="fade-up" data-aos-delay="60">입학에서 졸업까지,<br>필요한 안내</h2>
+      </div>
+      <p class="section-desc" data-aos="fade-up" data-aos-delay="120">
+        대학원 진학, 졸업 요건, 교환학생까지 — 학과 생활에 필요한 정보를 한곳에 모았습니다.
+      </p>
+    </div>
+
+    <div class="guide-grid" id="guideGrid"></div>
+
+    <div class="contact-cta" data-aos="fade-up">
+      <div>
+        <p class="side-label">학과 사무실</p>
+        <p class="contact-line"><a href="tel:02-820-0610">02-820-0610</a><span>형남공학관 912호 · 학사조교 이찬미, 이지숙</span></p>
+      </div>
+      <a class="btn btn-primary" href="mailto:chemical@ssu.ac.kr">
+        <i data-lucide="mail" aria-hidden="true"></i>
+        학과에 문의하기
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ CONTACT -->
+<section class="section section-contact" id="contact" aria-labelledby="contactTitle">
+  <div class="wrap contact-wrap">
+    <div class="contact-info">
+      <p class="section-index" data-aos="fade-up"><span>07</span> Location</p>
+      <h2 class="section-title" id="contactTitle" data-aos="fade-up" data-aos-delay="60">오시는 길</h2>
+      <address class="address-block" data-aos="fade-up" data-aos-delay="100">
+        <p class="address-main">서울특별시 동작구 상도로 369<br>숭실대학교 형남공학관 912호</p>
+        <p class="address-zip">(06978)</p>
+        <dl class="contact-dl">
+          <div><dt>대표전화</dt><dd><a href="tel:02-820-0610">02-820-0610</a></dd></div>
+          <div><dt>팩스</dt><dd>02-812-5378</dd></div>
+          <div><dt>이메일</dt><dd><a href="mailto:chemical@ssu.ac.kr">chemical@ssu.ac.kr</a></dd></div>
+          <div><dt>사무실</dt><dd>형남공학관 912호 · 학사조교 이찬미, 이지숙</dd></div>
+        </dl>
+        <dl class="transit">
+          <div>
+            <dt><i data-lucide="train-front" aria-hidden="true"></i> 지하철</dt>
+            <dd>7호선 숭실대입구(살피재)역 3번 출구</dd>
+          </div>
+          <div>
+            <dt><i data-lucide="bus-front" aria-hidden="true"></i> 버스</dt>
+            <dd>간선 501, 506, 641, 650, 750, 751, 752, 753 · 지선 5511, 5517</dd>
+          </div>
+        </dl>
+        <a class="btn btn-outline" href="https://map.kakao.com/?q=%EC%88%AD%EC%8B%A4%EB%8C%80%ED%95%99%EA%B5%90%20%ED%98%95%EB%82%A8%EA%B3%B5%ED%95%99%EA%B4%80" target="_blank" rel="noopener">
+          <i data-lucide="map-pin" aria-hidden="true"></i>
+          지도에서 보기
+        </a>
+      </address>
+    </div>
+
+    <div class="contact-graphic" data-aos="fade-up" data-aos-delay="120" aria-hidden="true">
+      <svg viewBox="0 0 420 420" role="presentation">
+        <defs>
+          <pattern id="mapGrid" width="28" height="28" patternUnits="userSpaceOnUse">
+            <path d="M28 0H0V28" fill="none" stroke="#002C6C" stroke-opacity="0.08" stroke-width="1"/>
+          </pattern>
+        </defs>
+        <rect width="420" height="420" fill="url(#mapGrid)"/>
+        <g stroke="#004098" stroke-opacity="0.22" stroke-width="6" stroke-linecap="round">
+          <path d="M-20 300 H 300"/>
+          <path d="M300 -20 V 440"/>
+        </g>
+        <g stroke="#00A0B8" stroke-opacity="0.45" stroke-width="2" stroke-dasharray="2 9">
+          <path d="M-20 150 H 420"/>
+        </g>
+        <circle cx="300" cy="300" r="8" fill="#002C6C"/>
+        <circle cx="300" cy="300" r="26" fill="none" stroke="#002C6C" stroke-opacity="0.26"/>
+        <circle cx="300" cy="300" r="52" fill="none" stroke="#002C6C" stroke-opacity="0.12"/>
+        <g font-family="ui-monospace,monospace" font-size="8.5" fill="#8A95A6" letter-spacing="1.4">
+          <text x="20" y="142">SUBWAY LINE 7</text>
+          <text x="20" y="334">SANGBO-RO</text>
+          <text x="318" y="60">N ↑</text>
+          <text x="236" y="366">06978 · HYEONGNAM HALL</text>
+        </g>
+        <g font-family="ui-monospace,monospace" font-size="8" fill="#C3CCD9" letter-spacing="1">
+          <text x="20" y="404">SCHEMATIC — 실제 위치는 지도에서 확인하세요</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================ FOOTER -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <p class="footer-wordmark">숭실대학교 <strong>화학공학과</strong></p>
+      <p class="footer-dept">Department of Chemical Engineering<span>Soongsil University</span></p>
+      <p class="footer-addr">06978 서울특별시 동작구 상도로 369 숭실대학교 화학공학과<br>TEL 02-820-0610 · FAX 02-812-5378</p>
+      <p class="footer-copy">Copyright © Chemical Engineering, Soongsil University. All Rights Reserved.</p>
+    </div>
+    <nav class="footer-nav" aria-label="바로가기">
+      <div>
+        <h4>학과</h4>
+        <a href="#about">학과소개</a>
+        <a href="#research">연구분야</a>
+        <a href="#labs">교수진·연구실</a>
+        <a href="#curriculum">교과과정</a>
+      </div>
+      <div>
+        <h4>안내</h4>
+        <a href="#notices">공지사항</a>
+        <a href="#admission">입학·진로</a>
+        <a href="#contact">오시는 길</a>
+        <a href="http://chemeng.ssu.ac.kr" target="_blank" rel="noopener">기존 홈페이지</a>
+      </div>
+      <div>
+        <h4>숭실대학교</h4>
+        <a href="https://www.ssu.ac.kr" target="_blank" rel="noopener">대학 홈페이지</a>
+        <a href="http://chemeng.ssu.ac.kr/sub/sub05_02.php" target="_blank" rel="noopener">대학원 입학</a>
+        <a href="http://chemeng.ssu.ac.kr/sub/sub02_04_01.php" target="_blank" rel="noopener">졸업요건</a>
+      </div>
+    </nav>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="맨 위로">
+  <i data-lucide="arrow-up" aria-hidden="true"></i>
+</button>
+
+<!-- ============================================================ PROFILE DRAWER -->
+<div class="drawer" id="drawer" hidden>
+  <div class="drawer-backdrop" data-close-drawer></div>
+  <aside class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="drawerName">
+    <button class="drawer-close" type="button" data-close-drawer aria-label="닫기">
+      <i data-lucide="x" aria-hidden="true"></i>
+    </button>
+    <div class="drawer-body" id="drawerBody"></div>
+  </aside>
+</div>
+
+<!-- ============================================================ SEARCH PALETTE -->
+<div class="palette" id="palette" hidden>
+  <div class="palette-backdrop" data-close-palette></div>
+  <div class="palette-panel" role="dialog" aria-modal="true" aria-label="통합 검색">
+    <div class="palette-input">
+      <i data-lucide="search" aria-hidden="true"></i>
+      <input type="search" id="globalSearch" placeholder="교수명, 연구 키워드, 공지, 과목명을 검색하세요" aria-label="통합 검색" autocomplete="off">
+      <button type="button" class="palette-esc" data-close-palette>ESC</button>
+    </div>
+    <div class="palette-results" id="paletteResults"></div>
+    <div class="palette-foot">
+      <span><kbd>↑</kbd><kbd>↓</kbd> 이동</span>
+      <span><kbd>Enter</kbd> 열기</span>
+      <span><kbd>Esc</kbd> 닫기</span>
+    </div>
+  </div>
+</div>
+
+<!-- 라이브러리 -->
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+<script src="https://unpkg.com/lucide@0.451.0/dist/umd/lucide.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="data.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
