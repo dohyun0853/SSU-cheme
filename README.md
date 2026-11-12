@@ -17,7 +17,9 @@ assets/js/admin-portal.js  관리자 포털 네 개 탭
 assets/faculty/*.jpg       전임교원 사진 14장 (학과 공식 홈페이지 제공 이미지)
 assets/ssu-logo.png        숭실대학교 로고
 AI_유지보수_가이드.md      교수님·조교 인계용 유지보수 매뉴얼
-검증_보고서.md             기능·디자인·데이터 검증 결과
+검증_보고서.md             기능·접근성·디자인 검증 결과 (axe-core 측정 포함)
+robots.txt / sitemap.xml   검색엔진 수집 설정
+.lighthouserc.json         Lighthouse CI 예산(성능·접근성·SEO) 설정
 ```
 
 ## 주요 기능
@@ -34,6 +36,13 @@ AI_유지보수_가이드.md      교수님·조교 인계용 유지보수 매�
 
 Pretendard(웹폰트) · Lucide(아이콘) · Fuse.js(검색) — 모두 CDN으로 불러오며, 로드에 실패해도
 핵심 디자인과 데이터는 그대로 표시됩니다. 관리자 포털만 Tailwind CSS를 보조 유틸리티로 함께 씁니다.
+
+## 품질 기준
+
+- 입력 살균 **DOMPurify**, GitHub 커밋 **Octokit**(실패 시 REST 폴백)
+- 접근성 **axe-core** — `?a11y=1` 로 WCAG 2.1 A/AA 자체 점검 (측정 결과 위반 0건)
+- **Lighthouse CI** 예산 설정, JSON-LD·canonical·sitemap 등 SEO 마크업
+- 모바일 공지 탭은 좌우 스와이프로 전환(네이티브 터치 제스처, passive 리스너)
 
 ## 관리자 포털
 
