@@ -41,7 +41,6 @@
   }
 
   /* 라이브러리 로드 실패 대비 */
-  if (!window.AOS) document.documentElement.classList.add('no-aos');
   if (!window.Fuse) document.documentElement.classList.add('no-fuse');
 
   const icon = () => { if (window.lucide) window.lucide.createIcons(); };
@@ -728,15 +727,12 @@
   /* ------------------------------------------------------------ 11. 헤더·스크롤 */
   function initScroll() {
     const header = $('#siteHeader');
-    const bar = $('#progressBar');
     const toTop = $('#toTop');
 
     const onScroll = () => {
       const y = window.scrollY;
       if (header) header.classList.toggle('is-scrolled', y > 12);
       if (toTop) toTop.classList.toggle('is-visible', y > 700);
-      const h = document.documentElement.scrollHeight - window.innerHeight;
-      if (bar) bar.style.width = (h > 0 ? Math.min(100, (y / h) * 100) : 0) + '%';
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
@@ -853,16 +849,6 @@
     initScroll();
     initNav();
     icon();
-
-    if (window.AOS) {
-      window.AOS.init({
-        duration: 700,
-        easing: 'ease-out-cubic',
-        offset: 60,
-        once: true,
-        disable: () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
-      });
-    }
   }
 
   if (document.readyState === 'loading') {

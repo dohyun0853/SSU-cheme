@@ -126,13 +126,12 @@ ssu-cheme-web/
 | 라이브러리 | 쓰임 |
 |---|---|
 | `orioncactus/pretendard` | 한글 웹폰트 |
-| `tailwindlabs/tailwindcss` | 보조 유틸리티 CSS |
 | `lucide-icons/lucide` | 아이콘 |
 | `krisk/Fuse` | 공지·교수진·과목 실시간 퍼지 검색 |
-| `michalsnik/aos` | 스크롤 등장 애니메이션 |
 
-> 인터넷이 끊기거나 CDN이 막혀도 화면은 그대로 나옵니다. 핵심 디자인은 `assets/css/style.css`에
-> 들어 있고, 아이콘·애니메이션만 빠집니다(`app.js`에 자동 대비 코드가 있습니다).
+> 인터넷이 끊기거나 CDN이 막혀도 화면과 데이터는 그대로 나옵니다. 디자인은 `assets/css/style.css`,
+> 관리자 화면은 `assets/css/admin.css`에 모두 들어 있고, 아이콘·퍼지 검색만 빠집니다
+> (`app.js`에 자동 대비 코드가 있습니다). 관리자 포털은 Tailwind CSS를 보조 유틸리티로 씁니다.
 
 ---
 
