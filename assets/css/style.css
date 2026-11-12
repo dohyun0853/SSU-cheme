@@ -105,6 +105,11 @@ input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; appe
 }
 .util-links a:hover { color: var(--navy); }
 .util-links .util-univ { font-weight: 600; color: var(--navy); }
+.util-links .util-app {
+  color: var(--navy); font-weight: 700; background: #EBF3FC;
+  padding: 2px 8px; border-radius: 4px; text-decoration: none;
+}
+.util-links .util-app:hover { background: var(--navy); color: #fff; }
 
 /* ---------------------------------------------------------------- header */
 .site-header {

@@ -1,0 +1,62 @@
+{
+  "name": "숭실대학교 화학공학과",
+  "short_name": "숭실대화공",
+  "description": "숭실대학교 공과대학 화학공학과 모바일 공식 앱",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#002C6C",
+  "theme_color": "#002C6C",
+  "lang": "ko-KR",
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "스마트LMS 바로가기",
+      "short_name": "스마트LMS",
+      "description": "숭실대학교 스마트LMS 러닝엑스로 이동합니다.",
+      "url": "https://lms.ssu.ac.kr",
+      "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "u-SAINT 학사포털",
+      "short_name": "u-SAINT",
+      "description": "숭실대학교 u-SAINT 학사 포털로 이동합니다.",
+      "url": "https://saint.ssu.ac.kr",
+      "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "슈패스 (SSU-PATH)",
+      "short_name": "슈패스",
+      "description": "숭실대학교 비교과 역량관리 슈패스로 이동합니다.",
+      "url": "https://path.ssu.ac.kr",
+      "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "학과 최신 공지사항",
+      "short_name": "학과공지",
+      "description": "화학공학과 학부·대학원·취업 공지사항을 확인합니다.",
+      "url": "./index.html#notices",
+      "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

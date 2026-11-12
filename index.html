@@ -21,6 +21,13 @@
 <meta name="twitter:title" content="숭실대학교 화학공학과">
 <meta name="twitter:description" content="AI 융합 시대를 선도하는 화학공학의 새로운 도약 — 반도체·배터리·바이오·첨단소재 공학">
 
+<!-- PWA (Progressive Web App) 모바일 앱 지원 -->
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="숭실대화공">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+
 <!-- 구조화 데이터 (schema.org) — 검색엔진이 학과 정보를 이해하도록 -->
 <script type="application/ld+json">
 {
@@ -73,6 +80,7 @@
       <a href="https://ssu.ac.kr/%ED%95%99%EA%B5%90%EC%86%8C%EA%B0%9C/%EC%BA%A0%ED%8D%BC%EC%8A%A4%EC%95%88%EB%82%B4/%EC%BA%A0%ED%8D%BC%EC%8A%A4%EB%A7%B5/" target="_blank" rel="noopener">캠퍼스맵</a>
       <a href="https://webmail.ssu.ac.kr" target="_blank" rel="noopener">웹메일</a>
       <a class="util-univ" href="https://www.ssu.ac.kr" target="_blank" rel="noopener">숭실대학교 홈</a>
+      <a class="util-app" href="javascript:void(0)" onclick="installPWA()" title="스마트폰 홈 화면에 앱으로 추가">📱 앱 설치</a>
     </nav>
   </div>
 </div>
@@ -432,6 +440,7 @@
         <a href="https://www.ssu.ac.kr" target="_blank" rel="noopener">대학 홈페이지</a>
         <a href="https://saint.ssu.ac.kr" target="_blank" rel="noopener">u-SAINT</a>
         <a href="https://lib.ssu.ac.kr" target="_blank" rel="noopener">중앙도서관</a>
+        <a class="footer-pwa" href="javascript:void(0)" onclick="installPWA()">스마트폰 앱 설치</a>
         <a class="footer-admin" href="admin.html" id="adminLoginLink">관리자 로그인</a>
       </div>
     </nav>
@@ -478,6 +487,42 @@
 <script src="assets/js/admin-core.js?v=20261112d"></script>
 <script src="assets/js/app.js?v=20261112d"></script>
 <script src="assets/js/admin.js?v=20261112d"></script>
+<!-- PWA Service Worker & 앱 설치 스크립트 -->
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('./service-worker.js')
+      .then(function (reg) { console.log('[PWA] Service Worker 등록 완료:', reg.scope); })
+      .catch(function (err) { console.warn('[PWA] Service Worker 등록 실패:', err); });
+  });
+}
+
+// PWA 설치 안내 인터랙션
+var deferredPrompt;
+window.addEventListener('beforeinstallprompt', function (e) {
+  e.preventDefault();
+  deferredPrompt = e;
+  var banner = document.getElementById('pwaBanner');
+  if (banner) banner.style.display = 'flex';
+});
+
+function installPWA() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(function (choiceResult) {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('[PWA] 사용자가 앱 설치를 수락했습니다.');
+      }
+      deferredPrompt = null;
+      var banner = document.getElementById('pwaBanner');
+      if (banner) banner.style.display = 'none';
+    });
+  } else {
+    // iOS 사파리 가이드
+    alert('아이폰 사파리 브라우저 하단의 [공유 버튼(⎋)]을 누른 뒤\n[홈 화면에 추가]를 선택하시면 바탕화면에 앱으로 설치됩니다!');
+  }
+}
+</script>
 <!-- 접근성 자체 점검 (axe-core) — 주소 뒤에 ?a11y=1 을 붙이면 콘솔에 결과를 남깁니다 -->
 <script>
 (function () {
