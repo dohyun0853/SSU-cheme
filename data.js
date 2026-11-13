@@ -535,12 +535,12 @@ const CAREERS = [
    ---------------------------------------------------------------------------- */
 const GUIDES = [
   { title: "대학원 입학", en: "Graduate Admission",
-    text: "석사·박사 과정은 학과 연구실 단위로 모집합니다. 지원 전 관심 연구실의 연구 주제와 논문을 먼저 확인하는 것이 좋습니다.",
-    link: "http://chemeng.ssu.ac.kr/sub/sub05_02.php", linkText: "대학원 입학 안내" },
-  { title: "졸업 요건", en: "Graduation",
-    text: "단일전공 기준 졸업학점 133학점. 전공 84학점(전공기초 18 + 전공선택·필수 66)과 교양 28학점을 포함합니다.",
-    link: "http://chemeng.ssu.ac.kr/sub/sub02_04_01.php", linkText: "졸업요건 자세히" },
+    text: "석사·박사 과정은 학과 연구실 단위로 모집합니다. 4대 세부전공, 전형 배점 기준 및 4대 장학제도를 확인하세요.",
+    link: "guide.html#admission", linkText: "대학원 입학 상세 안내" },
+  { title: "졸업 요건", en: "Graduation Requirements",
+    text: "단일전공 기준 133학점(전공 84학점), 복수·부전공 학점표, 졸업논문 및 대체 자격증, 영어인증 기준을 상세히 안내합니다.",
+    link: "guide.html#graduation", linkText: "졸업요건 상세 안내" },
   { title: "교환학생", en: "Exchange Program",
-    text: "숭실대학교 국제교류팀과 학과 지도를 통해 해외 대학 교환·방문학생 과정을 이수할 수 있습니다.",
-    link: "http://chemeng.ssu.ac.kr/sub/sub02_05.php", linkText: "교환학생 안내" }
+    text: "해외 자매대학 1:1 파견, ACUCA, UMAP 등 4대 파견 프로그램 유형과 학과 전공 학점 인정 절차를 확인하세요.",
+    link: "guide.html#exchange", linkText: "교환학생 상세 안내" }
 ];

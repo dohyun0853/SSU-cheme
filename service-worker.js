@@ -1,8 +1,9 @@
-// 숭실대학교 화학공학과 공식 PWA Service Worker (v3.2 Network-First)
-const CACHE_NAME = 'ssu-cheme-v3.5';
+// 숭실대학교 화학공학과 공식 PWA Service Worker (v3.6 Network-First)
+const CACHE_NAME = 'ssu-cheme-v3.6';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
+  './guide.html',
   './admin.html',
   './data.js',
   './manifest.webmanifest',

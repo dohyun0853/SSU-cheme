@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>학사 및 대학원 안내 | 숭실대학교 화학공학과</title>
+<meta name="description" content="숭실대학교 공과대학 화학공학과 졸업요건, 대학원 입학 및 장학제도, 해외 교환학생 프로그램 종합 안내">
+<meta name="theme-color" content="#002C6C">
+<link rel="icon" href="assets/ssu-logo.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<!-- Pretendard Font -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<!-- SSU Design Token & Main Styles -->
+<link rel="stylesheet" href="assets/css/style.css?v=20261113_v35">
+
+<style>
+/* ============================================================ GUIDE PAGE SPECIFIC STYLES */
+.guide-hero {
+  background: linear-gradient(135deg, #002C6C 0%, #001A42 100%);
+  color: #fff;
+  padding: 56px 0 48px;
+  position: relative;
+  overflow: hidden;
+}
+.guide-hero::after {
+  content: "";
+  position: absolute;
+  right: -60px;
+  top: -80px;
+  width: 380px;
+  height: 380px;
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 50%;
+  box-shadow: 0 0 0 50px rgba(255, 255, 255, .03), 0 0 0 110px rgba(255, 255, 255, .015);
+  pointer-events: none;
+}
+.guide-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 16px;
+}
+.guide-breadcrumb a {
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.15s ease;
+}
+.guide-breadcrumb a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+.guide-hero-title {
+  font-size: clamp(28px, 3.2vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 12px;
+  color: #fff;
+}
+.guide-hero-desc {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 680px;
+  line-height: 1.7;
+}
+
+/* Sticky Sub Nav */
+.guide-nav-bar {
+  position: sticky;
+  top: var(--header-h);
+  z-index: 40;
+  background: #ffffff;
+  border-bottom: 1px solid #E2E8F0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+.guide-nav-inner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 10px 0;
+  scrollbar-width: none;
+}
+.guide-nav-inner::-webkit-scrollbar { display: none; }
+.guide-tab-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  border-radius: 999px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #475569;
+  background: #F1F5F9;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+.guide-tab-link:hover {
+  background: #E2E8F0;
+  color: var(--navy);
+}
+.guide-tab-link.is-active {
+  background: var(--navy);
+  color: #fff;
+}
+
+/* Guide Content Blocks */
+.guide-container {
+  padding: 56px 0 80px;
+}
+.guide-section {
+  scroll-margin-top: calc(var(--header-h) + 70px);
+  margin-bottom: 72px;
+}
+.guide-section:last-child {
+  margin-bottom: 0;
+}
+.guide-header-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--navy);
+  background: #EEF4FC;
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+.guide-sec-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: #0F172A;
+  letter-spacing: -0.03em;
+  margin-bottom: 10px;
+}
+.guide-sec-lead {
+  font-size: 15.5px;
+  color: #64748B;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+/* Guide Cards */
+.guide-card-box {
+  background: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  padding: 28px 32px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.guide-card-box:hover {
+  border-color: #CBD5E1;
+  box-shadow: 0 6px 18px rgba(0, 44, 108, 0.05);
+}
+.guide-box-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.guide-box-title::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 18px;
+  background: var(--navy);
+  border-radius: 2px;
+}
+
+/* Tables */
+.guide-table-wrap {
+  overflow-x: auto;
+  border: 1px solid #E2E8F0;
+  border-radius: 6px;
+  margin: 16px 0 20px;
+}
+.guide-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  text-align: center;
+}
+.guide-table th {
+  background: #F8FAFC;
+  color: #334155;
+  font-weight: 700;
+  padding: 12px 14px;
+  border-bottom: 1px solid #E2E8F0;
+  border-right: 1px solid #E2E8F0;
+  white-space: nowrap;
+}
+.guide-table th:last-child { border-right: none; }
+.guide-table td {
+  padding: 11px 14px;
+  border-bottom: 1px solid #F1F5F9;
+  border-right: 1px solid #F1F5F9;
+  color: #475569;
+}
+.guide-table td:last-child { border-right: none; }
+.guide-table tr:last-child td { border-bottom: none; }
+.guide-table td.col-head {
+  font-weight: 600;
+  color: #1E293B;
+  background: #FAFAFA;
+  text-align: left;
+}
+.guide-table td.col-accent {
+  font-weight: 700;
+  color: var(--navy);
+}
+.guide-table tr.row-total {
+  background: #EFF6FF;
+  font-weight: 800;
+  color: var(--navy);
+}
+.guide-table tr.row-total td {
+  color: var(--navy);
+  border-top: 1px solid #BFDBFE;
+}
+
+/* Callout Info Box */
+.guide-callout {
+  background: #F8FAFC;
+  border-left: 4px solid var(--navy);
+  border-radius: 0 6px 6px 0;
+  padding: 16px 20px;
+  margin: 16px 0;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #334155;
+}
+.guide-callout p { margin-bottom: 6px; }
+.guide-callout p:last-child { margin-bottom: 0; }
+.guide-callout ul {
+  margin: 6px 0 0 20px;
+  list-style: disc;
+}
+.guide-callout li {
+  margin-bottom: 4px;
+}
+
+/* Grid for Features / Steps */
+.guide-step-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+.guide-step-card {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  padding: 20px 18px;
+  text-align: left;
+}
+.guide-step-num {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+.guide-step-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0F172A;
+  margin-bottom: 6px;
+}
+.guide-step-desc {
+  font-size: 13px;
+  color: #64748B;
+  line-height: 1.6;
+}
+
+/* Scholarship 2x2 Grid */
+.guide-scholar-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+.guide-scholar-card {
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  padding: 20px 22px;
+  background: #fff;
+}
+.guide-scholar-card h4 {
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+.guide-scholar-card p {
+  font-size: 13.5px;
+  color: #475569;
+  line-height: 1.65;
+}
+
+/* Office & CTA Footer Bar */
+.guide-cta-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  padding: 24px 32px;
+  margin-top: 48px;
+}
+.guide-cta-actions {
+  display: flex;
+  gap: 12px;
+}
+
+@media (max-width: 900px) {
+  .guide-step-grid { grid-template-columns: repeat(2, 1fr); }
+  .guide-scholar-grid { grid-template-columns: 1fr; }
+  .guide-cta-bar { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 640px) {
+  .guide-step-grid { grid-template-columns: 1fr; }
+  .guide-card-box { padding: 20px 18px; }
+  .guide-hero { padding: 40px 0 36px; }
+}
+</style>
+</head>
+<body id="top">
+
+<!-- ============================================================ UTIL BAR -->
+<div class="util-bar">
+  <div class="wrap util-inner">
+    <p class="util-dept">숭실대학교 공과대학 화학공학과</p>
+    <div class="util-links">
+      <a href="https://saint.ssu.ac.kr" target="_blank" rel="noopener">u-SAINT</a>
+      <a href="https://lms.ssu.ac.kr" target="_blank" rel="noopener">스마트LMS</a>
+      <a href="https://path.ssu.ac.kr" target="_blank" rel="noopener">슈패스</a>
+      <a href="https://oasis.ssu.ac.kr/" target="_blank" rel="noopener">중앙도서관</a>
+      <a href="https://www.ssu.ac.kr/campus-life/campus-map/" target="_blank" rel="noopener">캠퍼스맵</a>
+      <a href="http://mail.ssu.ac.kr/" target="_blank" rel="noopener">웹메일</a>
+      <a href="https://www.ssu.ac.kr" target="_blank" rel="noopener" class="util-univ">숭실대학교 홈 ↗</a>
+      <a href="javascript:void(0)" onclick="installPWA()" class="util-app">📱 앱 설치</a>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ HEADER -->
+<header class="site-header" id="siteHeader">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html" aria-label="숭실대학교 화학공학과 홈으로">
+      <img class="brand-logo" src="assets/ssu-logo.png" alt="숭실대학교" width="160" height="32" decoding="async">
+      <span class="brand-divider" aria-hidden="true"></span>
+      <span class="brand-text">
+        <strong>화학공학과</strong>
+        <em>Department of Chemical Engineering</em>
+      </span>
+    </a>
+
+    <nav class="nav" id="primaryNav" aria-label="주요 메뉴">
+      <a href="index.html#about">학과 소개</a>
+      <a href="index.html#research">연구 분야</a>
+      <a href="index.html#labs">교수진 및 연구실</a>
+      <a href="index.html#curriculum">학부 교과과정</a>
+      <a href="index.html#notices">학과 공지사항</a>
+      <a href="guide.html" class="is-active">입학 및 진로</a>
+      <a href="index.html#contact">오시는 길</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobileDrawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- 모바일 전용 슬라이드 사이드 드로어 메뉴 -->
+<div class="mobile-drawer-backdrop" id="drawerBackdrop" hidden></div>
+<nav class="mobile-drawer" id="mobileDrawer" aria-label="모바일 메뉴" aria-hidden="true">
+  <div class="mobile-drawer-head">
+    <div class="mobile-drawer-brand">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <img src="assets/ssu-logo.png" alt="숭실대학교" width="115" height="23">
+        <span style="width:1px; height:16px; background:#CBD5E1; display:inline-block;"></span>
+        <strong style="color:var(--navy); font-size:15.5px; font-weight:700;">화학공학과</strong>
+      </div>
+    </div>
+    <button type="button" class="mobile-drawer-close" id="drawerClose" aria-label="메뉴 닫기">
+      <i data-lucide="x" aria-hidden="true"></i>
+    </button>
+  </div>
+  <div class="mobile-drawer-body">
+    <div class="mobile-nav-links">
+      <a href="index.html#about" class="mobile-nav-link">
+        <i data-lucide="info" aria-hidden="true"></i>
+        <span>학과 소개</span>
+      </a>
+      <a href="index.html#research" class="mobile-nav-link">
+        <i data-lucide="flask-conical" aria-hidden="true"></i>
+        <span>연구 분야</span>
+      </a>
+      <a href="index.html#labs" class="mobile-nav-link">
+        <i data-lucide="users" aria-hidden="true"></i>
+        <span>교수진 및 연구실</span>
+      </a>
+      <a href="index.html#curriculum" class="mobile-nav-link">
+        <i data-lucide="book-open" aria-hidden="true"></i>
+        <span>학부 교과과정</span>
+      </a>
+      <a href="index.html#notices" class="mobile-nav-link">
+        <i data-lucide="bell" aria-hidden="true"></i>
+        <span>학과 공지사항</span>
+      </a>
+      <a href="guide.html" class="mobile-nav-link" style="color:var(--navy); font-weight:700;">
+        <i data-lucide="graduation-cap" aria-hidden="true"></i>
+        <span>입학 및 진로 (학사안내)</span>
+      </a>
+      <a href="index.html#contact" class="mobile-nav-link">
+        <i data-lucide="map-pin" aria-hidden="true"></i>
+        <span>오시는 길</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================================================ HERO -->
+<section class="guide-hero">
+  <div class="wrap">
+    <nav class="guide-breadcrumb" aria-label="경로">
+      <a href="index.html">홈</a>
+      <span>&gt;</span>
+      <span>입학 및 진로</span>
+      <span>&gt;</span>
+      <span style="color:#fff; font-weight:600;">학사 및 대학원 종합 안내</span>
+    </nav>
+    <h1 class="guide-hero-title">학사 및 대학원 종합 안내</h1>
+    <p class="guide-hero-desc">
+      숭실대학교 화학공학과 학사 학위 취득 요건, 대학원 입학 및 장학금 지원 요강, 해외 교환학생 파견 절차에 관한 상세 정보를 한곳에 정리하였습니다.
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================ STICKY SUB NAV -->
+<nav class="guide-nav-bar" aria-label="섹션 바로가기">
+  <div class="wrap guide-nav-inner">
+    <a href="#graduation" class="guide-tab-link is-active" id="tabGrad">🎓 졸업 요건 안내</a>
+    <a href="#admission" class="guide-tab-link" id="tabAdm">🏛️ 대학원 입학 요강</a>
+    <a href="#exchange" class="guide-tab-link" id="tabExc">✈️ 해외 교환학생</a>
+  </div>
+</nav>
+
+<!-- ============================================================ MAIN CONTENT -->
+<main class="wrap guide-container">
+
+  <!-- SECTION 1: GRADUATION -->
+  <section class="guide-section" id="graduation">
+    <div class="guide-header-badge">Graduation Requirements</div>
+    <h2 class="guide-sec-title">1. 학부 졸업 요건</h2>
+    <p class="guide-sec-lead">
+      화학공학과 학사 학위를 취득하기 위한 학번별 졸업학점, 전공 이수 기준, 졸업논문제 및 대체 인정 요건입니다.
+    </p>
+
+    <!-- Card 1-1: Credit Table -->
+    <div class="guide-card-box">
+      <h3 class="guide-box-title">졸업 이수학점 기준 (2021학번 이후 입학자)</h3>
+      <p style="font-size:14px; color:#64748B; margin-bottom:12px;">단일전공 기준 총 133학점 이상을 이수해야 하며, 전공기초 18학점과 전공선택/필수 66학점을 포함해 전공 총 84학점을 충족해야 합니다.</p>
+      
+      <div class="guide-table-wrap">
+        <table class="guide-table">
+          <thead>
+            <tr>
+              <th rowspan="2">구분</th>
+              <th rowspan="2">교양필수</th>
+              <th rowspan="2">교양선택</th>
+              <th colspan="2">전공 이수학점</th>
+              <th rowspan="2">일반선택</th>
+              <th rowspan="2">총 졸업학점</th>
+            </tr>
+            <tr>
+              <th>전공기초</th>
+              <th>전공(필수/선택)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-head">단일전공</td>
+              <td>16</td>
+              <td>12</td>
+              <td class="col-accent">18</td>
+              <td class="col-accent">66</td>
+              <td>21</td>
+              <td class="col-accent" style="font-size:15px; font-weight:800;">133</td>
+            </tr>
+            <tr>
+              <td class="col-head">복수전공자 (화공 주전공)</td>
+              <td>16</td>
+              <td>12</td>
+              <td class="col-accent">18</td>
+              <td>42</td>
+              <td>복수전공 42</td>
+              <td class="col-accent" style="font-size:15px; font-weight:800;">133</td>
+            </tr>
+            <tr>
+              <td class="col-head">부전공자 (화공 주전공)</td>
+              <td>16</td>
+              <td>12</td>
+              <td class="col-accent">18</td>
+              <td>66</td>
+              <td>부전공 21</td>
+              <td class="col-accent" style="font-size:15px; font-weight:800;">133</td>
+            </tr>
+            <tr>
+              <td class="col-head">타과생 화공 복수전공</td>
+              <td>-</td>
+              <td>-</td>
+              <td class="col-accent">18</td>
+              <td>42</td>
+              <td>-</td>
+              <td>화공 60학점 이수</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="guide-callout">
+        <p><strong>💡 학번별 졸업학점 유의사항:</strong></p>
+        <ul>
+          <li><strong>2019~2020학번 입학자</strong>: 총 133학점 (교양필수 17, 교양선택 12~17, 전공기초 18, 전공 66)</li>
+          <li><strong>2014~2018학번 입학자</strong>: 총 140학점 (교양필수 14, 교양선택 20, 전공기초 18, 전공 66, 일반선택 22)</li>
+          <li>편입생 및 외국인 학생의 경우 학과 조교실 및 소속 단과대학 교학팀에서 개별 학점 인정을 확인하시기 바랍니다.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Card 1-2: Core Courses -->
+    <div class="guide-card-box">
+      <h3 class="guide-box-title">전공기초 필수 이수 과목 (18학점)</h3>
+      <p style="font-size:14px; color:#64748B; margin-bottom:14px;">화학공학 전공 진입을 위해 1~2학년 과정에서 반드시 이수해야 하는 기초 6과목입니다.</p>
+
+      <div class="guide-table-wrap">
+        <table class="guide-table">
+          <thead>
+            <tr>
+              <th>이수시기</th>
+              <th>과목명</th>
+              <th>학점 / 시수</th>
+              <th>이수구분</th>
+              <th>과목 성격 및 내용</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1학년 1학기</td>
+              <td class="col-head">공학수학1</td>
+              <td>3 / 3</td>
+              <td class="col-accent">전공기초</td>
+              <td>상미분방정식, 라플라스 변환, 공학적 모델링 기초</td>
+            </tr>
+            <tr>
+              <td>1학년 1학기</td>
+              <td class="col-head">공학물리1</td>
+              <td>3 / 3</td>
+              <td class="col-accent">전공기초</td>
+              <td>고전역학, 회전운동, 진동 및 열역학 기초</td>
+            </tr>
+            <tr>
+              <td>1학년 1학기</td>
+              <td class="col-head">공학화학1</td>
+              <td>3 / 3</td>
+              <td class="col-accent">전공선택</td>
+              <td>화학양론, 원자구조, 화학결합 및 물질의 상태</td>
+            </tr>
+            <tr>
+              <td>1학년 2학기</td>
+              <td class="col-head">화공양론1</td>
+              <td>3 / 3</td>
+              <td class="col-accent">전공기초</td>
+              <td>물질수지 기초, 재순환 및 바이패스 공정 해석</td>
+            </tr>
+            <tr>
+              <td>1학년 2학기</td>
+              <td class="col-head">고급공학수학1</td>
+              <td>3 / 3</td>
+              <td class="col-accent">전공기초</td>
+              <td>선형대수학, 행렬 연산, 벡터 미적분학</td>
+            </tr>
+            <tr>
+              <td>1학년 2학기</td>
+              <td class="col-head">공학화학2</td>
+              <td>3 / 3</td>
+              <td class="col-accent">전공선택</td>
+              <td>화학평형, 열역학, 반응속도론 및 전기화학</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Card 1-3: Thesis & Alternative -->
+    <div class="guide-card-box">
+      <h3 class="guide-box-title">졸업논문제 및 대체 인정 요건</h3>
+      <p style="font-size:14px; color:#64748B; margin-bottom:14px;">화학공학과는 학사학위 취득을 위해 졸업논문 제출 또는 규정된 대체 요건 충족을 필수로 요구합니다.</p>
+
+      <div style="display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap:16px; margin-bottom:16px;">
+        <div style="border:1px solid #E2E8F0; border-radius:8px; padding:20px; background:#FAFAFA;">
+          <h4 style="font-size:15px; font-weight:700; color:var(--navy); margin-bottom:10px;">방식 A. 졸업논문제 (연구논문 제출)</h4>
+          <ul style="font-size:13.5px; color:#475569; line-height:1.7; padding-left:18px; margin:0;">
+            <li><strong>신청 시기</strong>: 4학년 1학기 초 지도교수 배정 신청</li>
+            <li><strong>연구 수행</strong>: 배정된 연구실에서 1~2개 학기 동안 졸업 연구 수행</li>
+            <li><strong>논문 제출</strong>: 4학년 2학기 종강 전(6월 / 12월) 학사학위 청구논문 완성본 및 심사 승인서 제출</li>
+          </ul>
+        </div>
+        <div style="border:1px solid #E2E8F0; border-radius:8px; padding:20px; background:#FAFAFA;">
+          <h4 style="font-size:15px; font-weight:700; color:var(--navy); margin-bottom:10px;">방식 B. 졸업논문 대체 인정</h4>
+          <p style="font-size:13px; color:#64748B; margin-bottom:8px;">아래 요건 중 하나를 충족하고 관련 증빙서류를 제출하면 졸업논문으로 대체 승인됩니다.</p>
+          <ul style="font-size:13.5px; color:#475569; line-height:1.7; padding-left:18px; margin:0;">
+            <li><strong>국가기술자격증 취득</strong> (기사 등급 이상)</li>
+            <li><strong>공인학술지 논문 게재</strong> (주저자 또는 공동저자)</li>
+            <li><strong>특허 출원 또는 등록</strong> (발명자 등재)</li>
+            <li><strong>산학 캡스톤디자인</strong> 우수 결과물 선정</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="guide-callout">
+        <p><strong>📋 졸업논문 대체 인정 국가기술자격증 종목 (기사급):</strong></p>
+        <p style="font-size:13.5px; margin-top:4px;">
+          화공기사, 화약류제조기사, 가스기사, 대기환경기사, 수질환경기사, 폐기물처리기사, 산업안전기사, 에너지관리기사, 생물공학기사, 화학분석기사, 원자력기사 등<br>
+          <span style="color:#64748B; font-size:12.5px;">* 대체 인정 서류는 매 학기 말(1학기 6월, 2학기 12월) 지정된 기한 내에 학과 사무실로 제출해야 합니다.</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Card 1-4: ABEEK & English -->
+    <div class="guide-card-box">
+      <h3 class="guide-box-title">공학인증(ABEEK) 및 공인영어 졸업인증</h3>
+      <div style="display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap:16px;">
+        <div style="padding:16px; border:1px solid #E2E8F0; border-radius:8px;">
+          <h4 style="font-size:15px; font-weight:700; color:#0F172A; margin-bottom:8px;">1. 공학교육인증 (ABEEK)</h4>
+          <p style="font-size:13.5px; color:#475569; line-height:1.65;">
+            한국공학교육인증원이 제시하는 화학공학 전문프로그램 기준을 충족해야 합니다.<br>
+            - BSM(기초과학·수학) 30학점 이상 이수<br>
+            - 전공주제(설계 12학점 포함) 54학점 이상 이수<br>
+            - 졸업 전 학습성과 포트폴리오(PD) 심사 통과
+          </p>
+        </div>
+        <div style="padding:16px; border:1px solid #E2E8F0; border-radius:8px;">
+          <h4 style="font-size:15px; font-weight:700; color:#0F172A; margin-bottom:8px;">2. 공인영어 졸업인증 점수</h4>
+          <p style="font-size:13.5px; color:#475569; line-height:1.65;">
+            졸업 심사 전까지 아래 공인영어시험 성적표 중 하나를 제출해야 합니다.<br>
+            - <strong>TOEIC</strong>: 700점 이상<br>
+            - <strong>TOEFL (iBT)</strong>: 71점 이상<br>
+            - <strong>New TEPS</strong>: 327점 이상<br>
+            - <strong>OPIc</strong>: IM2 이상 / <strong>토익스피킹</strong>: 120점 이상
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: GRADUATE ADMISSION -->
+  <section class="guide-section" id="admission">
+    <div class="guide-header-badge">Graduate Admission</div>
+    <h2 class="guide-sec-title">2. 대학원 입학 및 장학제도</h2>
+    <p class="guide-sec-lead">
+      반도체·배터리·바이오·소재 산업의 글로벌 연구 인력으로 도약하는 숭실대학교 일반대학원 화학공학과 입학 요강입니다.
+    </p>
+
+    <!-- Card 2-1: Programs -->
+    <div class="guide-card-box">
+      <h3 class="guide-box-title">모집 학위과정 및 세부전공</h3>
+      <div class="guide-table-wrap">
+        <table class="guide-table">
+          <thead>
+            <tr>
+              <th>학위과정</th>
+              <th>수업연한</th>
+              <th>개설 세부전공</th>
+              <th>신입학 / 편입학</th>
+              <th>비고</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-head">석사과정 (MS)</td>
+              <td>2년 (4학기)</td>
+              <td rowspan="3" style="text-align:left; padding-left:18px;">
+                <strong>1. 화학공학</strong> (공정설계, 촉매, 분리공정, 반응공학)<br>
+                <strong>2. 에너지융합공학</strong> (이차전지, 수소/연료전지, 전기화학)<br>
+                <strong>3. 뷰티공학</strong> (천연물 소재, 제형공학, 기능성 바이오)<br>
+                <strong>4. 안전보건융합학과</strong> (산업안전, 화학물질 방재 협동과정)
+              </td>
+              <td class="col-accent">신입학 / 편입학</td>
+              <td>학사학위 소지(예정)자</td>
+            </tr>
+            <tr>
+              <td class="col-head">박사과정 (PhD)</td>
+              <td>2~3년</td>
+              <td class="col-accent">신입학 / 편입학</td>
+              <td>석사학위 소지(예정)자</td>
+            </tr>
+            <tr>
+              <td class="col-head">석·박사 통합과정</td>
+              <td>4년 (석사논문 면제)</td>
+              <td class="col-accent">신입학</td>
+              <td>학사학위 소지(예정)자</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Card 2-2: Selection & Evaluation -->
+    <div class="guide-card-box">
+      <h3 class="guide-box-title">전형 방법 및 평가 배점</h3>
+      <p style="font-size:14px; color:#64748B; margin-bottom:14px;">대학원 선발은 1단계 서류심사와 2단계 구술시험(면접)을 종합 평가하여 선발합니다.</p>
+
+      <div class="guide-table-wrap">
+        <table class="guide-table">
+          <thead>
+            <tr>
+              <th>전형 단계</th>
+              <th>평가 요소</th>
+              <th>배점</th>
+              <th>주요 평가 기준</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td rowspan="3" class="col-head">1단계: 서류심사 (100점)</td>
+              <td>학부(전적대) 성적평가</td>
+              <td>40점</td>
+              <td>학부 전 학년 평점평균 및 전공 이수 성적</td>
+            </tr>
+            <tr>
+              <td>학업 및 연구계획서</td>
+              <td>30점</td>
+              <td>연구 동기, 희망 연구분야 적합성, 학문적 발전 가능성</td>
+            </tr>
+            <tr>
+              <td>경력 및 어학 우대</td>
+              <td>30점</td>
+              <td>학부연구생 활동, 논문 발표 실적, 공인영어성적, 수상 경력</td>
+            </tr>
+            <tr class="row-total">
+              <td class="col-head" style="background:#EFF6FF;">2단계: 구술시험 (100점)</td>
+              <td>심층 면접 (전공구술)</td>
+              <td>100점</td>
+              <td>화학공학 핵심 전공지식, 연구 수행 능력, 학업 의지 종합 평가</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Card 2-3: Scholarships -->
+    <div class="guide-card-box">
+      <h3 class="guide-box-title">대학원 핵심 장학제도</h3>
+      <p style="font-size:14px; color:#64748B; margin-bottom:14px;">대학원생들이 경제적 부담 없이 학업과 연구에 몰입할 수 있도록 폭넓은 장학 혜택을 지원합니다.</p>
+
+      <div class="guide-scholar-grid">
+        <div class="guide-scholar-card">
+          <h4>1. 입학성적우수장학금 (본교 출신 우대)</h4>
+          <p>숭실대학교 학부 졸업예정자가 본교 일반대학원 화학공학과 석사 또는 석박통합과정에 진학할 경우, 학부 누적 성적에 따라 등록금 전액 또는 일부를 감면 지원합니다.</p>
+        </div>
+        <div class="guide-scholar-card">
+          <h4>2. Research Assistant (RA) 연구장학금</h4>
+          <p>학과 연구실이 수행하는 국가 R&D 과제(BK21 FOUR, 한국연구재단, 산업통상자원부 등) 및 기업 산학과제에 참여하는 연구원에게 매월 연구장려금(인건비)과 등록금을 지원합니다.</p>
+        </div>
+        <div class="guide-scholar-card">
+          <h4>3. Teaching Assistant (TA) 조교장학금</h4>
+          <p>학과 학사 업무를 지원하는 학사조교나 학부 실험과목(화공기초실험, 화학공학실험 등) 실습 지도를 담당하는 실험조교로 선발된 대학원생에게 수업료의 50~100%를 장학금으로 지급합니다.</p>
+        </div>
+        <div class="guide-scholar-card">
+          <h4>4. 정부초청 및 외국인 유학생 장학금</h4>
+          <p>국가 정부초청장학생(GKS)으로 입학한 외국인 학생 및 본교에 재학 중인 우수 외국인 대학원생에게 수업료 및 생활비를 차등 지원합니다.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2-4: Steps -->
+    <div class="guide-card-box">
+      <h3 class="guide-box-title">대학원 지원 절차 4단계 가이드</h3>
+      <p style="font-size:14px; color:#64748B;">대학원 진학은 연구실(Lab) 단위로 운영되므로, 원서 접수 전 지도교수님과의 사전 컨택을 강력히 권장합니다.</p>
+
+      <div class="guide-step-grid">
+        <div class="guide-step-card">
+          <div class="guide-step-num">STEP 01</div>
+          <div class="guide-step-title">연구실 탐색</div>
+          <div class="guide-step-desc">홈페이지 연구분야(반도체, 배터리, 바이오, 고분자, 환경) 및 10개 랩 소개를 확인하고 관심 연구실을 탐색합니다.</div>
+        </div>
+        <div class="guide-step-card">
+          <div class="guide-step-num">STEP 02</div>
+          <div class="guide-step-title">지도교수 사전면담</div>
+          <div class="guide-step-desc">관심 지도교수님께 이메일로 이력서(CV), 자기소개, 성적표를 첨부하여 사전 연구실 면담을 신청합니다.</div>
+        </div>
+        <div class="guide-step-card">
+          <div class="guide-step-num">STEP 03</div>
+          <div class="guide-step-title">온라인 원서접수</div>
+          <div class="guide-step-desc">숭실대 일반대학원 입학처 웹사이트에서 원서를 접수하고 학업계획서 등 증빙서류를 제출합니다 (전기 10~11월 / 후기 4~5월).</div>
+        </div>
+        <div class="guide-step-card">
+          <div class="guide-step-num">STEP 04</div>
+          <div class="guide-step-title">구술시험 및 합격</div>
+          <div class="guide-step-desc">학과 구술면접 전형에 응시한 후 최종 합격자 발표를 확인하고 등록금을 납부합니다.</div>
+        </div>
+      </div>
+
+      <div style="margin-top:20px; text-align:right;">
+        <a class="link-arrow" href="https://grad.ssu.ac.kr" target="_blank" rel="noopener">숭실대학교 일반대학원 입학처 바로가기 ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: EXCHANGE -->
+  <section class="guide-section" id="exchange">
+    <div class="guide-header-badge">Exchange Program</div>
+    <h2 class="guide-sec-title">3. 해외 교환학생 프로그램</h2>
+    <p class="guide-sec-lead">
+      글로벌 화학공학 인재로 성장하기 위해 본교와 학술교류협정이 체결된 해외 자매대학에 파견되어 수학하는 제도입니다.
+    </p>
+
+    <!-- Card 3-1: Program Types -->
+    <div class="guide-card-box">
+      <h3 class="guide-box-title">교환학생 프로그램 유형 (4대 트랙)</h3>
+      <p style="font-size:14px; color:#64748B; margin-bottom:14px;">숭실대학교 국제처를 통해 전 세계 50여 개국 400여 개 유수 자매대학으로 파견될 수 있습니다.</p>
+
+      <div class="guide-table-wrap">
+        <table class="guide-table">
+          <thead>
+            <tr>
+              <th>구분</th>
+              <th>프로그램명</th>
+              <th>주요 협정 기관 및 국가</th>
+              <th>등록금 납부 형태</th>
+              <th>파견 기간</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-head" rowspan="4">순수교환<br>(Exchange)</td>
+              <td class="col-accent">본교 자매대학 1:1 교환</td>
+              <td style="text-align:left;">미국, 유럽, 일본, 중국 등 전 세계 자매대학</td>
+              <td>본교에만 등록금 납부 (상대교 면제)</td>
+              <td>1학기 또는 1년</td>
+            </tr>
+            <tr>
+              <td class="col-accent">ACUCA 교환학생</td>
+              <td style="text-align:left;">아시아 기독교 대학 연맹 약 34개교 (일본, 대만, 홍콩, 필리핀, 태국 등)</td>
+              <td>본교에만 등록금 납부 (상대교 면제)</td>
+              <td>최대 2학기</td>
+            </tr>
+            <tr>
+              <td class="col-accent">UMAP 교환학생</td>
+              <td style="text-align:left;">아시아·태평양 지역 33개국 약 370개 대학 연합체 학점교류</td>
+              <td>본교에만 등록금 납부 (상대교 면제)</td>
+              <td>최대 2학기</td>
+            </tr>
+            <tr>
+              <td class="col-accent">CREPUQ 교환학생</td>
+              <td style="text-align:left;">캐나다 퀘벡 주립대 연합체 (프랑스어·영어권 대학)</td>
+              <td>본교에만 등록금 납부 (상대교 면제)</td>
+              <td>1학기</td>
+            </tr>
+            <tr>
+              <td class="col-head">방문교환<br>(Visiting)</td>
+              <td class="col-accent">SAF 방문학생 (Study Abroad)</td>
+              <td style="text-align:left;">미국, 영국, 캐나다, 호주 등 아이비리그 및 명문대 50여 개교</td>
+              <td>본교 및 상대교 양교 등록금 (SAF 장학 지원)</td>
+              <td>최대 2학기</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Card 3-2: Qualifications -->
+    <div class="guide-card-box">
+      <h3 class="guide-box-title">지원 자격 및 선발 기준</h3>
+      <div style="display:grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap:16px;">
+        <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:18px;">
+          <h4 style="font-size:14.5px; font-weight:700; color:var(--navy); margin-bottom:8px;">1. 학기 이수 요건</h4>
+          <p style="font-size:13.5px; color:#475569; line-height:1.6;">본교 2학기 이상 수료자 (파견 시점 기준 3학기~7학기 재학 예정자, 마지막 8학기는 본교에서 이수 권장)</p>
+        </div>
+        <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:18px;">
+          <h4 style="font-size:14.5px; font-weight:700; color:var(--navy); margin-bottom:8px;">2. 학업 성적 기준</h4>
+          <p style="font-size:13.5px; color:#475569; line-height:1.6;">직전 학기까지의 전 학년 평점평균(CGPA)이 <strong>3.0 / 4.5 이상</strong> (파견교에 따라 3.5 이상 요구 대학 있음)</p>
+        </div>
+        <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:18px;">
+          <h4 style="font-size:14.5px; font-weight:700; color:var(--navy); margin-bottom:8px;">3. 공인어학성적</h4>
+          <p style="font-size:13.5px; color:#475569; line-height:1.6;">영어권: TOEFL iBT 79~80점 이상 또는 IELTS 6.0~6.5 이상<br>일본어권: JLPT N2 이상<br>중국어권: HSK 5급 이상</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3-3: Credit Transfer Process -->
+    <div class="guide-card-box">
+      <h3 class="guide-box-title">전공 학점 인정 절차 (Step-by-Step)</h3>
+      <div class="guide-callout">
+        <p><strong>⚠️ 화학공학과 전공학점 인정 중요 수칙:</strong></p>
+        <ul>
+          <li>해외 대학에서 이수한 과목을 숭실대 화학공학과 전공선택(전선) 학점으로 인정받으려면, <strong>파견 전 반드시 학과장님과의 사전 면담 및 <전공과목 이수인정원> 승인</strong>을 받아야 합니다.</li>
+          <li>일반 교양이나 일반선택(일선)은 자유롭게 인정 가능하나, 전공학점은 화학공학 교과목 편성표와의 연계성을 엄격히 심사합니다.</li>
+          <li>학기당 최대 19학점, 1년 파견 시 최대 36학점까지 인정받을 수 있습니다.</li>
+        </ul>
+      </div>
+
+      <div class="guide-step-grid" style="margin-top:20px;">
+        <div class="guide-step-card">
+          <div class="guide-step-num">단계 01</div>
+          <div class="guide-step-title">파견 전 사전 승인</div>
+          <div class="guide-step-desc">파견교 개설 과목 실라버스를 지참하여 학과장님 면담 후 '전공 이수인정원' 사전 날인을 받습니다.</div>
+        </div>
+        <div class="guide-step-card">
+          <div class="guide-step-num">단계 02</div>
+          <div class="guide-step-title">현지 수강 및 수학</div>
+          <div class="guide-step-desc">현지 대학에서 정규 수업을 수강하며, 만약 수강 과목이 변경될 경우 학과 이메일로 변경 승인을 신청합니다.</div>
+        </div>
+        <div class="guide-step-card">
+          <div class="guide-step-num">단계 03</div>
+          <div class="guide-step-title">공식 성적표 수령</div>
+          <div class="guide-step-desc">귀국 후 상대교 국제처로부터 밀봉된 공식 영문 성적표(Official Transcript)를 수령합니다.</div>
+        </div>
+        <div class="guide-step-card">
+          <div class="guide-step-num">단계 04</div>
+          <div class="guide-step-title">u-SAINT 학점 전환</div>
+          <div class="guide-step-desc">숭실대 u-SAINT 학사시스템에서 학점 전환을 신청하고, 학과 사무실 및 국제처의 최종 승인을 완료합니다.</div>
+        </div>
+      </div>
+
+      <div style="margin-top:20px; text-align:right;">
+        <a class="link-arrow" href="https://inbound.ssu.ac.kr" target="_blank" rel="noopener">숭실대학교 국제처 국제교류팀 공지 바로가기 ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAR -->
+  <div class="guide-cta-bar">
+    <div>
+      <h3 style="font-size:18px; font-weight:700; color:var(--navy); margin-bottom:4px;">학과 사무실 학사 상담 안내</h3>
+      <p style="font-size:14px; color:#64748B;">졸업사정, 학점 이수, 대학원 연구실 컨택에 관한 추가 문의는 형남공학관 912호 학과 사무실로 방문하세요.</p>
+      <p style="font-size:14px; font-weight:600; color:#1E293B; margin-top:8px;">TEL: 02-820-0610 · E-mail: chemical@ssu.ac.kr</p>
+    </div>
+    <div class="guide-cta-actions">
+      <a class="btn btn-primary" href="index.html#labs">교수진 및 연구실 보기</a>
+      <a class="btn btn-outline" href="index.html">메인 홈으로</a>
+    </div>
+  </div>
+
+</main>
+
+<!-- ============================================================ FOOTER -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <p class="footer-wordmark">숭실대학교 <strong>화학공학과</strong></p>
+      <p class="footer-dept">Department of Chemical Engineering, Soongsil University</p>
+      <p class="footer-addr">06978 서울특별시 동작구 상도로 369 숭실대학교 형남공학관 912호<br>TEL 02-820-0610 · FAX 02-812-5378</p>
+      <p class="footer-copy">Copyright © Department of Chemical Engineering, Soongsil University. All Rights Reserved.</p>
+    </div>
+    <nav class="footer-nav" aria-label="바로가기">
+      <div>
+        <h4>학과 안내</h4>
+        <a href="index.html#about">학과 소개</a>
+        <a href="index.html#research">연구 분야</a>
+        <a href="index.html#labs">교수진 및 연구실</a>
+        <a href="index.html#curriculum">학부 교과과정</a>
+      </div>
+      <div>
+        <h4>학사 안내</h4>
+        <a href="index.html#notices">학과 공지사항</a>
+        <a href="guide.html">입학 및 진로</a>
+        <a href="index.html#contact">오시는 길</a>
+        <a href="http://chemeng.ssu.ac.kr" target="_blank" rel="noopener">기존 홈페이지</a>
+      </div>
+      <div>
+        <h4>숭실대학교</h4>
+        <a href="https://www.ssu.ac.kr" target="_blank" rel="noopener">대학 홈페이지</a>
+        <a href="https://saint.ssu.ac.kr" target="_blank" rel="noopener">u-SAINT</a>
+        <a href="https://oasis.ssu.ac.kr/" target="_blank" rel="noopener">중앙도서관</a>
+        <a class="footer-pwa" href="javascript:void(0)" onclick="installPWA()">스마트폰 앱 설치</a>
+        <a class="footer-admin" href="admin.html">관리자 로그인</a>
+      </div>
+    </nav>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="맨 위로">
+  <i data-lucide="arrow-up" aria-hidden="true"></i>
+</button>
+
+<script src="https://unpkg.com/lucide@0.451.0/dist/umd/lucide.min.js"></script>
+<script>
+  // Lucide Icons
+  if (window.lucide) window.lucide.createIcons();
+
+  // Mobile Drawer
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileDrawer = document.getElementById('mobileDrawer');
+  const drawerBackdrop = document.getElementById('drawerBackdrop');
+  const drawerClose = document.getElementById('drawerClose');
+
+  function openDrawer() {
+    mobileDrawer.classList.add('is-open');
+    drawerBackdrop.classList.add('is-open');
+    drawerBackdrop.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDrawer() {
+    mobileDrawer.classList.remove('is-open');
+    drawerBackdrop.classList.remove('is-open');
+    document.body.style.overflow = '';
+    setTimeout(() => { if (!mobileDrawer.classList.contains('is-open')) drawerBackdrop.hidden = true; }, 300);
+  }
+  if (menuToggle) menuToggle.addEventListener('click', openDrawer);
+  if (drawerClose) drawerClose.addEventListener('click', closeDrawer);
+  if (drawerBackdrop) drawerBackdrop.addEventListener('click', closeDrawer);
+
+  // To Top Button & Scrollspy
+  const toTop = document.getElementById('toTop');
+  const navTabs = [
+    { link: document.getElementById('tabGrad'), target: document.getElementById('graduation') },
+    { link: document.getElementById('tabAdm'), target: document.getElementById('admission') },
+    { link: document.getElementById('tabExc'), target: document.getElementById('exchange') }
+  ];
+
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (toTop) toTop.classList.toggle('is-visible', y > 600);
+
+    // Active tab spy
+    const pos = y + 140;
+    navTabs.forEach(({ link, target }) => {
+      if (!link || !target) return;
+      const top = target.offsetTop;
+      const bottom = top + target.offsetHeight;
+      if (pos >= top && pos < bottom) {
+        navTabs.forEach(t => t.link && t.link.classList.remove('is-active'));
+        link.classList.add('is-active');
+      }
+    });
+  }, { passive: true });
+
+  if (toTop) toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+</script>
+</body>
+</html>

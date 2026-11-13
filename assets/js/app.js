@@ -617,13 +617,18 @@
   function renderGuides() {
     const el = $('#guideGrid');
     if (!el || typeof GUIDES === 'undefined') return;
-    el.innerHTML = GUIDES.map((g) => `
+    el.innerHTML = GUIDES.map((g) => {
+      const isExternal = g.link.startsWith('http');
+      const targetAttr = isExternal ? ' target="_blank" rel="noopener"' : '';
+      const iconName = isExternal ? 'arrow-up-right' : 'arrow-right';
+      return `
       <article class="guide-card">
         <p class="en">${esc(g.en)}</p>
         <h3>${esc(g.title)}</h3>
         <p>${esc(g.text)}</p>
-        <a class="link-arrow" href="${esc(g.link)}" target="_blank" rel="noopener">${esc(g.linkText)} ${ic('arrow-up-right')}</a>
-      </article>`).join('');
+        <a class="link-arrow" href="${esc(g.link)}"${targetAttr}>${esc(g.linkText)} ${ic(iconName)}</a>
+      </article>`;
+    }).join('');
   }
 
   /* ------------------------------------------------------------ 10. 통합 검색 팔레트 */
