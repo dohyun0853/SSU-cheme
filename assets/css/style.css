@@ -709,6 +709,9 @@ input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; appe
 .lab-contact svg, .lab-contact i { width: 12px; height: 12px; flex-shrink: 0; color: #6B7280; }
 .lab-contact a { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .lab-contact a:hover { color: var(--navy); text-decoration: underline; }
+.btn-label-desktop { display: inline; }
+.btn-label-mobile { display: none; }
+
 .lab-actions {
   display: flex; align-items: center; justify-content: space-between; gap: 8px;
   margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line-soft);
@@ -1312,14 +1315,88 @@ body.is-admin .notice-head .m { display: block; text-align: right; }
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 12px;
   }
-  .lab-photo { height: 135px; }
-  .lab-body { padding: 12px 10px; }
-  .lab-name { font-size: 14.5px; }
-  .lab-title { font-size: 11px; margin-bottom: 4px; }
-  .lab-room { font-size: 10.5px; margin-bottom: 6px; }
-  .lab-tags { gap: 3px; margin-bottom: 6px; }
-  .lab-tag { font-size: 9.5px; padding: 1px 5px; }
-  .lab-action { font-size: 11px; margin-top: 6px; padding-top: 6px; }
+  .btn-label-desktop { display: none !important; }
+  .btn-label-mobile { display: inline !important; }
+
+  /* Mobile Faculty Cards: Portrait aspect ratio so face is never cut off */
+  .lab-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .lab-photo {
+    height: auto !important;
+    aspect-ratio: 1 / 1.15 !important;
+    border-radius: 4px 4px 0 0;
+  }
+  .lab-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover !important;
+    object-position: top center !important;
+  }
+  .lab-info {
+    padding: 10px 9px 12px !important;
+    gap: 4px !important;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  .lab-name-row {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  .lab-name {
+    font-size: 14.5px !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.02em;
+  }
+  .lab-title {
+    font-size: 11px !important;
+    color: #64748b !important;
+  }
+  .lab-field {
+    font-size: 11px !important;
+    line-height: 1.45 !important;
+    color: #4b5563 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    min-height: 32px;
+    margin-bottom: 2px;
+  }
+  /* Hide minor details on mobile so only name and research topic show */
+  .lab-card .lab-lab,
+  .lab-card .lab-contact {
+    display: none !important;
+  }
+  /* Actions: [프로필 →] [연구실 ↗] on 1 neat line */
+  .lab-actions {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 4px !important;
+    margin-top: auto !important;
+    padding-top: 8px !important;
+    border-top: 1px solid #f1f5f9 !important;
+  }
+  .lab-more,
+  .lab-home {
+    font-size: 10.5px !important;
+    padding: 3px 5px !important;
+    white-space: nowrap !important;
+    letter-spacing: -0.02em !important;
+    flex-shrink: 0;
+  }
+  .lab-more svg, .lab-more i,
+  .lab-home svg, .lab-home i {
+    width: 11px !important;
+    height: 11px !important;
+  }
   .career-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
   .career-item { padding: 14px 12px; }
   .career-item h4 { font-size: 13.5px; margin-bottom: 4px; }

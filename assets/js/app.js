@@ -205,8 +205,8 @@
             <span>${ic('mail')}<a href="mailto:${esc(p.email)}">${esc(p.email)}</a></span>
           </div>
           <div class="lab-actions">
-            <button class="lab-more" type="button" data-profile="${esc(p.id)}">프로필 보기 ${ic('arrow-right')}</button>
-            ${p.labUrl ? `<span class="lab-home">랩 홈페이지 ${ic('external-link')}</span>` : ''}
+            <button class="lab-more" type="button" data-profile="${esc(p.id)}"><span class="btn-label-desktop">프로필 보기</span><span class="btn-label-mobile">프로필</span> ${ic('arrow-right')}</button>
+            ${p.labUrl ? `<span class="lab-home"><span class="btn-label-desktop">랩 홈페이지</span><span class="btn-label-mobile">연구실</span> ${ic('external-link')}</span>` : ''}
             ${adminBtns('prof', p)}
           </div>
         </div>
