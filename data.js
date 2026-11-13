@@ -25,7 +25,7 @@ const DEPT = {
 const STATS = [
   { value: "1967", label: "학과 설립", sub: "Soongsil University" },
   { value: "14", label: "전임교원", sub: "Full-time faculty" },
-  { value: "12", label: "연구실", sub: "Research laboratories" },
+  { value: "10", label: "연구실", sub: "Research laboratories" },
   { value: "48", label: "전공 교과목", sub: "Major courses" }
 ];
 
