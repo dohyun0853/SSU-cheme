@@ -520,14 +520,43 @@ const NOTICES = {
 
 /* ----------------------------------------------------------------------------
    8. 진로 — 학과 홈페이지에 소개된 주요 진출 기업
+      · companies 의 각 항목은 { name, url } 입니다. url 은 기업의 공식 채용·직무
+        안내 페이지이며, 링크를 걸지 않을 기업은 url 을 "" 로 두면 글자로만 표시됩니다.
+        (기업명·주소는 2026-11 확인 기준)
    ---------------------------------------------------------------------------- */
 const CAREERS = [
-  { field: "반도체·전자", companies: "삼성전자, SK하이닉스, 동진쎄미켐, LG전자" },
-  { field: "정유·석유화학", companies: "LG화학, 롯데케미컬, 한국카본" },
-  { field: "소재·금속", companies: "POSCO, 고려제강, 만호제강" },
-  { field: "제약·바이오", companies: "GC녹십자, 유한양행, 한미약품" },
-  { field: "식품", companies: "CJ제일제당, 롯데제과, 하이트맥주" },
-  { field: "에너지·엔지니어링", companies: "SK, 한국가스공사, 삼성엔지니어링, LG엔지니어링" }
+  { field: "반도체·전자", companies: [
+    { name: "삼성전자", url: "https://www.samsungcareers.com/" },
+    { name: "SK하이닉스", url: "https://talent.skhynix.com/hub/ko/home" },
+    { name: "동진쎄미켐", url: "https://dongjin.careerlink.kr/" },
+    { name: "LG전자", url: "https://www.lge.co.kr/company/recruit/hr" }
+  ] },
+  { field: "정유·석유화학", companies: [
+    { name: "LG화학", url: "https://www.lgchem.com/career/index?lang=ko_KR" },
+    { name: "롯데케미칼", url: "https://www.lottechem.com/ko/recruit/employment/list.do" },
+    { name: "한국카본", url: "https://www.hcarbon.com/ko/recruit/job.do" }
+  ] },
+  { field: "소재·금속", companies: [
+    { name: "POSCO", url: "https://recruit.posco.com/" },
+    { name: "고려제강", url: "https://www.kiswire.com/korean/recruit/recruit_0100.php" },
+    { name: "MH머트리얼즈(만호제강)", url: "http://www.manhorope.com/06_job/job01.asp" }
+  ] },
+  { field: "제약·바이오", companies: [
+    { name: "GC녹십자", url: "https://recruit.gccorp.com/" },
+    { name: "유한양행", url: "https://www.yuhan.co.kr/Recruits/Announce/" },
+    { name: "한미약품", url: "https://hanmi.recruiter.co.kr/" }
+  ] },
+  { field: "식품", companies: [
+    { name: "CJ제일제당", url: "https://recruit.cj.net/" },
+    { name: "롯데웰푸드", url: "https://careers.lottewellfood.com/" },
+    { name: "하이트진로", url: "https://dream.hitejinro.com/" }
+  ] },
+  { field: "에너지·엔지니어링", companies: [
+    { name: "SK이노베이션", url: "https://recruit.skinnovation.com/ui/index.do" },
+    { name: "한국가스공사", url: "https://kogas.incruit.com/main/" },
+    { name: "삼성E&A", url: "https://www.samsungena.com/kr/careers/join-us/recruitment-process" },
+    { name: "LG에너지솔루션", url: "https://www.lgensol.com/kr/career/career-recruit" }
+  ] }
 ];
 
 /* ----------------------------------------------------------------------------

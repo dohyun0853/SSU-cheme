@@ -13,10 +13,42 @@
 <!-- Pretendard Font -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <!-- SSU Design Token & Main Styles -->
-<link rel="stylesheet" href="assets/css/style.css?v=20261113_v35">
+<link rel="stylesheet" href="assets/css/style.css?v=20261114_v37">
 
 <style>
 /* ============================================================ GUIDE PAGE SPECIFIC STYLES */
+.guide-mini-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 6px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #475569;
+}
+.guide-mini-list li {
+  position: relative;
+  padding-left: 13px;
+  word-break: keep-all;
+}
+.guide-mini-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #94A3B8;
+}
+.guide-mini-list.is-compact { gap: 5px; font-size: 13px; }
+.guide-mini-list .lang-key {
+  display: inline-block;
+  min-width: 52px;
+  font-weight: 700;
+  color: #0F172A;
+}
 .guide-hero {
   background: linear-gradient(135deg, #002C6C 0%, #001A42 100%);
   color: #fff;
@@ -323,10 +355,15 @@
   gap: 12px;
 }
 
+.guide-grid { display: grid; gap: 16px; }
+.guide-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.guide-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
 @media (max-width: 900px) {
   .guide-step-grid { grid-template-columns: repeat(2, 1fr); }
   .guide-scholar-grid { grid-template-columns: 1fr; }
   .guide-cta-bar { flex-direction: column; align-items: flex-start; }
+  .guide-grid-2, .guide-grid-3 { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
   .guide-step-grid { grid-template-columns: 1fr; }
@@ -611,7 +648,7 @@
       <h3 class="guide-box-title">졸업논문제 및 대체 인정 요건</h3>
       <p style="font-size:14px; color:#64748B; margin-bottom:14px;">화학공학과는 학사학위 취득을 위해 졸업논문 제출 또는 규정된 대체 요건 충족을 필수로 요구합니다.</p>
 
-      <div style="display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap:16px; margin-bottom:16px;">
+      <div class="guide-grid guide-grid-2" style="margin-bottom:16px;">
         <div style="border:1px solid #E2E8F0; border-radius:8px; padding:20px; background:#FAFAFA;">
           <h4 style="font-size:15px; font-weight:700; color:var(--navy); margin-bottom:10px;">방식 A. 졸업논문제 (연구논문 제출)</h4>
           <ul style="font-size:13.5px; color:#475569; line-height:1.7; padding-left:18px; margin:0;">
@@ -644,25 +681,29 @@
     <!-- Card 1-4: ABEEK & English -->
     <div class="guide-card-box">
       <h3 class="guide-box-title">공학인증(ABEEK) 및 공인영어 졸업인증</h3>
-      <div style="display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap:16px;">
+      <div class="guide-grid guide-grid-2">
         <div style="padding:16px; border:1px solid #E2E8F0; border-radius:8px;">
           <h4 style="font-size:15px; font-weight:700; color:#0F172A; margin-bottom:8px;">1. 공학교육인증 (ABEEK)</h4>
           <p style="font-size:13.5px; color:#475569; line-height:1.65;">
-            한국공학교육인증원이 제시하는 화학공학 전문프로그램 기준을 충족해야 합니다.<br>
-            - BSM(기초과학·수학) 30학점 이상 이수<br>
-            - 전공주제(설계 12학점 포함) 54학점 이상 이수<br>
-            - 졸업 전 학습성과 포트폴리오(PD) 심사 통과
+            한국공학교육인증원이 제시하는 화학공학 전문프로그램 기준을 충족해야 합니다.
           </p>
+          <ul class="guide-mini-list">
+            <li><strong>BSM</strong>(기초과학·수학) 30학점 이상 이수</li>
+            <li><strong>전공주제</strong>(설계 12학점 포함) 54학점 이상 이수</li>
+            <li>졸업 전 <strong>학습성과 포트폴리오(PD)</strong> 심사 통과</li>
+          </ul>
         </div>
         <div style="padding:16px; border:1px solid #E2E8F0; border-radius:8px;">
           <h4 style="font-size:15px; font-weight:700; color:#0F172A; margin-bottom:8px;">2. 공인영어 졸업인증 점수</h4>
           <p style="font-size:13.5px; color:#475569; line-height:1.65;">
-            졸업 심사 전까지 아래 공인영어시험 성적표 중 하나를 제출해야 합니다.<br>
-            - <strong>TOEIC</strong>: 700점 이상<br>
-            - <strong>TOEFL (iBT)</strong>: 71점 이상<br>
-            - <strong>New TEPS</strong>: 327점 이상<br>
-            - <strong>OPIc</strong>: IM2 이상 / <strong>토익스피킹</strong>: 120점 이상
+            졸업 심사 전까지 아래 공인영어시험 성적표 중 하나를 제출해야 합니다.
           </p>
+          <ul class="guide-mini-list">
+            <li><strong>TOEIC</strong> 700점 이상</li>
+            <li><strong>TOEFL (iBT)</strong> 71점 이상</li>
+            <li><strong>New TEPS</strong> 327점 이상</li>
+            <li><strong>OPIc</strong> IM2 이상 · <strong>토익스피킹</strong> 120점 이상</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -887,7 +928,7 @@
     <!-- Card 3-2: Qualifications -->
     <div class="guide-card-box">
       <h3 class="guide-box-title">지원 자격 및 선발 기준</h3>
-      <div style="display:grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap:16px;">
+      <div class="guide-grid guide-grid-3">
         <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:18px;">
           <h4 style="font-size:14.5px; font-weight:700; color:var(--navy); margin-bottom:8px;">1. 학기 이수 요건</h4>
           <p style="font-size:13.5px; color:#475569; line-height:1.6;">본교 2학기 이상 수료자 (파견 시점 기준 3학기~7학기 재학 예정자, 마지막 8학기는 본교에서 이수 권장)</p>
@@ -898,7 +939,11 @@
         </div>
         <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:18px;">
           <h4 style="font-size:14.5px; font-weight:700; color:var(--navy); margin-bottom:8px;">3. 공인어학성적</h4>
-          <p style="font-size:13.5px; color:#475569; line-height:1.6;">영어권: TOEFL iBT 79~80점 이상 또는 IELTS 6.0~6.5 이상<br>일본어권: JLPT N2 이상<br>중국어권: HSK 5급 이상</p>
+          <ul class="guide-mini-list is-compact">
+            <li><span class="lang-key">영어권</span> TOEFL iBT 79~80점 이상 또는 IELTS 6.0~6.5 이상</li>
+            <li><span class="lang-key">일본어권</span> JLPT N2 이상</li>
+            <li><span class="lang-key">중국어권</span> HSK 5급 이상</li>
+          </ul>
         </div>
       </div>
     </div>

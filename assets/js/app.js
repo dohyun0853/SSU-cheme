@@ -68,13 +68,25 @@
   }
 
   /* ------------------------------------------------------------ 3. 진로 */
+  function careerList(c) {
+    const raw = c && c.companies;
+    if (Array.isArray(raw)) {
+      return raw.map((it) => (typeof it === 'string' ? { name: it, url: '' } : { name: it.name || '', url: it.url || '' }))
+        .filter((it) => it.name);
+    }
+    return String(raw || '').split(',').map((s) => ({ name: s.trim(), url: '' })).filter((it) => it.name);
+  }
+
   function renderCareers() {
     const el = $('#careerGrid');
     if (!el || typeof CAREERS === 'undefined') return;
     el.innerHTML = CAREERS.map((c) => `
       <div class="career-item">
         <h4>${esc(c.field)}</h4>
-        <p>${esc(c.companies)}</p>
+        <p class="career-tags">${careerList(c).map((co) => (co.url
+          ? `<a class="career-tag" href="${esc(co.url)}" target="_blank" rel="noopener noreferrer" title="${esc(co.name)} 채용·직무 안내 새 창 열기">${esc(co.name)}<span class="career-tag-ext" aria-hidden="true">↗</span></a>`
+          : `<span class="career-tag is-plain">${esc(co.name)}</span>`)).join('')}
+        </p>
       </div>`).join('');
   }
 
@@ -942,7 +954,7 @@
   };
 
   function initPillarCards() {
-    $$('.pillar-card[data-filter]').forEach((card) => {
+    $$('.pillar-card[data-filter], .pillar-extra[data-filter]').forEach((card) => {
       card.addEventListener('click', (e) => {
         e.preventDefault();
         const filter = card.dataset.filter;

@@ -683,7 +683,7 @@
           danger: true,
           eyebrow: '계정 초기화',
           title: '기본 계정으로 되돌릴까요?',
-          desc: 'admin / ssu1967! 로 다시 로그인하게 됩니다.',
+          desc: '발급 당시의 초기 기본 계정으로 다시 로그인하게 됩니다.',
           okText: '초기화'
         });
         if (!ok) return;
