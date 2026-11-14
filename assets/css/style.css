@@ -439,73 +439,67 @@ input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; appe
   display: none;
 }
 
-/* 05 환경·탄소중립 — 4대 산업 쇼케이스 아래 연결 배너 */
-.pillar-extra {
+/* 5개 연구분야 연결 — 4대 산업 쇼케이스 아래 한 줄 링크 (박스 없이 꼬리주석처럼) */
+.pillar-more {
   display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+  padding-top: 13px;
+  border-top: 1px solid rgba(0, 44, 108, 0.12);
+}
+.pillar-more-link {
+  display: inline-flex;
   align-items: center;
-  gap: 12px;
-  margin-top: 14px;
-  padding: 12px 15px;
-  border-radius: 10px;
-  border: 1px solid rgba(0, 44, 108, 0.16);
-  background: linear-gradient(100deg, rgba(0, 44, 108, 0.07) 0%, rgba(0, 44, 108, 0.015) 62%, rgba(0, 44, 108, 0.05) 100%);
+  gap: 8px;
+  min-width: 0;
+  padding: 2px 0;
   color: var(--navy);
   text-decoration: none;
-  transition: border-color .3s ease, background .3s ease, transform .3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .3s ease;
-}
-.pillar-extra:hover {
-  border-color: rgba(0, 44, 108, 0.34);
-  background: linear-gradient(100deg, rgba(0, 44, 108, 0.11) 0%, rgba(0, 44, 108, 0.03) 62%, rgba(0, 44, 108, 0.08) 100%);
-  box-shadow: 0 10px 24px -12px rgba(0, 44, 108, 0.45);
-  transform: translateY(-2px);
-}
-.pillar-extra-num {
-  flex-shrink: 0;
-  font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12.5px;
   font-weight: 600;
-  letter-spacing: .04em;
-  color: #fff;
-  background: var(--navy);
-  border-radius: 5px;
-  padding: 4px 6px;
-  line-height: 1;
+  letter-spacing: -.01em;
+  line-height: 1.4;
+  transition: color .25s ease;
 }
-.pillar-extra-copy {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
+.pillar-more-label {
+  position: relative;
+  white-space: nowrap;
+}
+.pillar-more-label::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.pillar-more-link:hover .pillar-more-label::after,
+.pillar-more-link:focus-visible .pillar-more-label::after { transform: scaleX(1); }
+.pillar-more-areas {
   min-width: 0;
-}
-.pillar-extra-copy strong {
   font-family: var(--mono);
-  font-size: 11.5px;
-  font-weight: 600;
+  font-size: 10.5px;
+  font-weight: 500;
   letter-spacing: .01em;
-  color: var(--navy);
+  color: #8593A6;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.pillar-extra-copy span {
-  font-size: 12.5px;
-  font-weight: 600;
-  color: #3D4C63;
-  letter-spacing: -.01em;
-}
-.pillar-extra > i {
+.pillar-more-link > i {
   flex-shrink: 0;
-  width: 16px;
-  height: 16px;
-  margin-left: auto;
+  width: 15px;
+  height: 15px;
   color: var(--navy);
-  opacity: .55;
+  opacity: .5;
   transition: transform .3s ease, opacity .3s ease;
 }
-.pillar-extra:hover > i {
-  transform: translateX(3px);
-  opacity: .9;
-}
+.pillar-more-link:hover > i,
+.pillar-more-link:focus-visible > i { transform: translateX(3px); opacity: .85; }
 
 .stat-strip { background: #fff; border-top: 1px solid #E8ECF2; }
 .stat-bar {
@@ -1363,6 +1357,10 @@ h1, h2, h3, h4, .section-title, .sub-title, .guide-sec-title, .guide-box-title {
     width: 22px;
     background: var(--navy);
   }
+
+  /* 5개 연구분야 링크 — 캐러셀 아래 한 줄, 카드 오른쪽 끝에 맞춤 */
+  .pillar-more { margin-top: 8px; margin-bottom: 12px; padding-top: 12px; }
+  .pillar-more-link { gap: 7px; }
 }
 
 @media (max-width: 640px) {
@@ -1399,6 +1397,9 @@ h1, h2, h3, h4, .section-title, .sub-title, .guide-sec-title, .guide-box-title {
 
   /* 4대 산업 글래스 카드 모바일 맞춤 */
   .pillar-stack { gap: 10px; }
+  .pillar-more { margin-top: 4px; padding-top: 11px; border-top-color: rgba(0, 44, 108, 0.10); }
+  .pillar-more-link { font-size: 12.5px; }
+  .pillar-more-areas { display: none; }
   .pillar-card { padding: 13px 14px; }
   .pillar-card:hover { transform: none; }
   .pillar-left { gap: 12px; min-width: 0; }

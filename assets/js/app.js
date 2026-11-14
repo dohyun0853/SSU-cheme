@@ -959,7 +959,7 @@
   };
 
   function initPillarCards() {
-    $$('.pillar-card[data-filter], .pillar-extra[data-filter]').forEach((card) => {
+    $$('.pillar-card[data-filter]').forEach((card) => {
       card.addEventListener('click', (e) => {
         e.preventDefault();
         const filter = card.dataset.filter;
