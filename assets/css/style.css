@@ -1276,7 +1276,9 @@ h1, h2, h3, h4, .section-title, .sub-title, .guide-sec-title, .guide-box-title {
 
 @media (max-width: 900px) {
   .util-dept { display: none; }
-  .util-inner { justify-content: flex-end; overflow-x: auto; }
+  .util-inner { justify-content: flex-start; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .util-inner::-webkit-scrollbar { display: none; }
+  .util-links { flex-wrap: nowrap; }
   .header-inner {
     display: flex; align-items: center; justify-content: space-between;
     gap: 8px; height: 60px;

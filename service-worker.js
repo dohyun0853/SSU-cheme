@@ -1,5 +1,5 @@
-// 숭실대학교 화학공학과 공식 PWA Service Worker (v3.8 Network-First)
-const CACHE_NAME = 'ssu-cheme-v3.8';
+// 숭실대학교 화학공학과 공식 PWA Service Worker (v3.9 Network-First)
+const CACHE_NAME = 'ssu-cheme-v3.9';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -26,7 +26,7 @@ const ASSETS_TO_CACHE = [
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('[ServiceWorker v3.8] Caching App Shell');
+      console.log('[ServiceWorker v3.9] Caching App Shell');
       return cache.addAll(ASSETS_TO_CACHE).catch(err => console.warn('Cache addAll error:', err));
     }).then(() => self.skipWaiting())
   );
@@ -39,7 +39,7 @@ self.addEventListener('activate', (event) => {
       return Promise.all(
         keyList.map((key) => {
           if (key !== CACHE_NAME) {
-            console.log('[ServiceWorker v3.8] Deleting stale cache:', key);
+            console.log('[ServiceWorker v3.9] Deleting stale cache:', key);
             return caches.delete(key);
           }
         })
