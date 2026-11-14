@@ -656,6 +656,7 @@ input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; appe
   background: #F1F5FB;
   transform: translateY(-1px);
 }
+.contact-tile { align-self: start; }
 .contact-tile .office-room {
   display: block;
   margin-top: 6px;
