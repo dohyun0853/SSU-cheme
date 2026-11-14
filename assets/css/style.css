@@ -360,6 +360,17 @@ input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; appe
   font-size: 14.5px;
   font-weight: 600;
 }
+/* 흰 배경 히어로에서는 btn-line 이 보이도록 네이비 계열 고스트 버튼으로 */
+.hero--v2 .hero-cta .btn-line {
+  color: var(--navy);
+  background: #fff;
+  border-color: rgba(0, 44, 108, 0.26);
+}
+.hero--v2 .hero-cta .btn-line:hover {
+  color: var(--navy);
+  background: #F2F6FC;
+  border-color: var(--navy);
+}
 .hero-motto {
   display: flex;
   align-items: center;
@@ -629,6 +640,7 @@ input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; appe
 .career-tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .career-tag {
   display: inline-flex; align-items: center; gap: 3px;
+  white-space: nowrap;
   padding: 4px 8px;
   border: 1px solid #E1E8F2; border-radius: 5px;
   background: #FBFCFE;
@@ -643,6 +655,14 @@ input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; appe
   border-color: rgba(0, 44, 108, 0.38);
   background: #F1F5FB;
   transform: translateY(-1px);
+}
+.contact-tile .office-room {
+  display: block;
+  margin-top: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #5A6069;
+  letter-spacing: -.01em;
 }
 .career-tag-ext {
   font-size: 9.5px; line-height: 1;
@@ -841,6 +861,7 @@ input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; appe
 .curriculum-layout {
   display: grid; grid-template-columns: minmax(0, 1fr) 268px; gap: 40px; align-items: start;
 }
+.curriculum-main, .curriculum-side { min-width: 0; max-width: 100%; }
 .year-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--line); margin-bottom: 22px; }
 .year-tab {
   display: inline-flex; align-items: center; gap: 6px;
@@ -860,7 +881,7 @@ input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; appe
   padding: 0 0 9px; border-bottom: 2px solid #C9D3E0; margin-bottom: 4px;
 }
 .term-head h4 { font-size: 14.5px; font-weight: 700; color: var(--ink); }
-.term-head span { font-size: 11.5px; color: #667080; }
+.term-head span { font-size: 11.5px; color: #667080; white-space: nowrap; }
 .course { border-bottom: 1px solid var(--line-soft); }
 .course-btn {
   display: grid; grid-template-columns: 46px minmax(0, 1fr) 52px 16px;
@@ -1219,6 +1240,15 @@ body.is-admin .notice-head .m { display: block; text-align: right; }
   padding: 1px 4px; margin-right: 3px; color: #6A727D;
 }
 
+/* ---------------------------------------------------------------- 줄바꿈 다듬기 */
+/* 한글은 단어 단위로 접히게 하고, 마지막 줄에 한 글자만 남는 고아 줄을 줄입니다. */
+p, li, dd, dt, blockquote, .section-desc, .guide-mini-list li { text-wrap: pretty; }
+h1, h2, h3, h4, .section-title, .sub-title, .guide-sec-title, .guide-box-title { text-wrap: balance; }
+.section-desc, .prose, .research-body p, .lab-field, .career-tag, .curriculum-note { word-break: keep-all; }
+.lab-card a[href^="mailto"], .footer-addr { overflow-wrap: anywhere; }
+/* 영문 단어 중간에서 끊기지 않도록(예: Soon|gsil) */
+.stat-bar dd span, .summary-en, .brand-text em { overflow-wrap: normal; }
+
 /* ---------------------------------------------------------------- responsive */
 @media (max-width: 1180px) {
   .lab-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -1235,7 +1265,7 @@ body.is-admin .notice-head .m { display: block; text-align: right; }
   .section-head--split .section-desc { padding-top: 0; }
   .about-grid { grid-template-columns: 1fr; gap: 32px; }
   .career-head { grid-template-columns: 1fr; gap: 10px; }
-  .curriculum-layout { grid-template-columns: 1fr; gap: 28px; }
+  .curriculum-layout { grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .contact-wrap { grid-template-columns: 1fr; gap: 28px; }
   .contact-map iframe { height: 320px; }
   .guide-grid { grid-template-columns: 1fr; }
@@ -1498,8 +1528,29 @@ body.is-admin .notice-head .m { display: block; text-align: right; }
   .career-tags { gap: 5px; }
   .career-tag { padding: 6px 9px; font-size: 12px; min-height: 30px; }
   .career-tag-ext { font-size: 10px; }
-  .chips { width: 100%; }
-  .chip { padding: 6px 10px; font-size: 12.5px; }
+  /* 연구 분야 필터 — 6개 칩이 3열 2행으로 정렬되어 마지막 칩만 홀로 남지 않게 */
+  .chips {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px; width: 100%;
+  }
+  .chip {
+    width: 100%; justify-content: center; margin-right: 0;
+    padding: 8px 6px; font-size: 12.5px; gap: 5px; border-radius: 4px;
+    white-space: nowrap;
+  }
+  .chip .count { font-size: 11px; }
+  /* 교과과정 — 4개 학년 탭이 화면 폭 안에서 균등하게 접히도록 */
+  .year-tabs { display: flex; width: 100%; max-width: 100%; }
+  .year-tab {
+    flex: 1 1 0; min-width: 0; justify-content: center;
+    padding: 10px 4px; font-size: 13.5px; gap: 4px; white-space: nowrap;
+  }
+  .year-tab .n { font-size: 10.5px; }
+  .curriculum-main, .curriculum-side { min-width: 0; max-width: 100%; }
+  .term-grid, .term-col, .course-list, .course { min-width: 0; max-width: 100%; }
+  .course-btn { grid-template-columns: 42px minmax(0, 1fr) 42px 14px; gap: 7px; }
+  .course-desc { padding-left: 49px; }
+  .curriculum-note { word-break: keep-all; }
   .lab-search { width: 100%; }
   .lab-search input { width: 100%; }
   .notice-top { padding: 0 14px; }

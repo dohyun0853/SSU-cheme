@@ -14,6 +14,9 @@
     { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
   ));
   const ic = (name) => `<i data-lucide="${name}" aria-hidden="true"></i>`;
+  /* 가운뎃점(·)으로 시작하는 줄(예: "에너지 / ·환경 소재")을 막기 위해
+     점 앞에 word-joiner(U+2060)를 넣습니다. 점 뒤에서는 정상적으로 줄이 바뀝니다. */
+  const escDots = (s) => esc(s).replace(/\u00b7/g, '\u2060\u00b7');
   const dateValue = (d) => {
     const t = Date.parse(d);
     return Number.isNaN(t) ? 0 : t;
@@ -71,10 +74,12 @@
   function careerList(c) {
     const raw = c && c.companies;
     if (Array.isArray(raw)) {
-      return raw.map((it) => (typeof it === 'string' ? { name: it, url: '' } : { name: it.name || '', url: it.url || '' }))
+      return raw.map((it) => (typeof it === 'string'
+        ? { name: it, url: '', former: '' }
+        : { name: it.name || '', url: it.url || '', former: it.former || '' }))
         .filter((it) => it.name);
     }
-    return String(raw || '').split(',').map((s) => ({ name: s.trim(), url: '' })).filter((it) => it.name);
+    return String(raw || '').split(',').map((s) => ({ name: s.trim(), url: '', former: '' })).filter((it) => it.name);
   }
 
   function renderCareers() {
@@ -84,7 +89,7 @@
       <div class="career-item">
         <h4>${esc(c.field)}</h4>
         <p class="career-tags">${careerList(c).map((co) => (co.url
-          ? `<a class="career-tag" href="${esc(co.url)}" target="_blank" rel="noopener noreferrer" title="${esc(co.name)} 채용·직무 안내 새 창 열기">${esc(co.name)}<span class="career-tag-ext" aria-hidden="true">↗</span></a>`
+          ? `<a class="career-tag" href="${esc(co.url)}" target="_blank" rel="noopener noreferrer" title="${esc(co.name)}${co.former ? `(구 ${esc(co.former)})` : ''} 채용·직무 안내 새 창 열기">${esc(co.name)}<span class="career-tag-ext" aria-hidden="true">↗</span></a>`
           : `<span class="career-tag is-plain">${esc(co.name)}</span>`)).join('')}
         </p>
       </div>`).join('');
@@ -102,7 +107,7 @@
           <p class="research-num">${esc(area.num)}</p>
           <div class="research-body">
             <h3>${esc(area.title)}</h3>
-            <p>${esc(area.desc)}</p>
+            <p>${escDots(area.desc)}</p>
           </div>
           <div class="research-side">
             <p class="research-count">${profs.length} labs</p>
@@ -209,7 +214,7 @@
             <h3 class="lab-name">${esc(p.name)}</h3>
             <span class="lab-title">${esc(p.title)}</span>
           </div>
-          <p class="lab-field">${esc(p.field || '학과 행정·특별임무 담당')}</p>
+          <p class="lab-field">${escDots(p.field || '학과 행정·특별임무 담당')}</p>
           ${p.labName ? `<p class="lab-lab"><strong>${esc(p.labName)}</strong>${esc(p.labRoom)}</p>` : '<p class="lab-lab"><strong>연구실 정보 없음</strong>전임교원 프로필 참고</p>'}
           <div class="lab-contact">
             <span>${ic('door-open')}${esc(p.office)}</span>
@@ -225,7 +230,7 @@
       </article>`).join('') + (labFilter === '전체' && !labQuery ? `
       <aside class="lab-card contact-tile">
         <p class="side-label">Department Office</p>
-        <h3>학과 사무실 · 형남공학관 912호</h3>
+        <h3>학과 사무실<span class="office-room">형남공학관 912호</span></h3>
         <p>입학·학사·연구실 안내는 학과 사무실로 문의하세요.</p>
         <a href="tel:02-820-0610">02-820-0610</a>
       </aside>` : '');

@@ -539,7 +539,7 @@ const CAREERS = [
   { field: "소재·금속", companies: [
     { name: "POSCO", url: "https://recruit.posco.com/" },
     { name: "고려제강", url: "https://www.kiswire.com/korean/recruit/recruit_0100.php" },
-    { name: "MH머트리얼즈(만호제강)", url: "http://www.manhorope.com/06_job/job01.asp" }
+    { name: "MH머트리얼즈", former: "만호제강", url: "http://www.manhorope.com/06_job/job01.asp" }
   ] },
   { field: "제약·바이오", companies: [
     { name: "GC녹십자", url: "https://recruit.gccorp.com/" },

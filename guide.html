@@ -13,7 +13,7 @@
 <!-- Pretendard Font -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <!-- SSU Design Token & Main Styles -->
-<link rel="stylesheet" href="assets/css/style.css?v=20261114_v37">
+<link rel="stylesheet" href="assets/css/style.css?v=20261114_v38">
 
 <style>
 /* ============================================================ GUIDE PAGE SPECIFIC STYLES */
@@ -140,7 +140,8 @@
 
 /* Guide Content Blocks */
 .guide-container {
-  padding: 56px 0 80px;
+  /* .wrap 의 좌우 여백(--gutter)을 남기고 위아래 여백만 지정합니다. */
+  padding-block: 56px 80px;
 }
 .guide-section {
   scroll-margin-top: calc(var(--header-h) + 70px);
@@ -369,6 +370,25 @@
   .guide-step-grid { grid-template-columns: 1fr; }
   .guide-card-box { padding: 20px 18px; }
   .guide-hero { padding: 40px 0 36px; }
+  /* 제목이 한두 단어만 다음 줄로 떨어지지 않도록 모바일 글자 크기 조정 */
+  .guide-sec-title { font-size: 22px; }
+  .guide-box-title { font-size: 16px; gap: 8px; }
+  .guide-sec-lead { font-size: 14.5px; }
+  /* 표: 모바일에서는 자연 폭으로 두고 필요할 때만 좌우 스크롤 + 안내 문구 */
+  .guide-table-wrap { -webkit-overflow-scrolling: touch; }
+  .guide-table { width: auto; min-width: 100%; font-size: 12.5px; }
+  .guide-table th, .guide-table td { padding: 9px 11px; }
+  .guide-table th { white-space: nowrap; }
+  .guide-table td { word-break: keep-all; overflow-wrap: break-word; }
+  .guide-table td.col-head { min-width: 82px; }
+  .guide-table td:last-child { min-width: 170px; max-width: 210px; }
+  .guide-table-hint {
+    margin: -10px 0 18px;
+    font-size: 11.5px;
+    color: #64748B;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .guide-table-hint::before { content: "↔"; font-size: 12px; }
 }
 </style>
 </head>
@@ -1044,6 +1064,32 @@
   <i data-lucide="arrow-up" aria-hidden="true"></i>
 </button>
 
+
+<script>
+/* 넓은 표가 실제로 잘려 있을 때만 좌우 스크롤 안내를 붙입니다. */
+(function () {
+  function addHints() {
+    if (!window.matchMedia('(max-width: 640px)').matches) return;
+    document.querySelectorAll('.guide-table-wrap').forEach(function (wrap) {
+      if (wrap.dataset.hinted === '1') return;
+      if (wrap.scrollWidth <= wrap.clientWidth + 2) return;
+      if (wrap.nextElementSibling && wrap.nextElementSibling.classList.contains('guide-table-hint')) return;
+      var p = document.createElement('p');
+      p.className = 'guide-table-hint';
+      p.textContent = '표를 좌우로 밀면 전체 열을 볼 수 있습니다.';
+      wrap.insertAdjacentElement('afterend', p);
+      wrap.dataset.hinted = '1';
+    });
+  }
+  if (document.readyState === 'complete') addHints();
+  else window.addEventListener('load', addHints);
+  window.addEventListener('resize', function () {
+    document.querySelectorAll('.guide-table-hint').forEach(function (h) { h.remove(); });
+    document.querySelectorAll('.guide-table-wrap').forEach(function (w) { w.dataset.hinted = ''; });
+    addHints();
+  });
+})();
+</script>
 <script src="https://unpkg.com/lucide@0.451.0/dist/umd/lucide.min.js"></script>
 <script>
   // Lucide Icons
