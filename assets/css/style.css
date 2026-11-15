@@ -668,19 +668,18 @@ input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; appe
 /* ---------------------------------------------------------------- about : 학과장 인사말 · 주요 성과 */
 .greet-block {
   display: grid;
-  grid-template-columns: 168px minmax(0, 1fr);
-  gap: 28px;
-  align-items: start;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 30px;
+  align-items: center;
   margin: 0 0 44px;
-  padding: 26px 28px;
+  padding: 24px 28px;
   border: 1px solid var(--line);
   border-left: 3px solid var(--navy);
   background: var(--bg-soft);
-  align-items: stretch;
 }
 .greet-photo {
   margin: 0;
-  width: 168px;
+  width: 150px;
   aspect-ratio: 817 / 1061;
   overflow: hidden;
   background: #E7EAF0;
@@ -1385,8 +1384,8 @@ h1, h2, h3, h4, .section-title, .sub-title, .guide-sec-title, .guide-box-title {
   .section-head--split { grid-template-columns: 1fr; gap: 16px; }
   .section-head--split .section-desc { padding-top: 0; }
   .about-grid { grid-template-columns: 1fr; gap: 32px; }
-  .greet-block { grid-template-columns: 120px minmax(0, 1fr); gap: 20px; padding: 22px 22px; }
-  .greet-photo { width: 120px; }
+  .greet-block { grid-template-columns: 124px minmax(0, 1fr); gap: 22px; padding: 22px 22px; align-items: center; }
+  .greet-photo { width: 124px; }
   .achieve-head { grid-template-columns: 1fr; gap: 10px; }
   .achieve-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .career-head { grid-template-columns: 1fr; gap: 10px; }
@@ -1500,7 +1499,7 @@ h1, h2, h3, h4, .section-title, .sub-title, .guide-sec-title, .guide-box-title {
 
   /* 터치 목표 크기 44px 이상 확보 */
   .notice-tab { min-height: 46px; }
-  .greet-block { grid-template-columns: 1fr; gap: 16px; padding: 20px 18px; }
+  .greet-block { grid-template-columns: 1fr; gap: 16px; padding: 20px 18px; align-items: start; }
   .greet-photo { width: 104px; }
   .greet-name { font-size: 18px; margin-bottom: 9px; }
   .greet-text { font-size: 14px; line-height: 1.85; }
