@@ -212,6 +212,7 @@
         <div class="lab-info">
           <div class="lab-name-row">
             <h3 class="lab-name">${esc(p.name)}</h3>
+            ${isHead(p) ? '<span class="lab-head">학과장</span>' : ''}
             <span class="lab-title">${esc(p.title)}</span>
           </div>
           <p class="lab-field">${escDots(p.field || '학과 행정·특별임무 담당')}</p>
@@ -307,7 +308,7 @@
         </div>
         <div>
           <h2 id="drawerName">${esc(p.name)}</h2>
-          <p class="profile-title">${esc(p.title)}</p>
+          <p class="profile-title">${esc(p.title)}${isHead(p) ? ' <span class="lab-head">학과장</span>' : ''}</p>
           ${p.field ? `<p class="profile-field">${esc(p.field)}</p>` : ''}
           <div class="profile-tags">${p.tags.map((t) => `<span>${esc(t)}</span>`).join('')}</div>
         </div>
@@ -377,6 +378,27 @@
   /* ------------------------------------------------------------ 7. 교과과정 */
   let currentYear = 1;
 
+  /* 학과장 표기 — data.js GREETING.head 와 이름이 같은 교수님을 학과장으로 표시합니다. */
+  function isHead(p) {
+    return typeof GREETING !== 'undefined' && GREETING && GREETING.head && p && p.name === GREETING.head;
+  }
+
+  /* 과목 카드 소형 표기 — 신설 / 2027-1 개편 예정 */
+  function courseBadge(c) {
+    if (c.next) return `<span class="course-badge">27-1 개편예정</span>`;
+    if (c.isNew) return `<span class="course-badge is-new">${esc(c.changed || '')} 신설</span>`;
+    return '';
+  }
+
+  function courseMeta(c) {
+    const parts = [];
+    parts.push(c.code ? `과목ID ${esc(c.code)}` : '과목ID 미부여(신설)');
+    if (c.depth) parts.push(`심화정도 ${esc(c.depth)}`);
+    if (c.prev) parts.push(`${esc(c.changed || '')}학기부터 ${esc(c.prev)} → ${esc(c.name)}`);
+    if (c.next) parts.push(`${esc(c.nextTerm)}학기부터 '${esc(c.next)}'으로 변경 예정 (${esc(c.nextFrom)}부터)`);
+    return parts.join(' · ');
+  }
+
   function renderYearTabs() {
     const el = $('#yearTabs');
     if (!el) return;
@@ -411,13 +433,13 @@
               <div class="course" data-key="${currentYear}-${term}-${i}">
                 <button class="course-btn" type="button" aria-expanded="false">
                   <span class="course-type${c.type.indexOf('전필') === 0 ? ' required' : ''}">${esc(c.type)}</span>
-                  <span class="course-name">${esc(c.name)}</span>
+                  <span class="course-name"><span class="course-name-t">${esc(c.name)}</span>${courseBadge(c)}</span>
                   <span class="course-credit">${esc(c.credit)}</span>
                   ${ic('chevron-down')}
                 </button>
                 <div class="course-desc">
                   ${c.desc ? esc(c.desc) : '학과 교과목 안내에 상세 내용이 등록되어 있습니다.'}
-                  <p class="course-meta">과목ID ${esc(c.code)} · 심화정도 ${esc(c.depth)}</p>
+                  <p class="course-meta">${courseMeta(c)}</p>
                 </div>
               </div>`).join('')}
           </div>
@@ -432,6 +454,48 @@
       });
     });
     icon();
+  }
+
+  /* ------------------------------------------------------------ 7-1. 학과장 인사말 · 주요 성과 */
+  function renderGreeting() {
+    const text = $('#greetText');
+    if (!text) return;
+    const G = typeof GREETING !== 'undefined' ? GREETING : null;
+    const nameEl = $('#greetName');
+    const roleEl = $('#greetRole');
+    const photoEl = $('#greetPhoto');
+
+    if (G) {
+      if (nameEl && G.head) nameEl.textContent = G.head;
+      if (roleEl && G.title) roleEl.textContent = G.title;
+      if (photoEl && G.photo) {
+        photoEl.src = G.photo;
+        photoEl.alt = `${G.head || '학과장'} 학과장`;
+      }
+    }
+
+    const body = G && G.body ? String(G.body).trim() : '';
+    if (!body) {
+      text.innerHTML = '<p class="greet-empty">학과장 인사말이 아직 등록되지 않았습니다. 관리자 페이지에서 입력할 수 있습니다.</p>';
+      return;
+    }
+    text.innerHTML = body.split(/\n{2,}/).map((par) => `<p>${esc(par).replace(/\n/g, '<br>')}</p>`).join('');
+  }
+
+  function renderAchievements() {
+    const grid = $('#achieveGrid');
+    if (!grid || typeof ACHIEVEMENTS === 'undefined') return;
+    grid.innerHTML = ACHIEVEMENTS.map((a) => `
+      <article class="achieve-card">
+        <div class="achieve-top">
+          <span class="achieve-year">${esc(a.year)}</span>
+          ${a.lead ? `<span class="achieve-lead">${esc(a.lead)}</span>` : ''}
+        </div>
+        <h4 class="achieve-title">${esc(a.title)}</h4>
+        <ul class="achieve-points">
+          ${(a.points || []).map((p) => `<li>${esc(p)}</li>`).join('')}
+        </ul>
+      </article>`).join('');
   }
 
   function renderGraduation() {
@@ -937,6 +1001,8 @@
     renderResearch();
     renderLabFilters();
     renderLabs();
+    renderGreeting();
+    renderAchievements();
     renderNotices();
     renderGuides();
     buildPaletteIndex();
@@ -1049,6 +1115,8 @@
     renderLabFilters();
     initLabSearch();
     renderLabs();
+    renderGreeting();
+    renderAchievements();
     renderYearTabs();
     renderCurriculum();
     renderGraduation();

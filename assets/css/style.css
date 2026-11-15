@@ -665,6 +665,98 @@ input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; appe
 }
 .career-tag:hover .career-tag-ext { color: var(--navy); transform: translate(1px, -1px); }
 
+/* ---------------------------------------------------------------- about : 학과장 인사말 · 주요 성과 */
+.greet-block {
+  display: grid;
+  grid-template-columns: 168px minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+  margin: 0 0 44px;
+  padding: 26px 28px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--navy);
+  background: var(--bg-soft);
+  align-items: stretch;
+}
+.greet-photo {
+  margin: 0;
+  width: 168px;
+  aspect-ratio: 817 / 1061;
+  overflow: hidden;
+  background: #E7EAF0;
+}
+.greet-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.greet-eyebrow {
+  font-size: 12px;
+  color: var(--navy);
+  font-weight: 600;
+  letter-spacing: .01em;
+  margin-bottom: 2px;
+}
+.greet-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -.03em;
+  margin-bottom: 12px;
+}
+.greet-text { font-size: 14.5px; line-height: 1.9; color: #444; }
+.greet-text p + p { margin-top: 12px; }
+.greet-empty {
+  font-size: 13.5px;
+  line-height: 1.8;
+  color: #78818D;
+}
+
+.achieve-block { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--line-soft); }
+.achieve-head { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 40px; align-items: start; }
+.achieve-head p { font-size: 14.5px; color: var(--muted); line-height: 1.8; padding-top: 2px; }
+.achieve-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+.achieve-card {
+  padding: 20px 22px;
+  border: 1px solid var(--line);
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.achieve-top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.achieve-year {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--navy);
+  font-variant-numeric: tabular-nums;
+}
+.achieve-lead {
+  font-size: 11.5px;
+  color: #5A6069;
+  padding-left: 9px;
+  border-left: 1px solid var(--line);
+}
+.achieve-title { font-size: 15.5px; font-weight: 700; color: var(--ink); letter-spacing: -.02em; line-height: 1.45; }
+.achieve-points { display: grid; gap: 5px; }
+.achieve-points li {
+  position: relative;
+  padding-left: 10px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #4A525D;
+}
+.achieve-points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 3px;
+  height: 1px;
+  background: #A9B4C2;
+}
+
 /* ---------------------------------------------------------------- research (3D 모션 지원) */
 .research-list { border-top: 1px solid var(--line); }
 .research-row {
@@ -800,8 +892,18 @@ input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; appe
   font-size: 26px; font-weight: 600; color: var(--navy); letter-spacing: -.04em;
 }
 .lab-info { padding: 14px 15px 15px; display: flex; flex-direction: column; gap: 5px; flex: 1; }
-.lab-name-row { display: flex; align-items: baseline; gap: 6px; }
+.lab-name-row { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
 .lab-name { font-size: 16px; font-weight: 700; color: var(--ink); letter-spacing: -.02em; }
+.lab-head {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--navy);
+  background: var(--navy-soft);
+  border: 1px solid #CBD8EA;
+  padding: 0 5px;
+  line-height: 1.55;
+  white-space: nowrap;
+}
 .lab-title { font-size: 11.5px; color: #667080; }
 .lab-field {
   font-size: 12.5px; color: #5A6069; line-height: 1.55;
@@ -889,7 +991,24 @@ input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; appe
 .course-type.required { border-color: #C9D3E0; background: #EEF3FA; color: var(--navy); }
 .course-name {
   font-size: 13.5px; color: #222; letter-spacing: -.01em;
-  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  display: flex; align-items: center; gap: 6px; min-width: 0;
+}
+.course-name-t { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.course-badge {
+  flex-shrink: 0;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: #7A5B12;
+  background: #FBF3E2;
+  border: 1px solid #EBD9B4;
+  padding: 0 4px;
+  white-space: nowrap;
+}
+.course-badge.is-new {
+  color: var(--navy);
+  background: var(--navy-soft);
+  border-color: #CBD8EA;
 }
 .course-credit { font-size: 11.5px; color: #667080; text-align: right; font-variant-numeric: tabular-nums; }
 .course-btn svg, .course-btn i { width: 14px; height: 14px; color: #6B7280; transition: transform .2s var(--ease); }
@@ -1266,6 +1385,10 @@ h1, h2, h3, h4, .section-title, .sub-title, .guide-sec-title, .guide-box-title {
   .section-head--split { grid-template-columns: 1fr; gap: 16px; }
   .section-head--split .section-desc { padding-top: 0; }
   .about-grid { grid-template-columns: 1fr; gap: 32px; }
+  .greet-block { grid-template-columns: 120px minmax(0, 1fr); gap: 20px; padding: 22px 22px; }
+  .greet-photo { width: 120px; }
+  .achieve-head { grid-template-columns: 1fr; gap: 10px; }
+  .achieve-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .career-head { grid-template-columns: 1fr; gap: 10px; }
   .curriculum-layout { grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .contact-wrap { grid-template-columns: 1fr; gap: 28px; }
@@ -1311,6 +1434,7 @@ h1, h2, h3, h4, .section-title, .sub-title, .guide-sec-title, .guide-box-title {
   .nav a::after { display: none; }
   .lab-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .career-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .achieve-grid { grid-template-columns: 1fr; }
   .term-grid { grid-template-columns: 1fr; }
   .stat-bar { grid-template-columns: 1fr 1fr; }
   .stat-bar > div { padding: 16px 4px; }
@@ -1376,6 +1500,12 @@ h1, h2, h3, h4, .section-title, .sub-title, .guide-sec-title, .guide-box-title {
 
   /* 터치 목표 크기 44px 이상 확보 */
   .notice-tab { min-height: 46px; }
+  .greet-block { grid-template-columns: 1fr; gap: 16px; padding: 20px 18px; }
+  .greet-photo { width: 104px; }
+  .greet-name { font-size: 18px; margin-bottom: 9px; }
+  .greet-text { font-size: 14px; line-height: 1.85; }
+  .achieve-card { padding: 17px 16px; }
+  .course-badge { font-size: 9.5px; }
   .sort-toggle button { height: 36px; padding: 0 12px; }
   .clear-input { width: 32px; height: 32px; right: 4px; }
   .lab-more { padding: 6px 0; }

@@ -174,6 +174,8 @@
   function g(name) {
     switch (name) {
       case 'DEPT': return typeof DEPT !== 'undefined' ? DEPT : null;
+      case 'GREETING': return typeof GREETING !== 'undefined' ? GREETING : null;
+      case 'ACHIEVEMENTS': return typeof ACHIEVEMENTS !== 'undefined' ? ACHIEVEMENTS : null;
       case 'STATS': return typeof STATS !== 'undefined' ? STATS : null;
       case 'HISTORY': return typeof HISTORY !== 'undefined' ? HISTORY : null;
       case 'RESEARCH_AREAS': return typeof RESEARCH_AREAS !== 'undefined' ? RESEARCH_AREAS : null;
@@ -189,6 +191,7 @@
 
   const base = {
     DEPT: clone(g('DEPT')),
+    GREETING: clone(g('GREETING')),
     STATS: clone(g('STATS')),
     HISTORY: clone(g('HISTORY')),
     RESEARCH_AREAS: clone(g('RESEARCH_AREAS')),
@@ -399,6 +402,10 @@
     /* ---- 읽기 ---- */
     professors() { return g('PROFESSORS') || []; },
     stats() { return g('STATS') || []; },
+    greeting() {
+      const G = g('GREETING');
+      return G ? clone(G) : { head: '', title: '학과장', photo: '', body: '', updatedAt: '' };
+    },
     notices(board) { return noticeArray(board) || []; },
 
     localSnapshot() {
@@ -514,6 +521,23 @@
       if (target) target.value = String(this.professors().length);
     },
 
+    /* 학과장 인사말 저장 — 홈페이지 index.html 의 GREETING 을 덮어씁니다. */
+    setGreeting(fields) {
+      const G = g('GREETING');
+      if (!G) return null;
+      const next = {
+        head: Sanitizer.text(fields && fields.head, 20) || G.head || '',
+        title: Sanitizer.text(fields && fields.title, 30) || '학과장',
+        photo: G.photo || '',
+        body: String((fields && fields.body) == null ? '' : fields.body).replace(/\r\n/g, '\n').slice(0, 4000).trim(),
+        updatedAt: new Date().toISOString()
+      };
+      Object.keys(G).forEach((k) => { delete G[k]; });
+      Object.assign(G, next);
+      this.save();
+      return next;
+    },
+
     /* ---- 저장 / 초기화 ---- */
     save() {
       const snapshot = {
@@ -521,7 +545,8 @@
         savedAt: Date.now(),
         professors: clone(this.professors()),
         notices: {},
-        stats: clone(this.stats())
+        stats: clone(this.stats()),
+        greeting: clone(this.greeting())
       };
       BOARDS.forEach((b) => { snapshot.notices[b] = clone(this.notices(b)); });
       LS.set(K_DATA, JSON.stringify(snapshot));
@@ -544,6 +569,11 @@
             if (Array.isArray(s.notices[b])) replaceArray(noticeArray(b), s.notices[b].map(normalizeNotice));
           });
           if (Array.isArray(s.stats) && s.stats.length) replaceArray(g('STATS'), s.stats);
+          if (s.greeting && g('GREETING')) {
+            const G = g('GREETING');
+            Object.keys(G).forEach((k) => { delete G[k]; });
+            Object.assign(G, s.greeting);
+          }
         } catch (e) { console.warn('[SSUAdmin] 저장본 복원 실패', e); }
       }
       ensureIds();
@@ -555,6 +585,11 @@
       if (Array.isArray(base.PROFESSORS)) replaceArray(g('PROFESSORS'), clone(base.PROFESSORS));
       if (base.NOTICES) BOARDS.forEach((b) => replaceArray(noticeArray(b), clone(base.NOTICES[b] || [])));
       if (Array.isArray(base.STATS)) replaceArray(g('STATS'), clone(base.STATS));
+      if (base.GREETING && g('GREETING')) {
+        const G = g('GREETING');
+        Object.keys(G).forEach((k) => { delete G[k]; });
+        Object.assign(G, clone(base.GREETING));
+      }
       ensureIds();
       document.dispatchEvent(new CustomEvent('ssuadmin:data', { detail: { source: 'reset' } }));
     },
@@ -570,7 +605,9 @@
       });
       return {
         DEPT: clone(g('DEPT')),
+        GREETING: clone(g('GREETING')),
         STATS: clone(g('STATS')),
+        ACHIEVEMENTS: clone(g('ACHIEVEMENTS')),
         HISTORY: clone(g('HISTORY')),
         RESEARCH_AREAS: clone(g('RESEARCH_AREAS')),
         PROFESSORS: clone(this.professors()),
@@ -598,8 +635,10 @@
 
       const blocks = [
         ['1. 학과 기본 정보', 'DEPT', D.DEPT],
+        ['학과장 인사말 — 관리자 포털에서 입력 (body 가 비면 안내 문구 표시)', 'GREETING', D.GREETING],
         ['주요 지표 (홈 상단 카운터)', 'STATS', D.STATS],
         ['2. 연혁 — 학과소개 타임라인', 'HISTORY', D.HISTORY],
+        ['2-2. 학과 주요 사업 및 성과 — 학과소개 성과 카드', 'ACHIEVEMENTS', D.ACHIEVEMENTS],
         ['3. 연구 분야 — 연구 키워드 필터와 1:1로 연결됩니다.\n      (교수진 tags 의 값과 정확히 같은 이름을 써야 카운트가 맞습니다)', 'RESEARCH_AREAS', D.RESEARCH_AREAS],
         ['4. 교수진 — 14명 전임교원. photo 는 assets/faculty/ 파일명입니다.', 'PROFESSORS', D.PROFESSORS],
         ['5. 교과과정 — 4개 학년 × 2학기', 'COURSES', D.COURSES],

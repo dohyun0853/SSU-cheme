@@ -72,8 +72,8 @@
 <!-- ⑤ AOS — michalsnik/aos (스크롤 모션그래픽 애니메이션) -->
 <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
 
-<link rel="stylesheet" href="assets/css/style.css?v=20261115_v42">
-<link rel="stylesheet" href="assets/css/admin.css?v=20261115_v42">
+<link rel="stylesheet" href="assets/css/style.css?v=20261115_v43">
+<link rel="stylesheet" href="assets/css/admin.css?v=20261115_v43">
 </head>
 <body id="top">
 <a class="skip-link" href="#main">본문으로 건너뛰기</a>
@@ -302,6 +302,18 @@
       </p>
     </div>
 
+    <!-- 학과장 인사말 -->
+    <section class="greet-block" id="greeting" aria-labelledby="greetName">
+      <figure class="greet-photo">
+        <img id="greetPhoto" src="assets/faculty/이준협.jpg" alt="이준협 학과장" loading="lazy" width="817" height="1061">
+      </figure>
+      <div class="greet-body">
+        <p class="greet-eyebrow" id="greetRole">학과장 · 교수</p>
+        <h3 class="greet-name" id="greetName">이준협</h3>
+        <div class="greet-text" id="greetText"></div>
+      </div>
+    </section>
+
     <div class="about-grid">
       <div class="about-main">
         <h3 class="sub-title">교육 목적</h3>
@@ -342,6 +354,15 @@
         <span class="from">숭실대학교 화학공학과</span>
       </figcaption>
     </figure>
+
+    <!-- 학과 주요 사업 및 성과 -->
+    <div class="achieve-block" data-aos="fade-up" aria-labelledby="achieveTitle">
+      <div class="achieve-head">
+        <h3 class="sub-title" id="achieveTitle">학과 주요 사업 및 성과</h3>
+        <p>수소에너지에서 AI 신에너지로 이어진 특성화 사업과 산학연계 인재양성 기반입니다.</p>
+      </div>
+      <div class="achieve-grid" id="achieveGrid"></div>
+    </div>
 
     <div class="career-block" data-aos="fade-up">
       <div class="career-head">
@@ -410,7 +431,7 @@
         <h2 class="section-title" id="curriculumTitle">학부 교과과정</h2>
       </div>
       <p class="section-desc">
-        2024학년도 화학공학과 편성표 기준, 학년별 전공 교과목 48개입니다.
+        2026학년도 화학공학과 편성표 기준, 학년별 전공 교과목 49개입니다.
         과목을 누르면 강의 내용을 확인할 수 있습니다.
       </p>
     </div>
@@ -420,8 +441,10 @@
         <div class="year-tabs" id="yearTabs" role="tablist" aria-label="학년 선택"></div>
         <div class="term-grid" id="curriculumPanel" role="tabpanel" aria-live="polite"></div>
         <p class="curriculum-note">
-          이수구분 — 전기: 전공기초 · 전필: 전공필수 · 전선: 전공선택. 2024학년도 화학공학과 편성표를 기준으로 정리했으며,
+          이수구분 — 전기: 전공기초 · 전필: 전공필수 · 전선: 전공선택. 2026학년도 화학공학과 편성표(2026-05-27 교과과정 변경 반영)를 기준으로 정리했으며,
           입학 학년도에 따라 적용 교과과정이 다를 수 있습니다. 과목ID는 학과 교과과정표 기준입니다.
+          <br>
+          <strong>2027-1학기 개편 예정</strong> — 화공열역학1 → 화공열역학 및 응용, 화공유체역학 → 화공유체역학응용, 촉매공학 → 촉매반응공학, 고분자화학 → 고분자화학 및 중합, 공정시스템 → 공정시스템 설계, 분리공정 → 분리공정 및 응용, 전기화학에너지공학 → 전기화학응용공학, 종합설계1 → 캡스톤디자인 및 AI 활용.
         </p>
       </div>
 
@@ -631,12 +654,12 @@
 
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
 <script src="https://unpkg.com/lucide@0.451.0/dist/umd/lucide.min.js"></script>
-<script src="data.js?v=20261115_v42"></script>
+<script src="data.js?v=20261115_v43"></script>
 <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.7/dist/purify.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-<script src="assets/js/admin-core.js?v=20261115_v42"></script>
-<script src="assets/js/app.js?v=20261115_v42"></script>
-<script src="assets/js/admin.js?v=20261115_v42"></script>
+<script src="assets/js/admin-core.js?v=20261115_v43"></script>
+<script src="assets/js/app.js?v=20261115_v43"></script>
+<script src="assets/js/admin.js?v=20261115_v43"></script>
 <!-- PWA Service Worker & 앱 설치 스크립트 -->
 <script>
 if ('serviceWorker' in navigator) {

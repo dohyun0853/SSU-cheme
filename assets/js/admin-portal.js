@@ -18,6 +18,7 @@
   const TAB_META = {
     notices: { title: '공지사항 관리', hash: '#notices' },
     faculty: { title: '교수진·연구실 관리', hash: '#faculty' },
+    greeting: { title: '학과장 인사말 관리', hash: '#greeting' },
     sync: { title: '보존 · GitHub 동기화', hash: '#sync' },
     security: { title: '보안 설정', hash: '#security' }
   };
@@ -99,6 +100,7 @@
     if (tab === 'sync') renderSync();
     if (tab === 'security') renderSecurity();
     if (tab === 'faculty') renderFaculty();
+    if (tab === 'greeting') renderGreeting();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -107,6 +109,7 @@
     renderNoticeStats();
     renderNotices();
     renderFaculty();
+    renderGreeting();
     renderSync();
     renderSecurity();
     renderChrome();
@@ -265,6 +268,51 @@
       </article>`).join('');
 
     $('#facultyEmpty').hidden = list.length > 0;
+    icons();
+  }
+
+  /* ------------------------------------------------------------ ②-2 학과장 인사말 */
+  function renderGreeting() {
+    const form = $('#greetForm');
+    if (!form) return;
+    const G = Store.greeting();
+
+    const head = form.querySelector('[name=head]');
+    const title = form.querySelector('[name=title]');
+    const body = form.querySelector('[name=body]');
+    if (head && document.activeElement !== head) head.value = G.head || '';
+    if (title && document.activeElement !== title) title.value = G.title || '학과장';
+    if (body && document.activeElement !== body) body.value = G.body || '';
+
+    const has = !!(G.body && String(G.body).trim());
+    const chip = $('#greetState');
+    if (chip) {
+      chip.textContent = has ? '등록됨' : '미등록';
+      chip.classList.toggle('is-on', has);
+      chip.classList.toggle('is-warn', !has);
+    }
+
+    const nameEl = $('#greetPreviewName');
+    const roleEl = $('#greetPreviewRole');
+    if (nameEl) nameEl.textContent = G.head || '학과장';
+    if (roleEl) roleEl.textContent = G.title || '학과장';
+    const photo = $('#greetPreviewPhoto');
+    if (photo && G.photo) photo.src = G.photo;
+
+    const prevBody = $('#greetPreviewBody');
+    if (prevBody) {
+      prevBody.innerHTML = has
+        ? String(G.body).trim().split(/\n{2,}/).map((par) => `<p>${esc(par).replace(/\n/g, '<br>')}</p>`).join('')
+        : '<p class="sa-greet-empty">학과장 인사말이 아직 등록되지 않았습니다. 관리자 페이지에서 입력할 수 있습니다.</p>';
+    }
+
+    const saved = $('#greetSavedAt');
+    if (saved) {
+      const t = G.updatedAt ? new Date(G.updatedAt) : null;
+      saved.textContent = t && !Number.isNaN(t.getTime()) ? A.stamp(t) : '저장 이력 없음';
+    }
+    const len = $('#greetLength');
+    if (len) len.textContent = fmtNum(String(G.body || '').trim().length) + '자';
     icons();
   }
 
@@ -592,6 +640,30 @@
       const act = btn.dataset.act;
       const id = btn.dataset.id;
 
+      if (act === 'greet-clear') {
+        const form = $('#greetForm');
+        if (!form) return;
+        const ok = await UI.confirm({
+          eyebrow: '인사말 비우기',
+          title: '인사말 본문을 비울까요?',
+          desc: '홈페이지에는 준비 중 안내 문구가 표시됩니다.',
+          okText: '비우기'
+        });
+        if (!ok) return;
+        form.querySelector('[name=body]').value = '';
+        Store.setGreeting({
+          head: form.querySelector('[name=head]').value,
+          title: form.querySelector('[name=title]').value,
+          body: ''
+        });
+        invalidate();
+        renderGreeting();
+        renderChrome();
+        if (window.SSUApp) window.SSUApp.refreshAll();
+        UI.toast('인사말 본문을 비웠습니다.');
+        return;
+      }
+
       if (act === 'notice-new') { openNoticeEditor(null); return; }
       if (act === 'prof-new') { openProfessorEditor(null); return; }
 
@@ -720,12 +792,51 @@
       UI.toast('계정 정보를 변경했습니다.');
     });
 
+    /* 학과장 인사말 저장 */
+    const greetForm = $('#greetForm');
+    if (greetForm) {
+      greetForm.addEventListener('input', () => {
+        const prevBody = $('#greetPreviewBody');
+        const body = greetForm.querySelector('[name=body]');
+        const len = $('#greetLength');
+        if (len && body) len.textContent = fmtNum(body.value.trim().length) + '자';
+        if (prevBody && body) {
+          const v = body.value.trim();
+          prevBody.innerHTML = v
+            ? v.split(/\n{2,}/).map((par) => `<p>${esc(par).replace(/\n/g, '<br>')}</p>`).join('')
+            : '<p class="sa-greet-empty">학과장 인사말이 아직 등록되지 않았습니다. 관리자 페이지에서 입력할 수 있습니다.</p>';
+        }
+        const nameEl = $('#greetPreviewName');
+        const roleEl = $('#greetPreviewRole');
+        const head = greetForm.querySelector('[name=head]');
+        const title = greetForm.querySelector('[name=title]');
+        if (nameEl && head) nameEl.textContent = head.value.trim() || '학과장';
+        if (roleEl && title) roleEl.textContent = title.value.trim() || '학과장';
+      });
+
+      greetForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const g = Store.setGreeting({
+          head: greetForm.querySelector('[name=head]').value,
+          title: greetForm.querySelector('[name=title]').value,
+          body: greetForm.querySelector('[name=body]').value
+        });
+        if (!g) { UI.toast('인사말을 저장하지 못했습니다.', 'error'); return; }
+        invalidate();
+        renderGreeting();
+        renderChrome();
+        if (window.SSUApp) window.SSUApp.refreshAll();
+        UI.toast(g.body ? '학과장 인사말을 저장했습니다.' : '인사말 본문을 비웠습니다.');
+      });
+    }
+
     /* 데이터가 바뀌면 화면·지문 갱신 */
     document.addEventListener('ssuadmin:data', () => {
       invalidate();
       renderNoticeStats();
       renderNotices();
       renderFaculty();
+      if (state.tab === 'greeting') renderGreeting();
       if (state.tab === 'sync') renderSync();
       renderChrome();
     });

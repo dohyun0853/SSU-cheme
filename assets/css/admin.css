@@ -771,3 +771,27 @@ body.is-admin .lab-card .lab-actions { flex-wrap: wrap; gap: 6px; }
 @media print {
   .sa-side, .sa-topbar-actions, .sa-btn { display: none !important; }
 }
+
+/* ---------------------------------------------------------------- 학과장 인사말 탭 */
+.sa-grid-2--tight { gap: 12px; }
+.sa-greet-preview {
+  display: grid;
+  grid-template-columns: 108px minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+  padding: 18px;
+  border: 1px solid var(--sa-line-soft);
+  background: #FAFBFC;
+}
+.sa-greet-photo { width: 108px; aspect-ratio: 817 / 1061; overflow: hidden; background: #E7EAF0; }
+.sa-greet-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.sa-greet-text { min-width: 0; }
+.sa-greet-role { font-family: var(--sa-mono); font-size: 10px; letter-spacing: .06em; color: #55627A; margin-bottom: 3px; }
+.sa-greet-name { font-size: 16px; font-weight: 700; color: var(--ink); letter-spacing: -.02em; margin-bottom: 8px; }
+.sa-greet-body { font-size: 12.5px; line-height: 1.8; color: #4A5568; }
+.sa-greet-body p + p { margin-top: 8px; }
+.sa-greet-empty { color: #7A8494; }
+@media (max-width: 720px) {
+  .sa-greet-preview { grid-template-columns: 1fr; }
+  .sa-greet-photo { width: 84px; }
+}
