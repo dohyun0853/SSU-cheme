@@ -1922,3 +1922,11 @@ body.is-modal-open { overflow: hidden; }
 @media print {
   .notice-modal { display: none !important; }
 }
+
+/* ---------------------------------------------------------------- 영문 모드 미세 조정 (v4.4) */
+html[data-lang="en"] .hero h1 { text-wrap: balance; }
+html[data-lang="en"] .hero h1 br { display: none; }
+html[data-lang="en"] .brand-text em { display: none; }
+@media (max-width: 640px) {
+  html[data-lang="en"] .hero h1 { font-size: 23px; line-height: 1.32; }
+}

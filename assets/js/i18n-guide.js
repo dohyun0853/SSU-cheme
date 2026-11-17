@@ -109,8 +109,14 @@
     '산학 캡스톤디자인': 'Industry capstone design',
     '우수 결과물 선정': 'selected as an outstanding project',
     '📋 졸업논문 대체 인정 국가기술자격증 종목 (기사급):': '📋 Accepted national technical qualifications (engineer level):',
-    '화공기사, 화약류제조기사, 가스기사, 대기환경기사, 수질환경기사, 폐기물처리기사, 산업안전기사, 에너지관리기사, 생물공학기사, 화학분석기사, 원자력기사 등 * 대체 인정 서류는 매 학기 말(1학기 6월, 2학기 12월) 지정된 기한 내에 학과 사무실로 제출해야 합니다.':
-      'Chemical Engineering Engineer, Explosives Manufacturing Engineer, Gas Engineer, Air Environment Engineer, Water Quality Environment Engineer, Waste Treatment Engineer, Industrial Safety Engineer, Energy Management Engineer, Biotechnology Engineer, Chemical Analysis Engineer, Nuclear Engineer, and others. * Submit the supporting documents to the department office by the deadline at the end of each semester (June and December).',
+    '화공기사, 화약류제조기사, 가스기사, 대기환경기사, 수질환경기사, 폐기물처리기사, 산업안전기사, 에너지관리기사, 생물공학기사, 화학분석기사, 원자력기사 등':
+      'Chemical Engineering Engineer, Explosives Manufacturing Engineer, Gas Engineer, Air Environment Engineer, Water Quality Environment Engineer, Waste Treatment Engineer, Industrial Safety Engineer, Energy Management Engineer, Biotechnology Engineer, Chemical Analysis Engineer, Nuclear Engineer, and others',
+    '* 대체 인정 서류는 매 학기 말(1학기 6월, 2학기 12월) 지정된 기한 내에 학과 사무실로 제출해야 합니다.':
+      '* Submit the supporting documents to the department office by the deadline at the end of each semester (June and December).',
+    '전공기초(전기) 5과목 15학점': '5 foundation courses (15 credits)',
+    '과': 'and',
+    '석사 · 박사': 'Master’s and doctoral',
+    '공통': 'common',
     '공학인증(ABEEK) 및 공인영어 졸업인증': 'ABEEK accreditation and English certification',
     '1. 공학교육인증 (ABEEK)': '1. Engineering accreditation (ABEEK)',
     '한국공학교육인증원이 제시하는 화학공학 전문프로그램 기준을 충족해야 합니다.':
