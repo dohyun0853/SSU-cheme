@@ -804,3 +804,18 @@ body.is-admin .lab-card .lab-actions { flex-wrap: wrap; gap: 6px; }
   .sa-file-row { grid-template-columns: minmax(0, 1fr) 32px; }
   .sa-file-row [data-file-url] { grid-column: 1 / -1; }
 }
+
+/* ---------------------------------------------------------------- 모바일 보정 (v4.4) */
+.notice-modal-panel:focus { outline: none; }
+@media (max-width: 780px) {
+  .sa-table { min-width: 640px; }
+  .sa-title {
+    display: block; max-width: 100%; overflow: hidden; text-overflow: ellipsis;
+    white-space: nowrap; text-align: left;
+  }
+  .sa-side { gap: 8px; padding: 8px 10px; }
+  .sa-side-nav a { padding: 6px 9px; }
+  .sa-seg { padding-bottom: 6px; }
+  .sa-panel-head { flex-wrap: wrap; gap: 8px; }
+  .sa-panel-head .sa-panel-tools { justify-content: space-between; }
+}

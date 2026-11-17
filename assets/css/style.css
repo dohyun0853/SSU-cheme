@@ -1959,3 +1959,6 @@ html[data-lang="en"] .brand-text em { display: none; }
   .rm-filter .chip { white-space: normal; line-height: 1.35; min-height: 40px; padding: 7px 6px; }
   html[data-lang="en"] .rm-filter { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
+/* ---------------------------------------------------------------- 공지 모달 포커스 (v4.4) */
+.notice-modal-panel:focus { outline: none; }

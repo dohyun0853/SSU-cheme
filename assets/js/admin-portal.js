@@ -303,7 +303,7 @@
     if (prevBody) {
       prevBody.innerHTML = has
         ? String(G.body).trim().split(/\n{2,}/).map((par) => `<p>${esc(par).replace(/\n/g, '<br>')}</p>`).join('')
-        : '<p class="sa-greet-empty">학과장 인사말이 아직 등록되지 않았습니다. 관리자 페이지에서 입력할 수 있습니다.</p>';
+        : '<p class="sa-greet-empty">학과장 인사말이 곧 업데이트될 예정입니다.</p>';
     }
 
     const saved = $('#greetSavedAt');
@@ -824,7 +824,7 @@
           const v = body.value.trim();
           prevBody.innerHTML = v
             ? v.split(/\n{2,}/).map((par) => `<p>${esc(par).replace(/\n/g, '<br>')}</p>`).join('')
-            : '<p class="sa-greet-empty">학과장 인사말이 아직 등록되지 않았습니다. 관리자 페이지에서 입력할 수 있습니다.</p>';
+            : '<p class="sa-greet-empty">학과장 인사말이 곧 업데이트될 예정입니다.</p>';
         }
         const nameEl = $('#greetPreviewName');
         const roleEl = $('#greetPreviewRole');

@@ -865,8 +865,8 @@
     document.body.style.overflow = 'hidden';
     icon();
     applyI18n(modal);
-    const closeBtn = $('.notice-modal-close', modal);
-    if (closeBtn) setTimeout(() => closeBtn.focus(), 30);
+    const panel = $('.notice-modal-panel', modal);
+    if (panel) setTimeout(() => panel.focus({ preventScroll: true }), 30);
   }
 
   function closeNotice() {
