@@ -828,3 +828,14 @@ body.is-admin .lab-card .lab-actions { flex-wrap: wrap; gap: 6px; }
   .sa-seg button { flex: 1 1 auto; padding: 8px 10px; }
   .sa-panel-tools .sa-select, .sa-panel-tools .sa-search { min-width: 0; }
 }
+
+/* 관리자 모바일 — 390px 에서는 표를 가로로 밀지 않고 제목을 두 줄로 접습니다 */
+@media (max-width: 640px) {
+  .sa-table { min-width: 0; }
+  .sa-table .c-author, .sa-table .c-num { display: none; }
+  .sa-title {
+    white-space: normal; display: -webkit-box; -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; line-height: 1.45;
+  }
+  .sa-table td.c-title { padding-right: 6px; }
+}
