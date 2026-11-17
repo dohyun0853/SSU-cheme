@@ -846,3 +846,9 @@ body.is-admin .lab-card .lab-actions { flex-wrap: wrap; gap: 6px; }
   .sa-table .c-manage .sa-icon-btn { width: 28px; height: 28px; }
   .sa-table .c-manage a.sa-icon-btn { display: none; }
 }
+
+@media (max-width: 640px) {
+  .sa-table th.c-manage, .sa-table td.c-manage { width: 58px; padding-left: 0; padding-right: 2px; }
+  .sa-table .c-manage .sa-icon-btn { width: 26px; height: 26px; }
+  .sa-table .c-manage .sa-icon-btn + .sa-icon-btn { margin-left: 2px; }
+}
