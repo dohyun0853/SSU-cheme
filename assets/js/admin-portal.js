@@ -515,6 +515,26 @@
     const err = form.querySelector('[data-sa-error]');
     modal.querySelector('[data-sa-cancel]').addEventListener('click', () => UI.close());
 
+    /* 첨부 파일 행 추가·삭제 */
+    const fileRows = form.querySelector('[data-file-rows]');
+    const addFile = form.querySelector('[data-file-add]');
+    const bindFileDel = () => {
+      form.querySelectorAll('[data-file-del]').forEach((btn) => {
+        btn.onclick = () => {
+          const row = btn.closest('[data-file-row]');
+          if (row) row.remove();
+        };
+      });
+    };
+    if (addFile && fileRows) {
+      addFile.addEventListener('click', () => {
+        fileRows.insertAdjacentHTML('beforeend', UI.fileRow({}));
+        UI.icons();
+        bindFileDel();
+      });
+    }
+    bindFileDel();
+
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       const r = UI.readNoticeForm(form);

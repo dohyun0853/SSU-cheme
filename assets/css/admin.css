@@ -795,3 +795,12 @@ body.is-admin .lab-card .lab-actions { flex-wrap: wrap; gap: 6px; }
   .sa-greet-preview { grid-template-columns: 1fr; }
   .sa-greet-photo { width: 84px; }
 }
+
+/* ---------------------------------------------------------------- 첨부 파일 입력 (v4.4) */
+.sa-file-rows { display: grid; gap: 8px; margin-bottom: 8px; }
+.sa-file-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) 34px; gap: 6px; align-items: center; }
+.sa-file-row .sa-icon-btn { width: 32px; height: 32px; }
+@media (max-width: 640px) {
+  .sa-file-row { grid-template-columns: minmax(0, 1fr) 32px; }
+  .sa-file-row [data-file-url] { grid-column: 1 / -1; }
+}

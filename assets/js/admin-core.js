@@ -151,6 +151,24 @@
       if (max && s.length > max) s = s.slice(0, max);
       return s;
     },
+    /* 본문(여러 줄) 필드: 태그는 지우고 문단 줄바꿈은 살립니다. */
+    paragraphs(value, max) {
+      let s = String(value == null ? '' : value).replace(/\r\n?/g, '\n');
+      if (/<\/?[a-zA-Z][^>]*>/.test(s)) {
+        if (!this.lib) this.init();
+        if (this.lib) {
+          s = this.lib.sanitize(s, { ALLOWED_TAGS: [], ALLOWED_ATTR: [], KEEP_CONTENT: true });
+        } else {
+          s = s.replace(/<(script|style|iframe|object)\b[^>]*>[\s\S]*?<\/\1>/gi, ' ');
+          s = s.replace(/<\/?[a-zA-Z][^>]*>/g, '');
+        }
+      }
+      s = s.replace(/[\u0000-\u0009\u000B-\u001F\u007F]/g, ' ');
+      s = s.replace(/[ \t]+/g, ' ').replace(/ *\n */g, '\n').replace(/\n{3,}/g, '\n\n').trim();
+      if (max && s.length > max) s = s.slice(0, max);
+      return s;
+    },
+
     /* 링크: http(s)만 허용 (javascript:, data:, vbscript: 차단) */
     url(value) {
       const s = String(value == null ? '' : value).trim();
@@ -220,6 +238,16 @@
     if (n.url) return 'u:' + n.url;
     return 'd:' + n.date + '|' + sha256Hex(String(n.title || '')).slice(0, 12);
   }
+  function normalizeFiles(list) {
+    if (!Array.isArray(list)) return [];
+    return list
+      .map((f) => ({
+        name: Sanitizer.text(f && f.name, 120),
+        url: Sanitizer.url(f && f.url)
+      }))
+      .filter((f) => f.name)
+      .slice(0, 10);
+  }
   function normalizeNotice(n) {
     const o = {
       date: String(n.date || '').slice(0, 10),
@@ -227,7 +255,9 @@
       author: Sanitizer.text(n.author, 40) || '관리자',
       views: Math.max(0, Number(n.views) || 0),
       pinned: !!n.pinned,
-      url: Sanitizer.url(n.url)
+      url: Sanitizer.url(n.url),
+      body: Sanitizer.paragraphs(n.body, 4000),
+      files: normalizeFiles(n.files)
     };
     o._id = n._id || noticeKey(o);
     return o;
@@ -600,6 +630,8 @@
       BOARDS.forEach((b) => {
         notices[b] = this.notices(b).map((n) => {
           const clean = { date: n.date, title: n.title, author: n.author, views: n.views, pinned: n.pinned, url: n.url };
+          if (n.body) clean.body = n.body;
+          if (Array.isArray(n.files) && n.files.length) clean.files = n.files;
           return clean;
         });
       });
@@ -643,7 +675,7 @@
         ['4. 교수진 — 14명 전임교원. photo 는 assets/faculty/ 파일명입니다.', 'PROFESSORS', D.PROFESSORS],
         ['5. 교과과정 — 4개 학년 × 2학기', 'COURSES', D.COURSES],
         ['6. 졸업요건', 'GRADUATION', D.GRADUATION],
-        ['7. 공지사항 — 게시판별 최신순. pinned 는 중요공지', 'NOTICES', D.NOTICES],
+        ['7. 공지사항 — 게시판별 최신순. pinned 는 중요공지,\n      body 는 상세 모달 본문, files 는 첨부 파일 목록입니다.', 'NOTICES', D.NOTICES],
         ['8. 진로 — 졸업생 진출 분야', 'CAREERS', D.CAREERS],
         ['9. 학사 안내 카드', 'GUIDES', D.GUIDES]
       ];
@@ -901,6 +933,19 @@
   /* ==========================================================================
      5. UI — 토스트 · 모달 · 확인창 · 폼
      ========================================================================== */
+  /* 첨부 파일 입력 행 (공지 폼에서 사용) */
+  function UI_FILE_ROW(f) {
+    const v = f || {};
+    const escAttr = (x) => String(x == null ? '' : x).replace(/[&<>"']/g, (c) => (
+      { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
+    ));
+    return `<div class="sa-file-row" data-file-row>
+      <input class="sa-input" data-file-name type="text" maxlength="120" placeholder="파일 이름 (예: 신청서.hwp)" value="${escAttr(v.name)}">
+      <input class="sa-input" data-file-url type="url" placeholder="https://…" value="${escAttr(v.url)}">
+      <button type="button" class="sa-icon-btn is-danger" data-file-del aria-label="첨부 삭제" title="첨부 삭제"><i data-lucide="x"></i></button>
+    </div>`;
+  }
+
   const UI = {
     icons() { try { if (window.lucide) window.lucide.createIcons(); } catch (e) { /* noop */ } },
 
@@ -1012,6 +1057,7 @@
     },
 
     /* ---------------- 공지 폼 ---------------- */
+    fileRow(f) { return UI_FILE_ROW(f); },
     noticeForm(n, opts) {
       const o = opts || {};
       const board = o.board || (n && n._board) || 'undergrad';
@@ -1041,6 +1087,21 @@
             <input name="title" type="text" class="sa-input" maxlength="200" value="${esc(v.title)}" placeholder="예: 2026-2학기 수강신청 정정 기간 안내" required>
             <span class="sa-hint">학과 홈페이지 게시판 제목과 같게 적으면 관리가 쉽습니다. (최대 200자)</span>
           </label>
+
+          <label class="sa-field">
+            <span class="sa-label">본문 <em>선택</em></span>
+            <textarea name="body" class="sa-input sa-textarea" rows="12" maxlength="4000" placeholder="공지 본문을 입력하세요. 문단은 빈 줄로 구분하고, 목록은 줄 앞에 · 또는 - 를 붙입니다.">${esc(v.body || '')}</textarea>
+            <span class="sa-hint">홈페이지의 공지 상세 모달에 그대로 표시됩니다. 비워 두면 '원문에서 확인' 안내가 나갑니다.</span>
+          </label>
+
+          <div class="sa-field">
+            <span class="sa-label">첨부 파일 <em>선택</em></span>
+            <div class="sa-file-rows" data-file-rows>
+              ${(Array.isArray(v.files) ? v.files : []).map((f) => UI_FILE_ROW(f)).join('')}
+            </div>
+            <button type="button" class="sa-btn sa-btn--sm" data-file-add><i data-lucide="plus"></i>첨부 추가</button>
+            <span class="sa-hint">파일 이름과 내려받기 주소(https://…)를 적습니다. 주소가 없으면 이름만 표시됩니다.</span>
+          </div>
 
           <div class="sa-field-row">
             <label class="sa-field">
@@ -1076,13 +1137,22 @@
         author: String(fd.get('author') || '관리자').trim() || '관리자',
         views: Math.max(0, parseInt(fd.get('views'), 10) || 0),
         url: String(fd.get('url') || '').trim(),
-        pinned: !!form.querySelector('[name=pinned]').checked
+        pinned: !!form.querySelector('[name=pinned]').checked,
+        body: String(fd.get('body') || '').trim(),
+        files: Array.prototype.slice.call(form.querySelectorAll('[data-file-row]')).map((row) => {
+          const nameEl = row.querySelector('[data-file-name]');
+          const urlEl = row.querySelector('[data-file-url]');
+          return { name: nameEl ? nameEl.value.trim() : '', url: urlEl ? urlEl.value.trim() : '' };
+        }).filter((f) => f.name)
       };
       if (!/^\d{4}-\d{2}-\d{2}$/.test(fields.date)) return { error: '등록일을 YYYY-MM-DD 형식으로 선택하세요.', field: 'date' };
       if (!fields.title) return { error: '제목을 입력하세요.', field: 'title' };
       if (fields.title.length > 200) return { error: '제목은 200자 이내로 입력하세요.', field: 'title' };
       if (fields.url && !/^https?:\/\//i.test(fields.url)) return { error: '링크는 http:// 또는 https:// 로 시작해야 합니다.', field: 'url' };
       if (!fields.url) fields.url = BOARD_SOURCE[fields.board];
+      if (fields.body && fields.body.length > 4000) return { error: '본문은 4,000자 이내로 입력하세요.', field: 'body' };
+      const badFile = fields.files.filter((f) => f.url && !/^https?:\/\//i.test(f.url));
+      if (badFile.length) return { error: '첨부 파일 주소는 http:// 또는 https:// 로 시작해야 합니다.', field: 'files' };
       return { fields };
     },
 

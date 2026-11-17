@@ -23,6 +23,20 @@
   };
   const fmtViews = (n) => (n >= 1000 ? n.toLocaleString('ko-KR') : String(n));
 
+  /* 영문 전환(i18n) — i18n.js 가 없으면 항상 한국어로 동작합니다. */
+  const isEn = () => !!(window.I18N && window.I18N.isEn());
+  const t = (ko, en) => (window.I18N ? window.I18N.pick(ko, en) : ko);
+  const applyI18n = (root) => { if (window.I18N) window.I18N.apply(root || document.body); };
+  const courseName = (ko) => (window.I18N ? window.I18N.course(ko) : ko);
+  /* 교수진 영문 표기 — i18n-content.js 의 PROF_EN[p.id] */
+  const profEn = (p) => (isEn() && window.PROF_EN && window.PROF_EN[p.id]) || null;
+
+  const typeEn = (ko) => (isEn() ? ({ '전기': 'Foundation', '전필': 'Required', '전선': 'Elective' }[ko] || ko) : ko);
+  const courseDesc = (c) => {
+    if (!isEn() || !window.I18N) return c.desc || '학과 교과목 안내에 상세 내용이 등록되어 있습니다.';
+    return I18N.courseDesc(c.name) || 'The course description is available in the Korean curriculum table.';
+  };
+
   const TAG_ORDER = ['반도체', '배터리', '바이오', '고분자', '환경'];
 
   /* 관리자 모드 — admin-core.js / admin.js 가 없으면 항상 false */
@@ -57,6 +71,7 @@
         <dt>${esc(s.value)}</dt>
         <dd>${esc(s.label)}<span>${esc(s.sub)}</span></dd>
       </div>`).join('');
+    applyI18n(bar);
   }
 
   /* ------------------------------------------------------------ 2. 연혁 */
@@ -68,6 +83,7 @@
         <span class="year">${esc(h.year)}</span>
         <span class="desc">${esc(h.text)}</span>
       </li>`).join('');
+    applyI18n(el);
   }
 
   /* ------------------------------------------------------------ 3. 진로 */
@@ -93,6 +109,7 @@
           : `<span class="career-tag is-plain">${esc(co.name)}</span>`)).join('')}
         </p>
       </div>`).join('');
+    applyI18n(el);
   }
 
   /* ------------------------------------------------------------ 4. 연구 분야 */
@@ -142,6 +159,7 @@
         }, 60);
       });
     });
+    applyI18n(el);
   }
 
   /* ------------------------------------------------------------ 5. 교수진·연구실 */
@@ -213,10 +231,10 @@
           <div class="lab-name-row">
             <h3 class="lab-name">${esc(p.name)}</h3>
             ${isHead(p) ? '<span class="lab-head">학과장</span>' : ''}
-            <span class="lab-title">${esc(p.title)}</span>
+            <span class="lab-title">${esc((profEn(p) || {}).title || p.title)}</span>
           </div>
-          <p class="lab-field">${escDots(p.field || '학과 행정·특별임무 담당')}</p>
-          ${p.labName ? `<p class="lab-lab"><strong>${esc(p.labName)}</strong>${esc(p.labRoom)}</p>` : '<p class="lab-lab"><strong>연구실 정보 없음</strong>전임교원 프로필 참고</p>'}
+          <p class="lab-field">${escDots((profEn(p) || {}).field || p.field || '학과 행정·특별임무 담당')}</p>
+          ${p.labName ? `<p class="lab-lab"><strong>${esc((profEn(p) || {}).labName || p.labName)}</strong>${esc(p.labRoom)}</p>` : '<p class="lab-lab"><strong>연구실 정보 없음</strong>전임교원 프로필 참고</p>'}
           <div class="lab-contact">
             <span>${ic('door-open')}${esc(p.office)}</span>
             <span>${ic('phone')}<a href="tel:${esc(p.tel.replace(/-/g, ''))}">${esc(p.tel)}</a></span>
@@ -255,6 +273,7 @@
     if (emptyEl) emptyEl.hidden = list.length > 0;
 
     icon();
+    applyI18n(grid);
   }
 
   function buildLabFuse() {
@@ -301,6 +320,14 @@
 
     lastFocused = document.activeElement;
 
+    const E = profEn(p) || {};
+    const pTitle = E.title || p.title;
+    const pField = E.field || p.field;
+    const pLab = E.labName || p.labName;
+    const eduList = (E.edu && E.edu.length) ? E.edu : (p.edu || []);
+    const researchList = (E.research && E.research.length) ? E.research : (p.research || []);
+    const careerList = (E.career && E.career.length) ? E.career : (p.career || []);
+
     body.innerHTML = `
       <div class="profile-head">
         <div class="profile-photo${p.photo ? '' : ' monogram'}">
@@ -308,42 +335,42 @@
         </div>
         <div>
           <h2 id="drawerName">${esc(p.name)}</h2>
-          <p class="profile-title">${esc(p.title)}${isHead(p) ? ' <span class="lab-head">학과장</span>' : ''}</p>
-          ${p.field ? `<p class="profile-field">${esc(p.field)}</p>` : ''}
-          <div class="profile-tags">${p.tags.map((t) => `<span>${esc(t)}</span>`).join('')}</div>
+          <p class="profile-title">${esc(pTitle)}${isHead(p) ? ' <span class="lab-head">학과장</span>' : ''}</p>
+          ${pField ? `<p class="profile-field">${esc(pField)}</p>` : ''}
+          <div class="profile-tags">${p.tags.map((tag) => `<span>${esc(tag)}</span>`).join('')}</div>
         </div>
       </div>
 
       <dl class="profile-meta">
         <div><dt>교수실</dt><dd>${esc(p.office)}</dd></div>
-        ${p.labName ? `<div><dt>연구실</dt><dd>${esc(p.labName)} · ${esc(p.labRoom)}</dd></div>` : ''}
+        ${pLab ? `<div><dt>연구실</dt><dd>${esc(pLab)} · ${esc(p.labRoom)}</dd></div>` : ''}
         <div><dt>전화</dt><dd><a href="tel:${esc(p.tel.replace(/-/g, ''))}">${esc(p.tel)}</a></dd></div>
         <div><dt>이메일</dt><dd><a href="mailto:${esc(p.email)}">${esc(p.email)}</a></dd></div>
       </dl>
 
-      ${p.edu && p.edu.length ? `
+      ${eduList.length ? `
       <section class="profile-block">
         <h3>학력</h3>
         <ul class="profile-list-plain">
-          ${p.edu.map((e) => {
+          ${eduList.map((e) => {
             const [deg, ...rest] = e.split('·');
-            return `<li><span class="deg">${esc(deg.trim())}</span>${esc(rest.join('·').trim())}</li>`;
+            return `<li><span class="deg">${esc((deg || '').trim())}</span>${esc(rest.join('·').trim())}</li>`;
           }).join('')}
         </ul>
       </section>` : ''}
 
-      ${p.research && p.research.length ? `
+      ${researchList.length ? `
       <section class="profile-block">
         <h3>연구 내용</h3>
-        <ul>${p.research.map((r) => `<li>${esc(r)}</li>`).join('')}</ul>
+        <ul>${researchList.map((r) => `<li>${esc(r)}</li>`).join('')}</ul>
       </section>` : ''}
 
-      ${p.career && p.career.length ? `
+      ${careerList.length ? `
       <section class="profile-block">
         <h3>주요 경력</h3>
         <ul class="profile-career-list">
-          ${p.career.map((c) => {
-            const m = c.match(/^(\d{4}\s*~\s*(?:\d{4}|현재))\s*(.*)$/);
+          ${careerList.map((c) => {
+            const m = c.match(/^(\d{4}\s*~\s*(?:\d{4}|현재|Present))[\s·]*(.*)$/);
             if (m) {
               return `<li><span class="career-period">${esc(m[1])}</span><span class="career-desc">${esc(m[2])}</span></li>`;
             }
@@ -357,6 +384,7 @@
         <a class="btn btn-outline" href="mailto:${esc(p.email)}">${ic('mail')} 메일 보내기</a>
       </div>`;
 
+    applyI18n(body);
     drawer.hidden = false;
     document.body.style.overflow = 'hidden';
     icon();
@@ -385,12 +413,20 @@
 
   /* 과목 카드 소형 표기 — 신설 / 2027-1 개편 예정 */
   function courseBadge(c) {
-    if (c.next) return `<span class="course-badge">27-1 개편예정</span>`;
-    if (c.isNew) return `<span class="course-badge is-new">${esc(c.changed || '')} 신설</span>`;
+    if (c.next) return `<span class="course-badge">${isEn() ? 'Renamed 2027-1' : '27-1 개편예정'}</span>`;
+    if (c.isNew) return `<span class="course-badge is-new">${esc(isEn() ? `New ${c.changed || ''}`.trim() : `${c.changed || ''} 신설`)}</span>`;
     return '';
   }
 
   function courseMeta(c) {
+    if (isEn()) {
+      const parts = [];
+      parts.push(c.code ? `Course ID ${c.code}` : 'Course ID not yet assigned');
+      if (c.depth) parts.push(`Depth ${depthEn(c.depth)}`);
+      if (c.prev) parts.push(`Renamed from ${I18N.course(c.prev)} in ${c.changed}`);
+      if (c.next) parts.push(`Becomes ${I18N.course(c.next)} from ${c.nextTerm} (${cohortEn(c.nextFrom)})`);
+      return parts.join(' · ');
+    }
     const parts = [];
     parts.push(c.code ? `과목ID ${esc(c.code)}` : '과목ID 미부여(신설)');
     if (c.depth) parts.push(`심화정도 ${esc(c.depth)}`);
@@ -399,13 +435,22 @@
     return parts.join(' · ');
   }
 
+  function depthEn(d) {
+    return ({ '핵심': 'Core', '심화': 'Advanced', 'AI중심교과목': 'AI-focused' })[d] || d;
+  }
+
+  function cohortEn(s) {
+    const m = String(s || '').match(/^(\d{4})학번$/);
+    return m ? `for the ${m[1]} cohort` : s;
+  }
+
   function renderYearTabs() {
     const el = $('#yearTabs');
     if (!el) return;
     el.innerHTML = [1, 2, 3, 4].map((y) => {
       const n = COURSES.filter((c) => c.year === y).length;
       return `<button class="year-tab${y === currentYear ? ' is-active' : ''}" type="button" role="tab"
-        aria-selected="${y === currentYear}" data-year="${y}">${y}학년<span class="n">${n}</span></button>`;
+        aria-selected="${y === currentYear}" data-year="${y}">${isEn() ? `Year ${y}` : `${y}학년`}<span class="n">${n}</span></button>`;
     }).join('');
     $$('.year-tab', el).forEach((b) => b.addEventListener('click', () => {
       currentYear = Number(b.dataset.year);
@@ -425,20 +470,20 @@
       return `
         <div class="term-col">
           <div class="term-head">
-            <h4>${term}학기</h4>
-            <span>${list.length}과목 · ${credits}학점</span>
+            <h4>${isEn() ? (term === 1 ? 'Spring semester' : 'Fall semester') : `${term}학기`}</h4>
+            <span>${isEn() ? `${list.length} courses · ${credits} credits` : `${list.length}과목 · ${credits}학점`}</span>
           </div>
           <div class="course-list">
             ${list.map((c, i) => `
               <div class="course" data-key="${currentYear}-${term}-${i}">
                 <button class="course-btn" type="button" aria-expanded="false">
-                  <span class="course-type${c.type.indexOf('전필') === 0 ? ' required' : ''}">${esc(c.type)}</span>
-                  <span class="course-name"><span class="course-name-t">${esc(c.name)}</span>${courseBadge(c)}</span>
+                  <span class="course-type${c.type.indexOf('전필') === 0 ? ' required' : ''}">${esc(typeEn(c.type))}</span>
+                  <span class="course-name"><span class="course-name-t">${esc(courseName(c.name))}</span>${courseBadge(c)}</span>
                   <span class="course-credit">${esc(c.credit)}</span>
                   ${ic('chevron-down')}
                 </button>
                 <div class="course-desc">
-                  ${c.desc ? esc(c.desc) : '학과 교과목 안내에 상세 내용이 등록되어 있습니다.'}
+                  ${esc(courseDesc(c))}
                   <p class="course-meta">${courseMeta(c)}</p>
                 </div>
               </div>`).join('')}
@@ -454,6 +499,7 @@
       });
     });
     icon();
+    applyI18n(panel);
   }
 
   /* ------------------------------------------------------------ 7-1. 학과장 인사말 · 주요 성과 */
@@ -476,7 +522,7 @@
 
     const body = G && G.body ? String(G.body).trim() : '';
     if (!body) {
-      text.innerHTML = '<p class="greet-empty">학과장 인사말이 아직 등록되지 않았습니다. 관리자 페이지에서 입력할 수 있습니다.</p>';
+      text.innerHTML = `<p class="greet-empty">${esc(t('학과장 인사말이 곧 업데이트될 예정입니다.', 'The chair’s welcome message will be posted soon.'))}</p>`;
       return;
     }
     text.innerHTML = body.split(/\n{2,}/).map((par) => `<p>${esc(par).replace(/\n/g, '<br>')}</p>`).join('');
@@ -563,11 +609,15 @@
         <span class="notice-date">${esc(n.date)}</span>
         <span class="notice-title">
           ${n.pinned ? '<span class="pin">중요</span>' : ''}
-          <a href="${esc(n.url || BOARD_META[board].source)}" target="_blank" rel="noopener">${esc(n.title)}</a>
+          <button type="button" class="notice-link" data-notice="${esc(noticeRef(n))}" aria-haspopup="dialog">${esc(n.title)}</button>
         </span>
         <span class="notice-views">${fmtViews(n.views)}</span>
         ${adminBtns('notice', n, { board: board })}
       </li>`).join('');
+
+    $$('.notice-link', listEl).forEach((btn) => {
+      btn.addEventListener('click', () => openNotice(btn.dataset.notice));
+    });
 
     const count = $('#noticeCount');
     if (count) {
@@ -694,6 +744,120 @@
     }
   }
 
+  /* ------------------------------------------------------------ 8-2. 공지 상세 모달 */
+  function noticeRef(n) {
+    const arr = NOTICES[board] || [];
+    return board + ':' + arr.indexOf(n);
+  }
+
+  function findNotice(ref) {
+    const parts = String(ref || '').split(':');
+    const b = parts[0];
+    const i = Number(parts[1]);
+    const arr = NOTICES[b];
+    if (!arr || !arr[i]) return null;
+    return { notice: arr[i], board: b };
+  }
+
+  function noticeBodyHtml(n) {
+    const text = String(n.body || '').trim();
+    if (!text) {
+      return `<p class="notice-modal-empty">${esc(t(
+        '학과 홈페이지에 게시된 공지입니다. 본문과 첨부 파일은 학과 홈페이지 원문에서 확인하실 수 있습니다.',
+        'This notice is posted on the department website. The full text and any attachments are available on the original page.'
+      ))}</p>`;
+    }
+    return text.split(/\n{2,}/).map((block) => {
+      const lines = block.split('\n').map((l) => l.trim()).filter(Boolean);
+      if (lines.length && lines.every((l) => /^[·\-*]\s?/.test(l))) {
+        return `<ul class="notice-modal-list">${lines.map((l) => `<li>${esc(l.replace(/^[·\-*]\s?/, ''))}</li>`).join('')}</ul>`;
+      }
+      return `<p>${esc(block).replace(/\n/g, '<br>')}</p>`;
+    }).join('');
+  }
+
+  function openNotice(ref) {
+    const found = findNotice(ref);
+    const modal = $('#noticeModal');
+    if (!found || !modal) return;
+    const n = found.notice;
+
+    const meta = $('#noticeModalMeta');
+    const title = $('#noticeModalTitle');
+    const bodyEl = $('#noticeModalBody');
+    const filesEl = $('#noticeModalFiles');
+    const srcEl = $('#noticeModalSource');
+
+    if (title) title.textContent = n.title;
+    if (meta) {
+      meta.innerHTML = [
+        `<span class="notice-modal-board">${esc(BOARD_META[found.board].label)}</span>`,
+        n.pinned ? `<span class="notice-modal-pin">${esc(t('중요', 'Pinned'))}</span>` : '',
+        `<span>${esc(n.date)}</span>`,
+        n.author ? `<span>${esc(n.author)}</span>` : '',
+        n.views != null ? `<span>${esc(t('조회', 'Views'))} ${esc(fmtViews(n.views))}</span>` : ''
+      ].filter(Boolean).join('<span class="dot" aria-hidden="true">·</span>');
+      applyI18n(meta);
+    }
+    if (bodyEl) {
+      bodyEl.innerHTML = noticeBodyHtml(n) + (isEn()
+        ? '<p class="notice-modal-note">Notice text is provided in Korean.</p>'
+        : '');
+    }
+    if (filesEl) {
+      const files = Array.isArray(n.files) ? n.files.filter((f) => f && f.name) : [];
+      filesEl.innerHTML = files.length
+        ? `<p class="notice-modal-files-title">${esc(t('첨부 파일', 'Attachments'))}</p><ul>${files.map((f) => (
+            f.url
+              ? `<li><a href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.name)}</a></li>`
+              : `<li><span>${esc(f.name)}</span></li>`
+          )).join('')}</ul>`
+        : '';
+      filesEl.hidden = files.length === 0;
+    }
+    if (srcEl) {
+      srcEl.href = n.url || BOARD_META[found.board].source;
+      srcEl.setAttribute('target', '_blank');
+      srcEl.setAttribute('rel', 'noopener');
+    }
+
+    modal.hidden = false;
+    document.body.classList.add('is-modal-open');
+    document.body.style.overflow = 'hidden';
+    icon();
+    applyI18n(modal);
+    const closeBtn = $('.notice-modal-close', modal);
+    if (closeBtn) setTimeout(() => closeBtn.focus(), 30);
+  }
+
+  function closeNotice() {
+    const modal = $('#noticeModal');
+    if (!modal || modal.hidden) return;
+    modal.hidden = true;
+    document.body.classList.remove('is-modal-open');
+    document.body.style.overflow = '';
+    const open = $('.notice-link.is-open');
+    if (open) { open.classList.remove('is-open'); open.focus(); }
+  }
+
+  function initNoticeModal() {
+    const modal = $('#noticeModal');
+    if (!modal) return;
+    $$('[data-close-notice]', modal).forEach((el) => el.addEventListener('click', closeNotice));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal.hidden) { e.preventDefault(); closeNotice(); }
+    });
+    modal.addEventListener('keydown', (e) => {
+      if (e.key !== 'Tab' || modal.hidden) return;
+      const focusables = $$('a[href], button:not([disabled])', modal).filter((el) => el.offsetParent !== null);
+      if (!focusables.length) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+  }
+
   /* ------------------------------------------------------------ 9. 학사 안내 카드 */
   function renderGuides() {
     const el = $('#guideGrid');
@@ -710,6 +874,7 @@
         <a class="link-arrow" href="${esc(g.link)}"${targetAttr}>${esc(g.linkText)} ${ic(iconName)}</a>
       </article>`;
     }).join('');
+    applyI18n(el);
   }
 
   /* ------------------------------------------------------------ 10. 통합 검색 팔레트 */
@@ -1123,11 +1288,33 @@
     renderGuides();
     initNotices();
     renderNotices();
+    initNoticeModal();
     initDrawer();
     initPalette();
     initScroll();
     initNav();
     icon();
+    applyI18n();
+
+    /* 언어를 바꾸면 자바스크립트로 그린 부분을 다시 그립니다. */
+    document.addEventListener('ssui18n', () => {
+      closeNotice();
+      renderStats();
+      renderTimeline();
+      renderCareers();
+      renderResearch();
+      renderLabFilters();
+      renderLabs();
+      renderGreeting();
+      renderAchievements();
+      renderYearTabs();
+      renderCurriculum();
+      renderGraduation();
+      renderGuides();
+      renderNotices();
+      buildPaletteIndex();
+      applyI18n();
+    });
   }
 
   if (document.readyState === 'loading') {

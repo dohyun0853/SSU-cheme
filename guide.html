@@ -1,11 +1,27 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-title-ko="학사 및 대학원 안내 | 숭실대학교 화학공학과" data-title-en="Academic and Graduate Guide | Department of Chemical Engineering, Soongsil University">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>학사 및 대학원 안내 | 숭실대학교 화학공학과</title>
 <meta name="description" content="숭실대학교 공과대학 화학공학과 졸업요건, 대학원 입학 및 장학제도, 해외 교환학생 프로그램 종합 안내">
 <meta name="theme-color" content="#002C6C">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://dohyun0853.github.io/SSU-cheme/guide.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="숭실대학교 화학공학과">
+<meta property="og:title" content="학사 및 대학원 안내 | 숭실대학교 화학공학과">
+<meta property="og:description" content="졸업요건·이수체계도·대학원 입학 및 장학제도·해외 교환학생까지 — 숭실대학교 화학공학과 학사 안내를 한곳에서 확인하세요.">
+<meta property="og:url" content="https://dohyun0853.github.io/SSU-cheme/guide.html">
+<meta property="og:image" content="https://dohyun0853.github.io/SSU-cheme/assets/hyeongnam-hall.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="820">
+<meta property="og:image:alt" content="숭실대학교 형남공학관 전경">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="학사 및 대학원 안내 | 숭실대학교 화학공학과">
+<meta name="twitter:description" content="졸업요건·이수체계도·대학원 입학 및 장학제도·해외 교환학생까지 — 숭실대학교 화학공학과 학사 안내.">
+<meta name="twitter:image" content="https://dohyun0853.github.io/SSU-cheme/assets/hyeongnam-hall.jpg">
 <link rel="icon" href="assets/ssu-logo.png">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -13,7 +29,7 @@
 <!-- Pretendard Font -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <!-- SSU Design Token & Main Styles -->
-<link rel="stylesheet" href="assets/css/style.css?v=20261115_v43">
+<link rel="stylesheet" href="assets/css/style.css?v=20261116_v44">
 
 <style>
 /* ============================================================ GUIDE PAGE SPECIFIC STYLES */
@@ -434,6 +450,11 @@
     </nav>
 
     <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="언어 선택 / Language">
+        <button type="button" class="lang-btn is-active" data-set-lang="ko" aria-pressed="true">KR</button>
+        <span class="lang-sep" aria-hidden="true">|</span>
+        <button type="button" class="lang-btn" data-set-lang="en" aria-pressed="false">EN</button>
+      </div>
       <button class="menu-toggle" id="menuToggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobileDrawer">
         <span></span><span></span><span></span>
       </button>
@@ -510,6 +531,7 @@
 <!-- ============================================================ STICKY SUB NAV -->
 <nav class="guide-nav-bar" aria-label="섹션 바로가기">
   <div class="wrap guide-nav-inner">
+    <a href="#roadmap" class="guide-tab-link" id="tabRoad">🧭 이수체계도</a>
     <a href="#graduation" class="guide-tab-link is-active" id="tabGrad">🎓 졸업 요건 안내</a>
     <a href="#admission" class="guide-tab-link" id="tabAdm">🏛️ 대학원 입학 요강</a>
     <a href="#exchange" class="guide-tab-link" id="tabExc">✈️ 해외 교환학생</a>
@@ -518,6 +540,32 @@
 
 <!-- ============================================================ MAIN CONTENT -->
 <main class="wrap guide-container">
+
+  <!-- SECTION 0: COURSE ROADMAP (이수체계도) -->
+  <section class="guide-section" id="roadmap">
+    <div class="guide-header-badge">Course Roadmap</div>
+    <h2 class="guide-sec-title">이수체계도</h2>
+    <p class="guide-sec-lead">
+      1~4학년 전공 49과목을 학기 순서대로 놓고, 선수·후속 흐름과 트랙별 권장 과목을 한눈에 볼 수 있게 정리했습니다.
+    </p>
+
+    <div class="rm-toolbar">
+      <div class="chips rm-filter" id="rmFilter" role="tablist" aria-label="트랙 선택"></div>
+      <p class="rm-hint">트랙을 선택하면 해당 과목이 강조됩니다.</p>
+    </div>
+
+    <div class="rm-grid" id="rmGrid" aria-live="polite"></div>
+
+    <h3 class="guide-box-title rm-subtitle">권장 이수 흐름</h3>
+    <div class="rm-flows" id="rmFlows"></div>
+
+    <h3 class="guide-box-title rm-subtitle">트랙별 권장 과목</h3>
+    <div class="rm-tracks" id="rmTracks"></div>
+
+    <p class="guide-box-note rm-note">
+      권장 이수 흐름은 학과가 권장하는 순서이며, 공식 선수과목 지정과 다를 수 있습니다. 본인 학번의 교과과정·선수과목은 학과 사무실에서 확인하세요.
+    </p>
+  </section>
 
   <!-- SECTION 1: GRADUATION -->
   <section class="guide-section" id="graduation">
@@ -1170,6 +1218,10 @@
   });
 })();
 </script>
+<script src="data.js?v=20261116_v44"></script>
+<script src="assets/js/i18n.js?v=20261116_v44"></script>
+<script src="assets/js/i18n-content.js?v=20261116_v44"></script>
+<script src="assets/js/roadmap.js?v=20261116_v44"></script>
 <script src="https://unpkg.com/lucide@0.451.0/dist/umd/lucide.min.js"></script>
 <script>
   // Lucide Icons
@@ -1200,6 +1252,7 @@
   // To Top Button & Scrollspy
   const toTop = document.getElementById('toTop');
   const navTabs = [
+    { link: document.getElementById('tabRoad'), target: document.getElementById('roadmap') },
     { link: document.getElementById('tabGrad'), target: document.getElementById('graduation') },
     { link: document.getElementById('tabAdm'), target: document.getElementById('admission') },
     { link: document.getElementById('tabExc'), target: document.getElementById('exchange') }

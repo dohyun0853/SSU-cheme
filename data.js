@@ -353,19 +353,19 @@ const GRADUATION = {
    ---------------------------------------------------------------------------- */
 const NOTICES = {
   undergrad: [
-    { date: "2026-11-10", title: "2026-2학기 AX특성화학과 비교과프로그램 학과세미나 일정 안내: 2차", author: "관리자", views: 138, pinned: true, url: "http://chemeng.ssu.ac.kr/sub/sub03_01.php?boardid=notice1&mode=view&idx=783" },
-    { date: "2026-10-23", title: "2026-2학기(2027년 2월 졸업대상자) 대체 서류 제출 안내: 기한 11/16(월) ~ 12/21(월)", author: "관리자", views: 424, pinned: true, url: "http://chemeng.ssu.ac.kr/sub/sub03_01.php?boardid=notice1&mode=view&idx=782" },
-    { date: "2026-10-15", title: "2026 제44회 형남과학상 공모전: 참가접수 10/13(화) ~11/13(금)", author: "관리자", views: 447, pinned: true, url: "http://chemeng.ssu.ac.kr/sub/sub03_01.php?boardid=notice1&mode=view&idx=781" },
-    { date: "2026-05-27", title: "2026학년도 교과과정 변경 안내: 교과목 변경표", author: "관리자", views: 2504, pinned: true, url: "http://chemeng.ssu.ac.kr/sub/sub03_01.php?boardid=notice1&mode=view&idx=772" },
-    { date: "2026-01-02", title: "[중요] 2025-2학기 진로지도상담 여부 백마성적장학금 미반영 안내", author: "관리자", views: 5814, pinned: true, url: "http://chemeng.ssu.ac.kr/sub/sub03_01.php?boardid=notice1&mode=view&idx=759" },
+    { date: "2026-11-10", title: "2026-2학기 AX특성화학과 비교과프로그램 학과세미나 일정 안내: 2차", author: "관리자", views: 138, pinned: true, url: "http://chemeng.ssu.ac.kr/sub/sub03_01.php?boardid=notice1&mode=view&idx=783", body: "2026-2학기 학과세미나 2차 일정을 안내드립니다.\n\n1. 일정 및 강연 정보\n· 4회차 — 2026. 11. 17.(화) 12:00~14:00 · 진리관 522호 · 'TV OLED 주요 기술 소개' · 이신우 팀장 (LG디스플레이 OLED 개발2팀)\n· 6회차 — 2026. 11. 23.(월) 15:00~17:00 · 안익태 402호 · '전기·전자에서 화장품 패키징까지: 산업 현장의 고분자 재료 실무' · 김정겸 상무/랩장 (COSMAX Packaging Science Lab)\n· 7회차 — 2026. 11. 25.(수) 17:30~19:20 · 형남관 112호 · '차세대 전지를 위한 고분자 소재 설계 (Design of Polymer Materials for Next-Generation Batteries)' · 송우진 교수 (충남대학교 유기재료공학과)\n\n2. 신청 방법: 숭실대학교 슈패스(SSU-PATH)에서 신청\n\n3. 신청 기한: 회차별로 다르므로 슈패스 공지에서 확인", files: [] },
+    { date: "2026-10-23", title: "2026-2학기(2027년 2월 졸업대상자) 대체 서류 제출 안내: 기한 11/16(월) ~ 12/21(월)", author: "관리자", views: 424, pinned: true, url: "http://chemeng.ssu.ac.kr/sub/sub03_01.php?boardid=notice1&mode=view&idx=782", body: "2026-2학기(2027년 2월 졸업대상자) 논문대체 서류 제출 안내입니다.\n\n1. 제출 기간: 2026. 11. 16.(월) ~ 2026. 12. 21.(월)\n2. 제출 방법: 학과사무실(형남공학관 912호)에 원본 제출, 또는 학과 이메일(chemical@ssu.ac.kr)로 파일 제출\n· 제출 기간 이전에 내면 학사시스템 입력이 불가능하므로 반드시 기간 안에 제출해야 합니다.\n\n3. 서류별 안내\n· 어학성적표 — QR 코드가 인식되는 스캔 파일 또는 사본 (재학기간 중 취득해 유효기간이 끝난 성적표는 원본 제출)\n· TOEIC Speaking — 등급 체계 개편으로 Level 6 이상, 2022년 6월 4일 정기시험 이후 응시자는 IM3 이상\n· 기사자격증 — 합격확인증과 기사자격증(취득확인서)\n· 공모전 수상실적 — 상장 원본 확인 후 반환\n· 인턴수료 — 현장실습보고서 양식을 내려받아 작성하고 제출서류 확인\n· 플랜트교육 — 이수증 원본 확인 후 반환", files: [] },
+    { date: "2026-10-15", title: "2026 제44회 형남과학상 공모전: 참가접수 10/13(화) ~11/13(금)", author: "관리자", views: 447, pinned: true, url: "http://chemeng.ssu.ac.kr/sub/sub03_01.php?boardid=notice1&mode=view&idx=781", body: "2026 제44회 형남과학상 공모전 제출 양식 안내입니다.\n\n· 참가접수: 2026. 10. 13.(화) ~ 11. 13.(금)\n· 첨부된 PPT 양식을 활용해 제출합니다.\n· 최대 15페이지(표지·간지 제외)를 넘지 않도록 구성합니다.\n  권장 분량 — 표지 1, 목차 1, 연구배경 및 필요성 1~2, 연구목표 1, 연구방법 또는 작품 설계 2~3, 연구결과 2~3, 연구의의 및 기대효과 1, 참고문헌 1", files: [{ name: "형남과학상 제출 양식.pptx", url: "" }] },
+    { date: "2026-05-27", title: "2026학년도 교과과정 변경 안내: 교과목 변경표", author: "관리자", views: 2504, pinned: true, url: "http://chemeng.ssu.ac.kr/sub/sub03_01.php?boardid=notice1&mode=view&idx=772", body: "2026학년도 화학공학과 교과과정 변경사항을 안내합니다.\n\n· 첨부된 '2026학년도 화학공학과 교과과정 변경사항_홈페이지.pdf'에서 변경 전·후 과목명, 적용 시기, 적용 입학년도를 확인할 수 있습니다.\n· 과목명 변경은 적용 학기부터 해당 학번 학생에게 적용되며, 홈페이지 학부 교과과정 표에도 반영되어 있습니다.", files: [{ name: "2026학년도 화학공학과 교과과정 변경사항_홈페이지.pdf", url: "" }] },
+    { date: "2026-01-02", title: "[중요] 2025-2학기 진로지도상담 여부 백마성적장학금 미반영 안내", author: "관리자", views: 5814, pinned: true, url: "http://chemeng.ssu.ac.kr/sub/sub03_01.php?boardid=notice1&mode=view&idx=759", body: "2025-2학기부터 진로지도상담 제도가 바뀌어 상담이 의무가 아닌 선택사항이 되었습니다.\n\n이에 따라 해당 학기부터 진로지도상담 여부를 백마성적장학금 선정에 반영하지 않기로 결정되었습니다.\n\n이미 신청한 학생은 상담이 필요할 경우 신청한 뒤 담당교수님과 상담을 진행하면 됩니다.", files: [] },
     { date: "2025-03-06", title: "2026년 2학기 작업형 대여 안내(2026.09.01~2027. 2. 28)", author: "관리자", views: 5549, pinned: true, url: "http://chemeng.ssu.ac.kr/sub/sub03_01.php?boardid=notice1&mode=view&idx=737" },
     { date: "2024-10-11", title: "2026학년도 2학기 학부 논문심사 안내", author: "관리자", views: 1003, pinned: true, url: "http://chemeng.ssu.ac.kr/sub/sub03_01.php?boardid=notice1&mode=view&idx=720" },
     { date: "2023-08-09", title: "[중요] 현장실습학기제 전공학점 인정 변경 안내: 시행시기 2023-2학기", author: "관리자", views: 3331, pinned: true, url: "http://chemeng.ssu.ac.kr/sub/sub03_01.php?boardid=notice1&mode=view&idx=662" },
     { date: "2018-06-25", title: "[화공인재양성장학금] 규정 및 수상자 명단 안내", author: "관리자", views: 5340, pinned: true, url: "http://chemeng.ssu.ac.kr/sub/sub03_01.php?boardid=notice1&mode=view&idx=319" },
     { date: "2026-09-28", title: "2026 전기화학공정연구실 (임태호 교수님) 대학원 신입학생 모집", author: "관리자", views: 696, pinned: false, url: "http://chemeng.ssu.ac.kr/sub/sub03_01.php?boardid=notice1&mode=view&idx=780" },
-    { date: "2026-09-02", title: "[화학공학과] 2026-2학기 전공과목 증원 안내: 공업유기화학2", author: "관리자", views: 769, pinned: false, url: "http://chemeng.ssu.ac.kr/sub/sub03_01.php?boardid=notice1&mode=view&idx=779" },
-    { date: "2026-08-28", title: "[화학공학과] 2026-2학기 전공과목 증원 안내: 화공열역학2", author: "관리자", views: 651, pinned: false, url: "http://chemeng.ssu.ac.kr/sub/sub03_01.php?boardid=notice1&mode=view&idx=778" },
-    { date: "2026-08-19", title: "2026학년도 이도영 장학금 신청 안내: 신청기간 8/24(월) ~ 9/9(수) 근무시간중", author: "관리자", views: 849, pinned: false, url: "http://chemeng.ssu.ac.kr/sub/sub03_01.php?boardid=notice1&mode=view&idx=777" },
+    { date: "2026-09-02", title: "[화학공학과] 2026-2학기 전공과목 증원 안내: 공업유기화학2", author: "관리자", views: 769, pinned: false, url: "http://chemeng.ssu.ac.kr/sub/sub03_01.php?boardid=notice1&mode=view&idx=779", body: "2026-2학기 전공과목 증원 안내입니다.\n\n1. 과목명: 공업유기화학2\n2. 증원 인원: 2150040501 분반 5명, 2150040502 분반 10명\n3. 증원 처리 일시: 9월 4일(금) 15:00~17:00\n4. 수강 신청 가능 일시: 9월 7일(월) 10:00", files: [] },
+    { date: "2026-08-28", title: "[화학공학과] 2026-2학기 전공과목 증원 안내: 화공열역학2", author: "관리자", views: 651, pinned: false, url: "http://chemeng.ssu.ac.kr/sub/sub03_01.php?boardid=notice1&mode=view&idx=778", body: "2026-2학기 전공과목 증원 안내입니다.\n\n1. 과목명: 화공열역학2\n2. 증원 인원: 분반별 5명\n3. 증원 처리 일시: 9월 1일(화) 15:00~17:00\n4. 수강 신청 가능 일시: 9월 2일(수) 10:00", files: [] },
+    { date: "2026-08-19", title: "2026학년도 이도영 장학금 신청 안내: 신청기간 8/24(월) ~ 9/9(수) 근무시간중", author: "관리자", views: 849, pinned: false, url: "http://chemeng.ssu.ac.kr/sub/sub03_01.php?boardid=notice1&mode=view&idx=777", body: "2026학년도 이도영 장학금 신청 안내입니다.\n\n1. 장학금액: 300만 원\n2. 선발인원: 2명\n3. 신청자격\n· 1~8학기 재학생 (2026-2학기 휴학생은 신청할 수 없습니다)\n· 기부자의 뜻에 따라 올바른 국가관을 갖추고 가계가 곤란한 학생\n4. 신청서류: 장학신청서(첨부 양식), 성적증명서, 개인정보 수집·이용 및 제3자 제공 동의서(첨부 양식)\n5. 제출방법: 신청서류 원본을 학과사무실(형남공학관 912호)로 제출\n6. 신청기간: 2026. 8. 24.(월) ~ 9. 9.(수) 근무시간 중", files: [{ name: "장학금 지원서_이도영장학금.hwp", url: "" }, { name: "개인정보-수집·이용-및-제3자-제공-동의서_숭실대.hwp", url: "" }] },
     { date: "2026-08-19", title: "2026학년도 2학기 한국장학재단 국가장학금 2차 신청 안내 : 기간  2026.08.12.(수) 09:00~2026.09.09.(수) 18:00", author: "관리자", views: 551, pinned: false, url: "http://chemeng.ssu.ac.kr/sub/sub03_01.php?boardid=notice1&mode=view&idx=776" },
     { date: "2026-07-21", title: "2026학년도 2학기 학과근로장학생 모집 안내:  2026년 8월 3일(월) 10:00 ~ 8월 7일(금) 17:00", author: "관리자", views: 1027, pinned: false, url: "http://chemeng.ssu.ac.kr/sub/sub03_01.php?boardid=notice1&mode=view&idx=775" },
     { date: "2026-07-02", title: "2026학년도 2학기 백마성적장학금 학과선발 기준 안내", author: "관리자", views: 1419, pinned: false, url: "http://chemeng.ssu.ac.kr/sub/sub03_01.php?boardid=notice1&mode=view&idx=774" },
@@ -498,7 +498,7 @@ const NOTICES = {
     { date: "2018-02-20", title: "2016학년도 2학기 석·박사통합과정 지원 및 선발 안내:6/7~20", author: "숭실대화공과", views: 679, pinned: false, url: "http://chemeng.ssu.ac.kr/sub/sub03_02.php?boardid=notice2&mode=view&idx=1" }
   ],
   job: [
-    { date: "2026-11-11", title: "GMTCK 동계인턴십 안내: 지원기간 11/4(화) ~ 11/15(일) 자정까지", author: "관리자", views: 13, pinned: true, url: "http://chemeng.ssu.ac.kr/sub/sub03_04.php?boardid=recruit&mode=view&idx=212" },
+    { date: "2026-11-11", title: "GMTCK 동계인턴십 안내: 지원기간 11/4(화) ~ 11/15(일) 자정까지", author: "관리자", views: 13, pinned: true, url: "http://chemeng.ssu.ac.kr/sub/sub03_04.php?boardid=recruit&mode=view&idx=212", body: "GMTCK(제너럴모터스 테크니컬센터 코리아) 동계인턴십 안내입니다.\n\n· 지원기간: 2026. 11. 4.(화) ~ 11. 15.(일) 자정까지\n· 모집 분야: IT/PE, Interior·Seat·Safety, Thermal, Propulsion, Energy Conversion System 등\n· 지원은 GM 채용 사이트(Workday)에서 온라인으로 접수합니다.", files: [{ name: "GMTCK 채용 지원 페이지 (Workday)", url: "https://generalmotors.wd5.myworkdayjobs.com/en-US/Careers_GM" }] },
     { date: "2022-12-27", title: "[[한국NOF메탈코팅스] 채용공고_기술영업 부문 인재 모집", author: "관리자", views: 5902, pinned: false, url: "http://chemeng.ssu.ac.kr/sub/sub03_04.php?boardid=recruit&mode=view&idx=211" },
     { date: "2022-12-07", title: "[숭실대학교 진로취업센터] 12월 소식", author: "관리자", views: 5289, pinned: false, url: "http://chemeng.ssu.ac.kr/sub/sub03_04.php?boardid=recruit&mode=view&idx=210" },
     { date: "2022-11-17", title: "(DIG 에어가스) 채용 공고 안내", author: "관리자", views: 4704, pinned: false, url: "http://chemeng.ssu.ac.kr/sub/sub03_04.php?boardid=recruit&mode=view&idx=209" },
@@ -635,4 +635,45 @@ const GUIDES = [
   { title: "교환학생", en: "Exchange Program",
     text: "해외 자매대학 1:1 파견, ACUCA, UMAP 등 4대 파견 프로그램 유형과 학과 전공 학점 인정 절차를 확인하세요.",
     link: "guide.html#exchange", linkText: "교환학생 상세 안내" }
+];
+
+/* ----------------------------------------------------------------------------
+   10. 이수체계도 — 권장 이수 흐름과 트랙 (guide.html #roadmap)
+      · 학기별 과목표는 COURSES 에서 자동으로 그립니다. 여기에는 '선수·후속 흐름'과
+        '트랙별 권장 과목'만 둡니다.
+      · steps / courses 의 과목명은 COURSES 의 name 과 정확히 같아야 합니다.
+        (이름이 다르면 이수체계도에서 그 과목만 빠집니다.)
+      · 공식 선수과목 지정이 아니라, 학과가 권장하는 이수 순서입니다.
+   ---------------------------------------------------------------------------- */
+const CURRICULUM_FLOWS = [
+  { title: "물질·에너지 수지", note: "화공 계산의 뼈대",
+    steps: ["화공양론1", "화공양론2", "화공열역학1", "화공열역학2"] },
+  { title: "유체·열·물질전달", note: "전달현상으로 이어지는 흐름",
+    steps: ["화공유체역학", "열및물질전달", "이동현상"] },
+  { title: "반응·촉매·설계", note: "반응기에서 공정 설계로",
+    steps: ["반응공학", "촉매공학", "종합설계1"] },
+  { title: "공정 설계·제어", note: "모사·제어에서 종합설계까지",
+    steps: ["공정모사와 제어", "공정시스템", "분리공정", "종합설계2"] },
+  { title: "실험·분석", note: "기초실험에서 기기분석까지",
+    steps: ["화공기초실험1", "화공기초실험2", "화학공학실험", "화공기기분석실험"] },
+  { title: "화학·물성 기초", note: "유기화학과 물리화학",
+    steps: ["공학화학1", "공업유기화학1", "공업물리화학1", "공업물리화학2"] }
+];
+
+const TRACKS = [
+  { key: "반도체", name: "반도체·디스플레이", en: "Semiconductor & Display", tags: ["반도체"],
+    summary: "소자 원리에서 공정·소재까지. 반도체공학과 나노소재공학을 축으로 두고 물성 과목으로 소재 이해를 보강합니다.",
+    courses: ["반도체공학", "나노소재공학", "재료과학", "공업물리화학1", "공업물리화학2", "고분자물성", "전기화학에너지공학"] },
+  { key: "배터리", name: "이차전지·에너지", en: "Batteries & Energy", tags: ["배터리"],
+    summary: "전기화학 소자와 에너지 변환·저장. 전기화학에너지공학, 차세대전지공학, 신재생에너지시스템공학에 촉매·반응공학을 더합니다.",
+    courses: ["전기화학에너지공학", "차세대전지공학", "신재생에너지시스템공학", "촉매공학", "반응공학", "화공열역학2"] },
+  { key: "고분자", name: "고분자·정밀소재", en: "Polymers & Advanced Materials", tags: ["고분자"],
+    summary: "중합과 물성, 계면. 고분자화학에서 고분자공학·고분자물성으로 이어지고 콜로이드계면공학이 계면을 다룹니다.",
+    courses: ["고분자화학", "고분자공학", "고분자물성", "콜로이드계면공학", "공업유기화학1", "공업유기화학2"] },
+  { key: "바이오", name: "바이오·의약", en: "Bio & Pharmaceuticals", tags: ["바이오"],
+    summary: "생체분자와 바이오공정. 생물분자공학, 생물화학공학, AI인체모사비임상시험을 분석 과목과 함께 듣습니다.",
+    courses: ["생물분자공학", "생물화학공학", "AI인체모사비임상시험", "기기분석", "화공기기분석실험", "공업유기화학2"] },
+  { key: "환경", name: "환경·에너지 공정", en: "Environment & Process", tags: ["환경"],
+    summary: "환경 처리와 공정 설계. 환경에너지공학개론·수처리공학·대기오염방지공학에 공정·제어 과목을 결합합니다.",
+    courses: ["환경에너지공학개론", "수처리공학", "대기오염방지공학", "공정모사와 제어", "공정시스템", "분리공정"] }
 ];
