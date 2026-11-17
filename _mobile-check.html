@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>390px 확인용</title>
+<style>
+  html,body{margin:0;padding:0;background:#6b7280;}
+  .frame-box{display:flex;gap:24px;padding:20px;align-items:flex-start;}
+  iframe{border:0;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.35);}
+  .cap{color:#fff;font:600 14px/1.4 system-ui;margin:0 0 8px;}
+</style>
+</head>
+<body>
+<div class="frame-box">
+  <div>
+    <p class="cap" id="cap">390px</p>
+    <iframe id="f" src="index.html" width="390" height="1500" scrolling="no" title="390px 확인"></iframe>
+  </div>
+</div>
+<script>
+  // ?p=index.html%23curriculum&h=2200&w=390
+  var q = new URLSearchParams(location.search);
+  var f = document.getElementById('f');
+  var w = Number(q.get('w') || 390);
+  var h = Number(q.get('h') || 1500);
+  f.src = q.get('p') || 'index.html';
+  f.width = w; f.height = h;
+  document.getElementById('cap').textContent = w + 'px · ' + f.src;
+</script>
+</body>
+</html>
