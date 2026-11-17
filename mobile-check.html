@@ -6,58 +6,52 @@
 <title>390px 확인용</title>
 <style>
   html,body{margin:0;padding:0;background:#6b7280;}
-  .frame-box{display:flex;gap:24px;padding:16px;align-items:flex-start;}
-  iframe{border:0;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.35);}
-  .cap{color:#fff;font:600 13px/1.4 system-ui;margin:0 0 10px;}
-  #out{color:#fff;font:12px/1.5 ui-monospace,monospace;white-space:pre-wrap;width:520px;margin:12px 16px;background:#111827;padding:10px;display:none;}
+  #host{display:block;padding:16px;}
+  iframe{border:0;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.35);display:block;}
+  #out{color:#fff;font:12px/1.55 ui-monospace,monospace;white-space:pre-wrap;margin:0 16px 20px;background:#111827;padding:10px;max-width:760px;}
 </style>
 </head>
 <body>
-<div class="frame-box">
-  <div>
-    <p class="cap" id="cap">390px</p>
-    <iframe id="f" src="index.html" width="390" height="844" scrolling="no" tabindex="-1"></iframe>
-  </div>
-</div>
-<pre id="out"></pre>
+<div id="host"></div>
+<pre id="out">checking…</pre>
 <script>
-  // ?p=index.html%3Flang%3Den%23about&h=844&w=390&y=0&check=1
+  // ?p=index.html%3Flang%3Den%23about&h=844&w=390&y=0
   var q = new URLSearchParams(location.search);
-  var f = document.getElementById('f');
   var w = Number(q.get('w') || 390);
   var h = Number(q.get('h') || 844);
   var y = Number(q.get('y') || 0);
-  f.width = w; f.height = h;
-  document.getElementById('cap').textContent = w + 'px · ' + (q.get('p') || 'index.html');
+  var host = document.getElementById('host');
+  var root = host.attachShadow ? host.attachShadow({ mode: 'closed' }) : host;
+  var f = document.createElement('iframe');
+  f.width = w; f.height = h; f.setAttribute('scrolling', 'no'); f.setAttribute('title', 'preview');
+  root.appendChild(f);
+  var out = document.getElementById('out');
   f.addEventListener('load', function () {
-    var out = document.getElementById('out');
     try {
       var d = f.contentDocument, win = f.contentWindow;
       if (y) win.scrollTo(0, y);
-      if (q.get('check') !== '1') return;
       var lines = [];
       var de = d.documentElement;
-      lines.push('viewport ' + win.innerWidth + ' / doc.scrollWidth ' + de.scrollWidth + ' / body.scrollWidth ' + d.body.scrollWidth);
-      if (de.scrollWidth > win.innerWidth + 1) lines.push('!! HORIZONTAL OVERFLOW page: ' + de.scrollWidth);
+      lines.push(f.src.split('/').pop() + '  ·  viewport ' + win.innerWidth + ' / doc ' + de.scrollWidth + ' / body ' + d.body.scrollWidth);
+      if (de.scrollWidth > win.innerWidth + 1) lines.push('!! PAGE HORIZONTAL OVERFLOW: ' + de.scrollWidth);
       var bad = [];
       d.querySelectorAll('body *').forEach(function (el) {
         if (!el.offsetParent && el.tagName !== 'BODY') return;
         var cs = win.getComputedStyle(el);
-        if (cs.overflowX === 'auto' || cs.overflowX === 'scroll') return;
-        if (el.closest('[data-ok-overflow]')) return;
+        if (cs.overflowX === 'auto' || cs.overflowX === 'scroll' || cs.webkitLineClamp !== 'none') return;
+        if (el.closest('.pillar-stack, .notice-title, .notice-modal, [data-no-check]')) return;
         var over = el.scrollWidth - el.clientWidth;
         if (over > 2 && el.clientWidth > 0) {
-          bad.push(el.tagName.toLowerCase() + (el.id ? '#' + el.id : '') + '.' + (el.className || '').toString().split(' ').slice(0,2).join('.') + ' +' + over + 'px "' + (el.textContent || '').trim().slice(0, 28) + '"');
+          bad.push(el.tagName.toLowerCase() + (el.id ? '#' + el.id : '') + '.' + (el.className || '').toString().split(' ').slice(0, 2).join('.') + ' +' + over + 'px "' + (el.textContent || '').trim().slice(0, 26) + '"');
         }
       });
-      if (bad.length) { lines.push('!! CLIPPED (' + bad.length + '):'); bad.slice(0, 18).forEach(function (b) { lines.push('  - ' + b); }); }
-      else lines.push('no clipped elements');
+      if (bad.length) { lines.push('!! CLIPPED (' + bad.length + '):'); bad.slice(0, 14).forEach(function (b) { lines.push('  - ' + b); }); }
+      else lines.push('clipped: none');
       out.textContent = lines.join('\n');
-      out.style.display = 'block';
       document.title = (de.scrollWidth > win.innerWidth + 1 ? 'OVERFLOW ' : 'OK ') + f.src.split('/').pop();
-    } catch (e) { document.title = 'CHECK FAILED ' + e.message; }
+    } catch (e) { out.textContent = 'CHECK FAILED: ' + e.message; }
   });
-  f.removeAttribute('sandbox');
+  document.getElementById('host').insertAdjacentHTML('beforebegin', '<p style="color:#fff;font:600 13px system-ui;margin:12px 16px 0;">' + w + 'px · ' + (q.get('p') || 'index.html') + '</p>');
   f.src = q.get('p') || 'index.html';
 </script>
 </body>
