@@ -47,7 +47,7 @@
     /* 첫 화면 */
     '분자를 설계하고,': 'We design molecules',
     '산업의 다음': 'and build what',
-    '을 만든다': 'industry does next',
+    '을 만든다': ' industry does next',
     '숭실대학교 화학공학과는 창의적 분자 설계와 첨단 공정 공학을 바탕으로 반도체·이차전지·바이오·첨단소재 산업을 선도하는 미래 인재를 양성합니다.':
       'The Department of Chemical Engineering at Soongsil University educates engineers who lead the semiconductor, battery, bio, and advanced materials industries through creative molecular design and advanced process engineering.',
     '학과소개 보기': 'About the Department',
@@ -96,7 +96,7 @@
       'Five industrial axes of research rest on one shared methodology — materials synthesis, interfacial phenomena, and process design. Each area links directly to its faculty and laboratories.',
     '전임교원 14명, 10개 연구실입니다. 연구 분야를 선택하면 해당 교수진만 표시되며, 자체 랩 웹사이트가 있는 경우 카드를 누르면 새 탭으로 연결됩니다. ‘프로필 보기’에서 학력·연구 내용·경력을 확인할 수 있습니다.':
       'Fourteen full-time faculty members and ten laboratories. Choose a research area to filter the list; where a lab runs its own website, the card opens it in a new tab. Use “Profile” for education, research, and career details.',
-    '명의 교수진': 'faculty members',
+    '명의 교수진': ' faculty members',
     '전체 연구 분야': 'All research areas',
     '분야': 'area',
     '조건에 맞는 교수진이 없습니다. 다른 연구 분야를 선택해 보세요.':
@@ -161,7 +161,26 @@
     '작성자': 'Author',
     '첨부 파일': 'Attachments',
     '원문 보기': 'Open original',
-    '본문': 'Contents',    /* 접근성 라벨·부가 문구 */
+    '본문': 'Contents',    /* 교수직함·학과장 인사말 */
+    '교수': 'Professor',
+    '부교수': 'Associate Professor',
+    '조교수': 'Assistant Professor',
+    '조교수 (교육중점)': 'Assistant Professor (Teaching-focused)',
+    '부교수 (특별임무중점)': 'Associate Professor (Special Assignment)',
+    '관리자': 'Administrator',
+    '숭실대 로고': 'Soongsil University logo',
+    '5대 연구분야 전체 보기 — 반도체, 이차전지, 바이오, 고분자, 환경':
+      'Explore all five research areas — semiconductors, batteries, bio, polymers, environment',
+
+    /* 졸업요건 카드 (index.html) */
+    '교양 필수': 'General education required',
+    '교양 선택': 'General education elective',
+    '전공 기초': 'Major foundation',
+    '전공 선택·필수': 'Major electives and required',
+    '일반 선택': 'Free electives',
+    '복수전공자는 주전공 42학점·복수전공 42학점을 이수합니다. 입학 학년도에 따라 기준이 다르므로 학과 졸업요건 페이지를 확인하세요.':
+      'Double-major students complete 42 credits in the first major and 42 in the second. Requirements depend on the year you entered — see the graduation requirements page.',
+    /* 접근성 라벨·부가 문구 */
     '검색어 지우기': 'Clear search',
     '맨 위로': 'Back to top',
     '주요 메뉴': 'Main menu',
@@ -267,7 +286,7 @@
      숫자가 섞인 문구는 사전 대신 규칙으로 바꿉니다. */
   var RULES = [
     [/^(\d)학년$/, function (m) { return 'Year ' + m[1]; }],
-    [/^(\d)학기$/, function (m) { return m[1] === '1' ? 'Spring semester' : 'Fall semester'; }],
+    [/^(\d)학기$/, function (m) { return m[1] === '1' ? '1 semester' : m[1] + ' semesters'; }],
     [/^(\d+)과목 · (\d+)학점$/, function (m) { return m[1] + ' courses · ' + m[2] + ' credits'; }],
     [/^(\d+)건$/, function (m) { return m[1] + ' posts'; }],
     [/^검색 결과 (\d+)건$/, function (m) { return m[1] + ' results'; }],
@@ -450,7 +469,11 @@
   global.I18N = {
     /* 사전 확장 — i18n-content.js 에서 호출 */
     extend: function (obj) {
-      Object.keys(obj || {}).forEach(function (k) { CONTENT[k] = obj[k]; });
+      Object.keys(obj || {}).forEach(function (k) {
+        CONTENT[k] = obj[k];
+        /* 'course:공학수학1' 은 표·목록에서 쓰는 '공학수학1' 로도 찾을 수 있게 합니다. */
+        if (k.indexOf('course:') === 0) CONTENT[k.slice(7)] = obj[k];
+      });
       if (lang === 'en') apply(document.body);
     },
     /* 지금 언어가 영어인지 */

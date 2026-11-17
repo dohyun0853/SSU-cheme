@@ -203,6 +203,8 @@
       case 'NOTICES': return typeof NOTICES !== 'undefined' ? NOTICES : null;
       case 'CAREERS': return typeof CAREERS !== 'undefined' ? CAREERS : null;
       case 'GUIDES': return typeof GUIDES !== 'undefined' ? GUIDES : null;
+      case 'CURRICULUM_FLOWS': return typeof CURRICULUM_FLOWS !== 'undefined' ? CURRICULUM_FLOWS : null;
+      case 'TRACKS': return typeof TRACKS !== 'undefined' ? TRACKS : null;
       default: return null;
     }
   }
@@ -218,7 +220,9 @@
     GRADUATION: clone(g('GRADUATION')),
     NOTICES: clone(g('NOTICES')) || {},
     CAREERS: clone(g('CAREERS')),
-    GUIDES: clone(g('GUIDES'))
+    GUIDES: clone(g('GUIDES')),
+    CURRICULUM_FLOWS: clone(g('CURRICULUM_FLOWS')),
+    TRACKS: clone(g('TRACKS'))
   };
 
   function replaceArray(target, next) {
@@ -647,7 +651,9 @@
         GRADUATION: clone(g('GRADUATION')),
         NOTICES: notices,
         CAREERS: clone(g('CAREERS')),
-        GUIDES: clone(g('GUIDES'))
+        GUIDES: clone(g('GUIDES')),
+        CURRICULUM_FLOWS: clone(g('CURRICULUM_FLOWS')),
+        TRACKS: clone(g('TRACKS'))
       };
     },
 
@@ -677,7 +683,9 @@
         ['6. 졸업요건', 'GRADUATION', D.GRADUATION],
         ['7. 공지사항 — 게시판별 최신순. pinned 는 중요공지,\n      body 는 상세 모달 본문, files 는 첨부 파일 목록입니다.', 'NOTICES', D.NOTICES],
         ['8. 진로 — 졸업생 진출 분야', 'CAREERS', D.CAREERS],
-        ['9. 학사 안내 카드', 'GUIDES', D.GUIDES]
+        ['9. 학사 안내 카드', 'GUIDES', D.GUIDES],
+        ['10. 이수체계도 — 권장 이수 흐름 (guide.html #roadmap)', 'CURRICULUM_FLOWS', D.CURRICULUM_FLOWS],
+        ['11. 이수체계도 — 트랙별 권장 과목 (courses 의 과목명은 COURSES 와 같아야 합니다)', 'TRACKS', D.TRACKS]
       ];
 
       blocks.forEach(([label, name, value]) => {

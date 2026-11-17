@@ -767,12 +767,30 @@
         'This notice is posted on the department website. The full text and any attachments are available on the original page.'
       ))}</p>`;
     }
+    const isBullet = (l) => /^[·\-*]\s?/.test(l);
     return text.split(/\n{2,}/).map((block) => {
       const lines = block.split('\n').map((l) => l.trim()).filter(Boolean);
-      if (lines.length && lines.every((l) => /^[·\-*]\s?/.test(l))) {
-        return `<ul class="notice-modal-list">${lines.map((l) => `<li>${esc(l.replace(/^[·\-*]\s?/, ''))}</li>`).join('')}</ul>`;
-      }
-      return `<p>${esc(block).replace(/\n/g, '<br>')}</p>`;
+      if (!lines.length) return '';
+      /* 한 덩어리 안에 보통 줄과 '·' 목록이 섞여 있으면 나눠서 그립니다. */
+      const out = [];
+      let run = [];
+      let runIsList = isBullet(lines[0]);
+      const flush = () => {
+        if (!run.length) return;
+        if (runIsList) {
+          out.push(`<ul class="notice-modal-list">${run.map((l) => `<li>${esc(l.replace(/^[·\-*]\s?/, ''))}</li>`).join('')}</ul>`);
+        } else {
+          out.push(`<p>${esc(run.join('\n')).replace(/\n/g, '<br>')}</p>`);
+        }
+        run = [];
+      };
+      lines.forEach((l) => {
+        const b = isBullet(l);
+        if (b !== runIsList && run.length) { flush(); runIsList = b; }
+        run.push(l);
+      });
+      flush();
+      return out.join('');
     }).join('');
   }
 

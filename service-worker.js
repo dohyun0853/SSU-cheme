@@ -13,6 +13,7 @@ const ASSETS_TO_CACHE = [
   './assets/js/i18n.js',
   './assets/js/i18n-content.js',
   './assets/js/roadmap.js',
+  './assets/js/i18n-guide.js',
   './assets/js/admin-core.js',
   './assets/js/admin.js',
   './assets/hero/card_semiconductor.webp',

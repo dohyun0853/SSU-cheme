@@ -243,3 +243,297 @@
 
   /* 교과목 설명 조회 (app.js·roadmap.js 공용) */
 })(window);
+
+/* ============================================================================
+   교수진 영문 표기 (카드·프로필 드로어)
+   ----------------------------------------------------------------------------
+   data.js 의 PROFESSORS 항목 id 를 키로 씁니다.
+   · 이름은 한국어 그대로 두고(공식 영문 표기 확인 전), 직위·전문분야·연구실·
+     학력·연구 내용·경력을 영어로 적었습니다.
+   · 항목을 비우면 한국어 원문이 그대로 표시됩니다.
+   ========================================================================== */
+window.PROF_EN = {
+  ryu: {
+    title: 'Professor',
+    field: 'Chemical engineering, environmental engineering',
+    labName: 'Environmental Biotechnology Laboratory',
+    edu: [
+      'B.S. · Chemical Engineering, Soongsil University (1987)',
+      'M.S. · Chemical Engineering, KAIST (1989)',
+      'Ph.D. · Chemical Engineering, KAIST (1993)'
+    ],
+    research: [
+      'Bioprocesses and the production of bioenergy and biopolymers',
+      'Biological treatment of waste gas, wastewater, and groundwater',
+      'Biodesulfurization of petroleum and coal, and metal recovery',
+      'Microbial processes for greenhouse gas mitigation',
+      'Beauty engineering: natural cosmetic ingredients and biotechnological applications'
+    ],
+    career: [
+      '2008 ~ Present · Professor, Department of Chemical Engineering, Soongsil University',
+      '2002 ~ 2008 · Associate Professor, Department of Environmental and Chemical Engineering, Soongsil University',
+      '1993 ~ 1994 · Postdoctoral researcher, University of Minnesota'
+    ]
+  },
+  kwon: {
+    title: 'Professor',
+    field: 'Catalysis, air pollution control, semiconductor environment',
+    labName: 'Catalysis and Air Quality Engineering Laboratory',
+    edu: [
+      'B.S. · Chemical Technology, Seoul National University (1989)',
+      'M.S. · Chemical Technology, Seoul National University (1991)',
+      'Ph.D. · Chemical Engineering, University of Michigan (1998)'
+    ],
+    research: [
+      'Treatment and concentration of perfluorinated process gases (PFCs) from semiconductor manufacturing',
+      'Electrocatalysts for fuel cells and catalysts for fuel reforming',
+      'Synthesis and catalytic properties of transition-metal carbides and nitrides',
+      'Photocatalytic removal of air pollutants',
+      'Decomposition of trace pollutants with membrane–homogeneous catalyst systems'
+    ],
+    career: [
+      '2012 ~ Present · Professor, Department of Chemical Engineering, Soongsil University',
+      '2006 ~ 2012 · Associate Professor, Soongsil University',
+      '1999 ~ 2001 · Full-time lecturer, Department of Environmental and Chemical Engineering, Soongsil University'
+    ]
+  },
+  park: {
+    title: 'Professor',
+    field: 'Energy nanomaterials',
+    labName: 'Energy Devices and Materials Laboratory',
+    edu: [
+      'B.S. · Materials Engineering, Sungkyunkwan University (1996)',
+      'M.S. · Materials Science and Engineering, Gwangju Institute of Science and Technology (1998)',
+      'Ph.D. · Materials Science and Engineering, Gwangju Institute of Science and Technology (2003)'
+    ],
+    research: [
+      'High-efficiency, low-cost fuel cells and low-temperature water electrolysis',
+      'Next-generation battery devices and materials',
+      'Nanostructured energy materials and electrochemical applications',
+      'Design of energy conversion and storage devices'
+    ],
+    career: [
+      '2005 ~ Present · Professor, Department of Chemical Engineering, Soongsil University',
+      '2004 ~ 2005 · Postdoctoral researcher, Pennsylvania State University',
+      '2012, 2013, 2015 · Best SFP Professor Award, Soongsil University'
+    ]
+  },
+  'kim-iw': {
+    title: 'Professor',
+    field: 'Crystallization engineering, biomaterials',
+    labName: 'Biomaterials Engineering Laboratory',
+    edu: [
+      'B.S. · Chemical Technology, Seoul National University (1996)',
+      'M.S. · Chemical Technology, Seoul National University (1998)',
+      'Ph.D. · Macromolecular Science and Engineering, University of Michigan (2004)'
+    ],
+    research: [
+      'Design of pharmaceutical substances through crystallization',
+      'Formulation for controlled drug bioavailability',
+      'Polymer-controlled crystallization of drugs and biominerals',
+      'Crystal growth mechanisms and interfacial phenomena'
+    ],
+    career: [
+      '2007 ~ Present · Professor, Department of Chemical Engineering, Soongsil University',
+      '2004 ~ 2007 · Researcher, Department of Chemistry, New York University',
+      '2021 ~ Present · Editorial board, Pharmaceutics and PLOS ONE'
+    ]
+  },
+  'kim-yg': {
+    title: 'Professor',
+    field: 'Biochemical engineering, biomolecular engineering',
+    labName: 'Cell and Biomolecular Engineering Laboratory',
+    edu: [
+      'B.S. · Chemical Engineering, Chungnam National University (2002)',
+      'M.S. · Biochemical Engineering, Seoul National University (2004)',
+      'Ph.D. · Biochemical Engineering, Seoul National University (2008)'
+    ],
+    research: [
+      'Biomarker screening for disease diagnosis and monitoring',
+      'Next-generation in-vitro diagnostic (IVD) systems',
+      'Bioproduction processes and quality assessment of biopharmaceuticals',
+      'Gut-environment models and host–microbe interactions',
+      'Control of antibiotic-resistant bacteria'
+    ],
+    career: [
+      '2012 ~ Present · Professor, Department of Chemical Engineering, Soongsil University',
+      '2009 ~ 2012 · Postdoctoral researcher, Harvard University',
+      '2008 ~ 2009 · Postdoctoral researcher, Harvard Medical School'
+    ]
+  },
+  jung: {
+    title: 'Professor',
+    field: 'Smart nanobio materials, interface engineering, drug delivery',
+    labName: 'Hybrid Nanobio Engineering Laboratory (HNB Lab)',
+    edu: [
+      'B.S. · Chemical Engineering, Yonsei University (2001)',
+      'M.S. · Biochemical Engineering, KAIST (2003)',
+      'Ph.D. · Biochemical Engineering, KAIST (2007)'
+    ],
+    research: [
+      'Smart nanocarriers for combined diagnosis and therapy',
+      'Organic–inorganic hybrid biomimetic materials',
+      'Cell-based 3D bio-actuator devices',
+      'Organoid-based safety assessment and cosmeceuticals'
+    ],
+    career: [
+      '2025.09 ~ Present · Professor, Department of Chemical Engineering, Soongsil University',
+      '2019.09 ~ 2025.08 · Associate Professor, Soongsil University',
+      '2008 ~ 2013 · Postdoctoral researcher, University of Illinois Urbana-Champaign'
+    ]
+  },
+  lim: {
+    title: 'Associate Professor',
+    field: 'Semiconductor processing, electrochemical materials',
+    labName: 'Electrochemical Process Laboratory',
+    edu: [
+      'B.S. · Chemical and Biological Engineering, Seoul National University (2007)',
+      'M.S. · Chemical and Biological Engineering, Seoul National University (2009)',
+      'Ph.D. · Chemical and Biological Engineering, Seoul National University (2013)'
+    ],
+    research: [
+      'Semiconductor interconnect and capping processes, metal thin-film formation',
+      'Electrocatalysts for fuel cells, water electrolysis, and CO₂ conversion',
+      'Si and non-Si inorganic semiconductors for solar cells',
+      'Electrochemical characterization and analysis of materials'
+    ],
+    career: [
+      '2016 ~ Present · Associate Professor, Department of Chemical Engineering, Soongsil University',
+      '2015 ~ 2016 · Postdoctoral researcher, University of Texas at Austin',
+      '2014 ~ 2015 · Postdoctoral researcher, Carnegie Mellon University'
+    ]
+  },
+  kang: {
+    title: 'Associate Professor',
+    field: 'Precision polymerization of functional polymers and applications',
+    labName: 'Functional Polymer Materials Laboratory (FPM Lab)',
+    edu: [
+      'B.S. · Polymer Systems Engineering, Sungkyunkwan University (2005)',
+      'M.S. · Materials Science and Engineering, Gwangju Institute of Science and Technology (2007)',
+      'Ph.D. · Materials Science and Engineering, Gwangju Institute of Science and Technology (2012)'
+    ],
+    research: [
+      'Synthesis of functional polymers by living polymerization',
+      'Block, star, and graft copolymer architectures',
+      'High-performance thermoplastic elastomers',
+      'Polymer electronic materials for OLEDs and memory',
+      'Self-healing thermoreversible block copolymers'
+    ],
+    career: [
+      '2019 ~ Present · Associate Professor, Department of Chemical Engineering, Soongsil University',
+      '2016 ~ 2019 · Principal researcher, LG Chem Central Research Institute',
+      '2015 ~ 2016 · Postdoctoral researcher, Princeton University'
+    ]
+  },
+  lee: {
+    title: 'Professor',
+    field: 'Polymer engineering, display engineering',
+    labName: 'Nano/Micro Engineering Laboratory (NMEL)',
+    edu: [
+      'B.S. · Applied Chemistry, Seoul National University (1999)',
+      'M.S. · Applied Chemistry, Seoul National University (2001)',
+      'Ph.D. · Applied Chemistry, Seoul National University (2005)'
+    ],
+    research: [
+      'Functional polymers for adhesives, films, and particles',
+      'Organic–inorganic hybrids and polymer nanocomposites',
+      'Optical and encapsulation materials for flexible displays',
+      'Quantum-dot display device structures and processes'
+    ],
+    career: [
+      '2020 ~ Present · Professor, Department of Chemical Engineering, Soongsil University',
+      '2005 ~ 2012 · Principal and senior researcher, Samsung Electronics and Samsung Display',
+      '2013 ~ 2020 · Professor, Department of Chemical Engineering, Myongji University'
+    ]
+  },
+  eum: {
+    title: 'Associate Professor',
+    field: 'Porous nanomaterials, adsorption for energy and environmental separation',
+    labName: 'Porous Organic/Inorganic Nanomaterials Laboratory (POINT Lab)',
+    edu: [
+      'B.S. · Chemical and Biological Engineering, Korea University (2009)',
+      'M.S. · Chemical and Biological Engineering, Korea University (2011)',
+      'Ph.D. · Chemical and Biomolecular Engineering, Georgia Institute of Technology (2016)'
+    ],
+    research: [
+      'Design of porous nanomaterials — MOFs, zeolites, and ordered silica',
+      'Post-synthetic modification to tune adsorption and diffusion',
+      'Energy-efficient separations with membranes and adsorbents',
+      'Single-crystal structure analysis and functional thin-film coatings'
+    ],
+    career: [
+      '2020 ~ Present · Associate Professor, Department of Chemical Engineering, Soongsil University',
+      '2017 ~ 2019 · Postdoctoral researcher, University of Minnesota',
+      '2021 · Miwon Award for Young Scientists, Korean Society of Industrial and Engineering Chemistry'
+    ]
+  },
+  ahn: {
+    title: 'Associate Professor',
+    field: 'Thermodynamics, gas storage and separation, energy and environmental materials',
+    labName: 'Energy and Environmental Systems Laboratory (EESL)',
+    edu: [
+      'B.S. · Chemical and Biomolecular Engineering, KAIST (2012)',
+      'M.S. · Chemical and Biomolecular Engineering, KAIST (2014)',
+      'Ph.D. · Chemical and Biomolecular Engineering, KAIST (2017)'
+    ],
+    research: [
+      'Clathrate hydrate-based storage of hydrogen and natural gas',
+      'CH₄–CO₂ replacement, and greenhouse gas capture and storage',
+      'Hollow-fiber and fibrous adsorbents, and gas separation membranes',
+      'Thermodynamics and kinetics of gas hydrates'
+    ],
+    career: [
+      '2026 ~ Present · Associate Professor, Department of Chemical Engineering, Soongsil University',
+      '2020 ~ 2025 · Assistant Professor, Soongsil University',
+      '2018 ~ 2020 · Postdoctoral researcher, Georgia Institute of Technology'
+    ]
+  },
+  'jung-hw': {
+    title: 'Assistant Professor',
+    field: 'Process modeling, process integration and optimization, decarbonization',
+    labName: 'Process Integration and Systems Modeling Laboratory (PRISM Lab)',
+    edu: [
+      'B.S. · Chemical and Biological Engineering, Korea University (2016)',
+      'M.S. · Chemical and Biomolecular Engineering, KAIST (2018)',
+      'Ph.D. · Chemical and Biomolecular Engineering, KAIST (2023)'
+    ],
+    research: [
+      'High-fidelity modeling and simulation of chemical processes',
+      'Process design with Bayesian optimization and machine learning',
+      'CCUS and direct air capture (DAC)',
+      'Energy integration and sustainable process optimization'
+    ],
+    career: [
+      '2026 ~ Present · Assistant Professor, Department of Chemical Engineering, Soongsil University',
+      '2025 ~ 2026 · Senior researcher, Korea Institute of Energy Research',
+      '2023 ~ 2024 · Postdoctoral researcher, University of Southern California'
+    ]
+  },
+  yang: {
+    title: 'Assistant Professor (Teaching-focused)',
+    field: 'Polymer materials, crystallization processes',
+    labName: '',
+    edu: [
+      'B.S. · Chemical and Biological Engineering, Seoul National University (2007)',
+      'M.S. · Chemical and Biological Engineering, Seoul National University (2009)',
+      'Ph.D. · Chemical and Biological Engineering, Seoul National University (2016)'
+    ],
+    research: [
+      'Structure–property relationships in polymers',
+      'Polymer–inorganic interfaces and control of crystal growth'
+    ],
+    career: [
+      '2019 ~ Present · Assistant Professor, Department of Chemical Engineering, Soongsil University',
+      '2017 ~ 2019 · Visiting professor, Soongsil University',
+      '2016 ~ 2018 · Postdoctoral researcher, Institute of Chemical Processes, Seoul National University'
+    ]
+  },
+  'park-ks': {
+    title: 'Associate Professor (Special Assignment)',
+    field: '',
+    labName: '',
+    edu: [],
+    research: [],
+    career: []
+  }
+};

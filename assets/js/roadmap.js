@@ -121,7 +121,7 @@
         .join('<span class="rm-arrow" aria-hidden="true">→</span>');
       return '<div class="rm-flow">' +
         '<p class="rm-flow-title">' + esc(isEn() ? (window.I18N ? window.I18N.t(f.title) : f.title) : f.title) +
-        (f.note ? '<em>' + esc(isEn() ? '' : f.note) + '</em>' : '') + '</p>' +
+        (!isEn() && f.note ? '<em>' + esc(f.note) + '</em>' : '') + '</p>' +
         '<div class="rm-flow-steps">' + steps + '</div>' +
         '</div>';
     }).join('');
