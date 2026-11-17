@@ -27,6 +27,24 @@
   const isEn = () => !!(window.I18N && window.I18N.isEn());
   const t = (ko, en) => (window.I18N ? window.I18N.pick(ko, en) : ko);
   const applyI18n = (root) => { if (window.I18N) window.I18N.apply(root || document.body); };
+  /* 줄 끝·줄 머리에서 '·' 하나만 떨어져 나가지 않도록, 점 앞에 보이지 않는
+     word joiner(U+2060)를 넣습니다. (여러 번 실행해도 한 번만 들어갑니다) */
+  const protectDots = (root) => {
+    const host = root || document.body;
+    if (!host) return;
+    const walker = document.createTreeWalker(host, NodeFilter.SHOW_TEXT, {
+      acceptNode(n) {
+        const p = n.parentElement;
+        if (!p) return NodeFilter.FILTER_REJECT;
+        if (/^(SCRIPT|STYLE|NOSCRIPT|TEXTAREA|CODE|PRE)$/.test(p.tagName)) return NodeFilter.FILTER_REJECT;
+        if (!n.nodeValue || n.nodeValue.indexOf('\u00b7') < 0) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach((n) => { n.nodeValue = n.nodeValue.replace(/(?<!\u2060)\u00b7/g, '\u2060\u00b7'); });
+  };
   const courseName = (ko) => (window.I18N ? window.I18N.course(ko) : ko);
   /* 교수진 영문 표기 — i18n-content.js 의 PROF_EN[p.id] */
   const profEn = (p) => (isEn() && window.PROF_EN && window.PROF_EN[p.id]) || null;
@@ -66,10 +84,11 @@
   function renderStats() {
     const bar = $('#statBar');
     if (!bar || typeof STATS === 'undefined') return;
+    const LABELS_EN = { '학과 설립': 'Founded', '전임교원': 'Faculty', '연구실': 'Laboratories', '전공 교과목': 'Major courses' };
     bar.innerHTML = STATS.map((s) => `
       <div>
         <dt>${esc(s.value)}</dt>
-        <dd>${esc(s.label)}<span>${esc(s.sub)}</span></dd>
+        <dd>${esc(isEn() ? (LABELS_EN[s.label] || s.label) : s.label)}<span>${esc(s.sub)}</span></dd>
       </div>`).join('');
     applyI18n(bar);
   }
@@ -521,6 +540,8 @@
     }
 
     const body = G && G.body ? String(G.body).trim() : '';
+    const block = $('#greeting');
+    if (block) block.classList.toggle('is-empty', !body);
     if (!body) {
       text.innerHTML = `<p class="greet-empty">${esc(t('학과장 인사말이 곧 업데이트될 예정입니다.', 'The chair’s welcome message will be posted soon.'))}</p>`;
       return;
@@ -1313,6 +1334,7 @@
     initNav();
     icon();
     applyI18n();
+    protectDots();
 
     /* 언어를 바꾸면 자바스크립트로 그린 부분을 다시 그립니다. */
     document.addEventListener('ssui18n', () => {
@@ -1332,6 +1354,7 @@
       renderNotices();
       buildPaletteIndex();
       applyI18n();
+      protectDots();
     });
   }
 

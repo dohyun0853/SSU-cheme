@@ -169,6 +169,14 @@
     '부교수 (특별임무중점)': 'Associate Professor (Special Assignment)',
     '관리자': 'Administrator',
     '숭실대 로고': 'Soongsil University logo',
+    '01 Semiconductor 반도체 공정 및 차세대 패키징 소재': '01 Semiconductor — semiconductor processing and next-generation packaging materials',
+    '02 Secondary Battery 고용량 이차전지 및 에너지 저장·변환': '02 Secondary Battery — high-capacity batteries, energy storage and conversion',
+    '03 Bio-Health 생체분자 공학 및 의약·뷰티 기능성 소재': '03 Bio-Health — biomolecular engineering, pharmaceutical and beauty materials',
+    '04 Advanced Polymers 다공성 나노소재 및 고기능성 고분자 복합체': '04 Advanced Polymers — porous nanomaterials and high-performance polymer composites',
+    '01 Semiconductor 반도체 연구실 둘러보기': '01 Semiconductor — view laboratories',
+    '02 Secondary Battery 이차전지 연구실 둘러보기': '02 Secondary Battery — view laboratories',
+    '03 Bio-Health 바이오 헬스 연구실 둘러보기': '03 Bio-Health — view laboratories',
+    '04 Advanced Polymers 첨단 고분자 연구실 둘러보기': '04 Advanced Polymers — view laboratories',
     '5대 연구분야 전체 보기 — 반도체, 이차전지, 바이오, 고분자, 환경':
       'Explore all five research areas — semiconductors, batteries, bio, polymers, environment',
 

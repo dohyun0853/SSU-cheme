@@ -1819,6 +1819,14 @@ body.is-modal-open { overflow: hidden; }
 
 /* ---------------------------------------------------------------- 학과장 인사말 빈 상태 */
 .greet-empty { margin: 0; font-size: 14.5px; line-height: 1.85; color: #5B6572; }
+/* 인사말이 아직 없을 때 — 사진과 여백을 줄여 빈 카드처럼 보이지 않게 합니다. */
+.greet-block.is-empty { padding: 20px 26px; }
+.greet-block.is-empty .greet-photo { width: 108px; }
+.greet-block.is-empty .greet-name { margin-bottom: 8px; }
+@media (max-width: 640px) {
+  .greet-block.is-empty { padding: 16px 16px; }
+  .greet-block.is-empty .greet-photo { width: 84px; }
+}
 
 /* ---------------------------------------------------------------- 이수체계도 */
 .rm-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; margin-bottom: 18px; }
