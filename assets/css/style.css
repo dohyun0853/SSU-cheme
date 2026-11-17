@@ -1953,3 +1953,9 @@ html[data-lang="en"] .brand-text em { display: none; }
   }
   html[data-lang="en"] .header-actions { gap: 5px; }
 }
+
+/* ---------------------------------------------------------------- 이수체계도 트랙 칩 (모바일) */
+@media (max-width: 640px) {
+  .rm-filter .chip { white-space: normal; line-height: 1.35; min-height: 40px; padding: 7px 6px; }
+  html[data-lang="en"] .rm-filter { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
