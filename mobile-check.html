@@ -33,6 +33,8 @@
       var click = q.get('click');
       if (click === 'year3') { var t3 = d.querySelector('.year-tab[data-year="3"]'); if (t3) t3.click(); }
       if (click === 'notice') { var nb = d.querySelector('.notice-link'); if (nb) nb.click(); }
+      var sel = q.get('sel');
+      if (sel) { var el = d.querySelector(sel); if (el) el.scrollIntoView({ block: 'start' }); }
       if (click === 'greeting') { var gb = d.querySelector('[data-tab="greeting"]'); if (gb) gb.click(); }
       var lines = [];
       var de = d.documentElement;
