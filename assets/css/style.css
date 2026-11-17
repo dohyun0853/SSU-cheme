@@ -1930,3 +1930,12 @@ html[data-lang="en"] .brand-text em { display: none; }
 @media (max-width: 640px) {
   html[data-lang="en"] .hero h1 { font-size: 23px; line-height: 1.32; }
 }
+
+/* ---------------------------------------------------------------- 모바일 공지 제목 (v4.4) */
+@media (max-width: 640px) {
+  .notice-title { align-items: flex-start; }
+  .notice-title .notice-link {
+    white-space: normal; display: -webkit-box; -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; overflow: hidden; line-height: 1.5;
+  }
+}
