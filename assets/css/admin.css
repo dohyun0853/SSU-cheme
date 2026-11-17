@@ -839,3 +839,10 @@ body.is-admin .lab-card .lab-actions { flex-wrap: wrap; gap: 6px; }
   }
   .sa-table td.c-title { padding-right: 6px; }
 }
+
+/* 관리자 모바일 — 관리 열 폭 축소(원문 열기는 수정 창에서) */
+@media (max-width: 640px) {
+  .sa-table .c-manage { width: 68px; }
+  .sa-table .c-manage .sa-icon-btn { width: 28px; height: 28px; }
+  .sa-table .c-manage a.sa-icon-btn { display: none; }
+}
