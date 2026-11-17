@@ -819,3 +819,12 @@ body.is-admin .lab-card .lab-actions { flex-wrap: wrap; gap: 6px; }
   .sa-panel-head { flex-wrap: wrap; gap: 8px; }
   .sa-panel-head .sa-panel-tools { justify-content: space-between; }
 }
+
+/* 관리자 모바일 — 가로 스크롤 대신 두 줄로 접어 모두 보이게 */
+@media (max-width: 780px) {
+  .sa-side { flex-wrap: wrap; overflow: visible; row-gap: 4px; }
+  .sa-side-nav { flex-wrap: wrap; overflow: visible; }
+  .sa-seg { flex-wrap: wrap; overflow: visible; padding-bottom: 0; }
+  .sa-seg button { flex: 1 1 auto; padding: 8px 10px; }
+  .sa-panel-tools .sa-select, .sa-panel-tools .sa-search { min-width: 0; }
+}
