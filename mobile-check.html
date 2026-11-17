@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><title>390px 확인용</title>
+<style>html,body{margin:0;background:#6b7280}#host{display:block;padding:16px}iframe{border:0;background:#fff;display:block}
+#out{color:#fff;font:12px/1.55 ui-monospace,monospace;white-space:pre-wrap;margin:0 16px 20px;background:#111827;padding:10px;max-width:760px}</style></head>
+<body><div id="host"></div><pre id="out">checking…</pre>
+<script>
+var q=new URLSearchParams(location.search),w=Number(q.get('w')||390),h=Number(q.get('h')||844),y=Number(q.get('y')||0);
+var host=document.getElementById('host'),root=host.attachShadow({mode:'closed'}),f=document.createElement('iframe');
+f.width=w;f.height=h;f.setAttribute('scrolling','no');root.appendChild(f);
+var out=document.getElementById('out');
+f.addEventListener('load',function(){try{var d=f.contentDocument,win=f.contentWindow;if(y)win.scrollTo(0,y);
+var sel=q.get('sel');if(sel){var el=d.querySelector(sel);if(el)el.scrollIntoView({block:'start'});}
+var click=q.get('click');
+if(click==='year3'){var t3=d.querySelector('.year-tab[data-year="3"]');if(t3)t3.click();}
+if(click==='notice'){var nb=d.querySelector('.notice-link');if(nb)nb.click();}
+var de=d.documentElement,lines=[];lines.push(f.src.split('/').pop()+' · viewport '+win.innerWidth+' / doc '+de.scrollWidth+' / body '+d.body.scrollWidth);
+if(de.scrollWidth>win.innerWidth+1)lines.push('!! PAGE OVERFLOW '+de.scrollWidth);
+var bad=[];d.querySelectorAll('body *').forEach(function(el){if(!el.offsetParent&&el.tagName!=='BODY')return;var cs=win.getComputedStyle(el);
+if(cs.overflowX==='auto'||cs.overflowX==='scroll'||cs.webkitLineClamp!=='none')return;if(el.closest('.pillar-stack, .notice-title, .notice-modal'))return;
+var over=el.scrollWidth-el.clientWidth;if(over>2&&el.clientWidth>0)bad.push(el.tagName.toLowerCase()+(el.id?'#'+el.id:'')+'.'+(el.className||'').toString().split(' ').slice(0,2).join('.')+' +'+over+'px');});
+lines.push(bad.length?'!! CLIPPED ('+bad.length+'): '+bad.slice(0,12).join(' | '):'clipped: none');
+out.textContent=lines.join('\n');}catch(e){out.textContent='FAILED '+e.message;}});
+f.src=q.get('p')||'index.html';
+</script></body></html>
