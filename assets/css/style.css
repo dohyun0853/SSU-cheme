@@ -1778,7 +1778,7 @@ h1, h2, h3, h4, .section-title, .sub-title, .guide-sec-title, .guide-box-title {
 .notice-modal-close svg, .notice-modal-close i { width: 19px; height: 19px; }
 .notice-modal-meta {
   display: flex; flex-wrap: wrap; align-items: center; gap: 7px;
-  margin-bottom: 12px; font-size: 12.5px; color: #6B7280;
+  margin-bottom: 12px; padding-right: 34px; font-size: 12.5px; color: #6B7280;
 }
 .notice-modal-board { font-weight: 700; color: var(--navy); }
 .notice-modal-pin { padding: 1px 7px; background: var(--navy); color: #fff; font-size: 11px; font-weight: 600; }
